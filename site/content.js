@@ -128,56 +128,8 @@ export default {
             ],
             points: ['Selektiv und abschnittsweise', 'Büro- und Gewerbeimmobilien', 'Abgestimmt mit der Bauleitung'],
         },
-        baureinigung: {
-            number: '04',
-            group: 'reinigung',
-            area: 'München und Umkreis bis 50 km',
-            title: 'Baureinigung',
-            short: 'Baustellenreinigung während der Bauphase.',
-            seoTitle: 'Baureinigung & Baustellenreinigung München | GoganBau',
-            description:
-                'Baureinigung und Baustellenreinigung in München: Grob- und Bauzwischenreinigung während der Bauphase – für Bauunternehmen, Generalunternehmer und Bauträger.',
-            text: 'Grob- und Zwischenreinigung während der Bauphase – für sichere Wege und saubere Übergaben.',
-            body: [
-                'Während der Bauphase übernehmen wir die Baustellenreinigung in München: Grobreinigung, Bauzwischenreinigung und die Beräumung von Bauabfällen – für freie, sichere Laufwege bei Neubau, Umbau und Sanierung.',
-                'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
-            ],
-            points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
-        },
-        bauendreinigung: {
-            number: '05',
-            group: 'reinigung',
-            area: 'München und Umkreis bis 50 km',
-            title: 'Bauendreinigung',
-            short: 'Baufeinreinigung vor der Abnahme.',
-            seoTitle: 'Bauendreinigung & Baufeinreinigung München | GoganBau',
-            description:
-                'Bauendreinigung in München: Baufeinreinigung und Bauschlussreinigung vor der Abnahme – Glasflächen, Rahmen, Böden und Sanitär, übergabefertig für Ihren Bauherrn.',
-            text: 'Gründliche Endreinigung vor der Abnahme – übergabefertig für Ihren Bauherrn.',
-            body: [
-                'Vor der Abnahme sorgen wir mit der Bauendreinigung (Baufeinreinigung, Bauschlussreinigung) dafür, dass Neubau, Umbau oder Renovierung übergabefertig sind: Glasflächen und Rahmen, Böden, Sanitärbereiche und alle sichtbaren Oberflächen.',
-                'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
-            ],
-            points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
-        },
-        gebaeudereinigung: {
-            number: '06',
-            group: 'reinigung',
-            area: 'München und Umkreis bis 50 km',
-            title: 'Gebäudereinigung',
-            short: 'Gewerbliche Reinigung und Sonderreinigung.',
-            seoTitle: 'Gebäudereinigung München – Reinigungsfirma | GoganBau',
-            description:
-                'Gebäudereinigung in München: gewerbliche Reinigung und Sonderreinigung für Unternehmen, Gewerbeimmobilien und Hausverwaltungen – mit direktem Ansprechpartner.',
-            text: 'Gewerbliche Gebäudereinigung und Sonderreinigung – alles aus einer Hand.',
-            body: [
-                'Als Reinigungsfirma in München übernehmen wir die Gebäudereinigung gewerblicher Objekte – Geschäftsräume, Gewerbe- und Verwaltungsflächen. Von der regelmäßigen Unterhaltsreinigung über Büro- und Treppenhausreinigung bis zur Grundreinigung erhalten Sie alles aus einer Hand.',
-                'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
-            ],
-            points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
-        },
         unterhaltsreinigung: {
-            number: '07',
+            number: '04',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Unterhaltsreinigung',
@@ -194,7 +146,7 @@ export default {
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
         },
         bueroreinigung: {
-            number: '08',
+            number: '05',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Büroreinigung',
@@ -211,7 +163,7 @@ export default {
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
         },
         grundreinigung: {
-            number: '09',
+            number: '06',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
@@ -228,7 +180,7 @@ export default {
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
         },
         treppenhausreinigung: {
-            number: '10',
+            number: '07',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
@@ -243,6 +195,54 @@ export default {
                 'Für Hausverwaltungen und Eigentümer von Mehrfamilienhäusern, Wohnanlagen und Gewerbeimmobilien übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
             ],
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
+        },
+        baureinigung: {
+            number: '08',
+            group: 'reinigung',
+            area: 'München und Umkreis bis 50 km',
+            title: 'Baureinigung',
+            short: 'Baustellenreinigung während der Bauphase.',
+            seoTitle: 'Baureinigung & Baustellenreinigung München | GoganBau',
+            description:
+                'Baureinigung und Baustellenreinigung in München: Grob- und Bauzwischenreinigung während der Bauphase – für Bauunternehmen, Generalunternehmer und Bauträger.',
+            text: 'Grob- und Zwischenreinigung während der Bauphase – für sichere Wege und saubere Übergaben.',
+            body: [
+                'Während der Bauphase übernehmen wir die Baustellenreinigung in München: Grobreinigung, Bauzwischenreinigung und die Beräumung von Bauabfällen – für freie, sichere Laufwege bei Neubau, Umbau und Sanierung.',
+                'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
+            ],
+            points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
+        },
+        bauendreinigung: {
+            number: '09',
+            group: 'reinigung',
+            area: 'München und Umkreis bis 50 km',
+            title: 'Bauendreinigung',
+            short: 'Baufeinreinigung vor der Abnahme.',
+            seoTitle: 'Bauendreinigung & Baufeinreinigung München | GoganBau',
+            description:
+                'Bauendreinigung in München: Baufeinreinigung und Bauschlussreinigung vor der Abnahme – Glasflächen, Rahmen, Böden und Sanitär, übergabefertig für Ihren Bauherrn.',
+            text: 'Gründliche Endreinigung vor der Abnahme – übergabefertig für Ihren Bauherrn.',
+            body: [
+                'Vor der Abnahme sorgen wir mit der Bauendreinigung (Baufeinreinigung, Bauschlussreinigung) dafür, dass Neubau, Umbau oder Renovierung übergabefertig sind: Glasflächen und Rahmen, Böden, Sanitärbereiche und alle sichtbaren Oberflächen.',
+                'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
+            ],
+            points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
+        },
+        gebaeudereinigung: {
+            number: '10',
+            group: 'reinigung',
+            area: 'München und Umkreis bis 50 km',
+            title: 'Gebäudereinigung',
+            short: 'Gewerbliche Reinigung und Sonderreinigung.',
+            seoTitle: 'Gebäudereinigung München – Reinigungsfirma | GoganBau',
+            description:
+                'Gebäudereinigung in München: gewerbliche Reinigung und Sonderreinigung für Unternehmen, Gewerbeimmobilien und Hausverwaltungen – mit direktem Ansprechpartner.',
+            text: 'Gewerbliche Gebäudereinigung und Sonderreinigung – alles aus einer Hand.',
+            body: [
+                'Als Reinigungsfirma in München übernehmen wir die Gebäudereinigung gewerblicher Objekte – Geschäftsräume, Gewerbe- und Verwaltungsflächen. Von der regelmäßigen Unterhaltsreinigung über Büro- und Treppenhausreinigung bis zur Grundreinigung erhalten Sie alles aus einer Hand.',
+                'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
+            ],
+            points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
         },
         praxisreinigung: {
             number: '11',
@@ -351,7 +351,7 @@ export default {
         {
             title: 'Gebäudereinigung & Baureinigung in München',
             text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung und Büroreinigung: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
-            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'unterhaltsreinigung', 'bueroreinigung', 'grundreinigung', 'treppenhausreinigung', 'praxisreinigung'],
+            services: ['unterhaltsreinigung', 'bueroreinigung', 'grundreinigung', 'treppenhausreinigung', 'baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'praxisreinigung'],
         },
         {
             title: 'Montage & Baustellenlogistik',
