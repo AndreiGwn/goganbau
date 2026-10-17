@@ -36,7 +36,7 @@ The HTML pages (`index.html`, `leistungen/*/index.html`, `impressum/`, `datensch
 2. In the repository, open **Settings → Pages** and set **Source** to **GitHub Actions**.
 3. Every push to `main` now builds and publishes the site through [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). The address is shown under Settings → Pages, for example `https://<user>.github.io/<repo>/`.
 
-**Custom domain (e.g. `bau.goganspace.de`):** enter it under Settings → Pages → Custom domain and create the DNS record GitHub shows you. The workflow adjusts all links automatically, whether the site runs under `/<repo>/` or on its own domain.
+**Custom domain:** the site runs on `goganbau.de`, set under Settings → Pages → Custom domain. DNS is at IONOS: four A records (185.199.108–111.153), four AAAA records (2606:50c0:8000–8003::153) and `www` as CNAME to `andreigwn.github.io`. The workflow adjusts all links automatically, whether the site runs under `/<repo>/` or on its own domain.
 
 ## Contact form
 
