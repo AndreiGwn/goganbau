@@ -234,10 +234,50 @@ function beforeAfter(project) {
 </figure>`;
 }
 
+/**
+ * Machine-readable company card for Google (schema.org LocalBusiness): name, address, contact,
+ * area and services. Helps Google match the site to the Google Business Profile and local searches.
+ */
+function structuredData() {
+    const url = (p = '') => `${gb.siteUrl}/${p}`;
+    const data = {
+        '@context': 'https://schema.org',
+        '@type': 'LocalBusiness',
+        '@id': url('#firma'),
+        name: gb.name,
+        alternateName: gb.shortName,
+        description: gb.homeDescription,
+        url: url(),
+        telephone: gb.contact.phone.replace(/\s/g, ''),
+        email: gb.contact.email,
+        logo: url('apple-touch-icon.png'),
+        image: url('apple-touch-icon.png'),
+        foundingDate: String(gb.founded),
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: gb.contact.street,
+            addressLocality: gb.contact.city,
+            ...(gb.contact.postalCode && { postalCode: gb.contact.postalCode }),
+            addressCountry: 'DE',
+        },
+        areaServed: { '@type': 'City', name: 'München' },
+        hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Leistungen',
+            itemListElement: services.map(([key, s]) => ({
+                '@type': 'Offer',
+                itemOffered: { '@type': 'Service', name: s.title, description: s.description, url: url(`leistungen/${key}/`) },
+            })),
+        },
+    };
+    return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+}
+
 /* --------------------------------------------------------------- layout */
 
 // title: the full browser-tab / Google title. description: the text under the Google result.
-function layout(ctx, { title, description = gb.homeDescription, body }) {
+// head: extra tags for <head>, e.g. structured data.
+function layout(ctx, { title, description = gb.homeDescription, head = '', body }) {
     const canonical = ctx.path === null ? '' : `
     <link rel="canonical" href="${gb.siteUrl}/${ctx.path}">
     <meta property="og:url" content="${gb.siteUrl}/${ctx.path}">`;
@@ -258,6 +298,7 @@ function layout(ctx, { title, description = gb.homeDescription, body }) {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
     <link rel="stylesheet" href="/src/css/app.css">
     <script type="module" src="/src/js/app.js"></script>
+    ${head}
 </head>
 <body class="min-h-screen bg-obsidian pb-[calc(4rem+env(safe-area-inset-bottom))] font-sans text-slate-300 antialiased lg:pb-0">
     <a href="#main" class="sr-only z-[100] bg-signal px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Zum Inhalt springen</a>
@@ -284,6 +325,7 @@ function homePage(ctx, projects) {
 
     return layout(ctx, {
         title: gb.homeTitle,
+        head: structuredData(),
         body: `
     <!-- Fixed 3D canvas behind hero + services; later sections are opaque and cover it. -->
     <div class="fixed inset-0 z-0" aria-hidden="true">
@@ -500,7 +542,8 @@ function legalPage(ctx, title, body) {
     });
 }
 
-const address = `${esc(gb.name)}<br>${esc(gb.contact.street)}<br>${esc(gb.contact.city)}`;
+const cityLine = `${gb.contact.postalCode || '[PLZ]'} ${gb.contact.city}`;
+const address = `${esc(gb.name)}<br>${esc(gb.contact.street)}<br>${esc(cityLine)}`;
 
 const impressum = (ctx) =>
     legalPage(
@@ -508,7 +551,7 @@ const impressum = (ctx) =>
         'Impressum',
         `
         <h2>Angaben gemäß § 5 DDG</h2>
-        <p>${esc(gb.name)}<br>[Inhaber / Rechtsform]<br>${esc(gb.contact.street)}<br>${esc(gb.contact.city)}</p>
+        <p>${esc(gb.name)}<br>[Inhaber / Rechtsform]<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>
         <h2>Kontakt</h2>
         <p>Telefon: ${esc(gb.contact.phone)}<br>E-Mail: ${esc(gb.contact.email)}</p>
         <h2>Umsatzsteuer-ID</h2>

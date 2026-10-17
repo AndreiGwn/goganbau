@@ -35,7 +35,9 @@ export default {
         phone: '+49 1575 9283617',
         phoneHref: 'tel:+4915759283617',
         street: 'Rambaldistraße 37',
-        city: '[PLZ] München',
+        // Postcode still missing — fill it in; until then the legal pages show [PLZ].
+        postalCode: '',
+        city: 'München',
         email: 'info@goganbau.de',
         // WhatsApp number in international format, digits only (used for wa.me links).
         whatsapp: '4915759283617',
