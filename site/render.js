@@ -14,6 +14,9 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const base = process.argv[2] ?? '/';
 
 const pages = renderPages({ base, publicDir: path.join(root, 'public') });
+
+// Service pages are all generated: start from an empty folder, so a removed service's page disappears too.
+fs.rmSync(path.join(root, 'leistungen'), { recursive: true, force: true });
 for (const { file, html } of pages) {
     const target = path.join(root, file);
     fs.mkdirSync(path.dirname(target), { recursive: true });
