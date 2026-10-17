@@ -333,6 +333,24 @@ function homePage(ctx, projects) {
         </div>
     </section>
 
+    <section id="schwerpunkte" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian py-24 lg:py-32">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="max-w-2xl">
+                <p class="eyebrow">Schwerpunkte</p>
+                <h2 class="section-title mt-4">Abbruch und Reinigung aus einer Hand.</h2>
+            </div>
+            <div class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
+                ${each(gb.focusAreas, (area, i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="border-t-2 ${i === 1 ? 'border-emerald-400' : 'border-signal'} pt-6">
+                    <h3 class="font-display text-xl font-bold text-white">${esc(area.title)}</h3>
+                    <p class="mt-3 text-slate-400">${esc(area.text)}</p>
+                    <ul class="mt-5 space-y-2 text-sm">
+                        ${each(area.services, (key) => `<li><a href="${url(`leistungen/${key}/`)}" class="inline-flex items-center gap-2 text-white hover:text-signal-soft">${icon.arrow('size-3.5 text-signal')} ${esc(gb.services[key].title)}</a></li>`)}
+                    </ul>
+                </div>`)}
+            </div>
+        </div>
+    </section>
+
     ${
         projects.length
             ? `<section id="projekte" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian-2 py-24 lg:py-32">
@@ -359,6 +377,24 @@ function homePage(ctx, projects) {
             <ul data-reveal style="--reveal-delay: 120ms" class="self-end">
                 ${each(gb.highlights, (item) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white sm:text-lg">${icon.check()} ${esc(item)}</li>`)}
             </ul>
+        </div>
+    </section>
+
+    <!-- Answers stay collapsed until tapped, so the page stays short while search engines read the full text. -->
+    <section id="fragen" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian-2 py-24 lg:py-32">
+        <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+            <div data-reveal class="lg:col-span-4">
+                <p class="eyebrow">Häufige Fragen</p>
+                <h2 class="section-title mt-4">Kurz beantwortet.</h2>
+            </div>
+            <div data-reveal style="--reveal-delay: 120ms" class="divide-y divide-white/10 border-y border-white/10 lg:col-span-8">
+                ${each(gb.faq, ({ q, a }) => `<details class="group/faq">
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-white [&::-webkit-details-marker]:hidden">
+                        ${esc(q)} <span class="inline-flex shrink-0 text-signal transition group-open/faq:rotate-180">${icon.chevronDown}</span>
+                    </summary>
+                    <p class="pb-5 text-slate-400">${esc(a)}</p>
+                </details>`)}
+            </div>
         </div>
     </section>
 

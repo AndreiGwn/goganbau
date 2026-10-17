@@ -173,6 +173,57 @@ export default {
         },
     ],
 
+    // "Unsere Schwerpunkte" on the home page — the two SEO directions plus Montage & Logistik.
+    focusAreas: [
+        {
+            title: 'Abbruch & Rückbau in München',
+            text: 'Als Abbruchfirma übernehmen wir Abbrucharbeiten, Demontage und die Entkernung bis auf den Rohbau – und den geplanten Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
+            services: ['abbruch', 'rueckbau'],
+        },
+        {
+            title: 'Gebäudereinigung & Baureinigung in München',
+            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir dafür, dass Flächen sicher, sauber und übergabefertig sind.',
+            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung'],
+        },
+        {
+            title: 'Montage & Baustellenlogistik',
+            text: 'Ergänzend montieren wir Tektalan-Dämmplatten in Tiefgaragen, Kellern und Gewerbeflächen und koordinieren Material, Lieferungen und Einsatzzeiten auf der Baustelle.',
+            services: ['tektalan', 'logistik'],
+        },
+    ],
+
+    // "Häufige Fragen" on the home page. Answers are collapsed until tapped; only state facts.
+    faq: [
+        {
+            q: 'Sind Sie wirklich rund um die Uhr erreichbar?',
+            a: 'Ja. Für Anfragen und projektbezogene Abstimmungen sind wir 24/7 erreichbar – per Telefon, WhatsApp oder über das Anfrageformular. Einsatzzeiten und Umfang stimmen wir projektbezogen mit Ihnen ab.',
+        },
+        {
+            q: 'In welchem Gebiet sind Sie tätig?',
+            a: 'Unser Einsatzgebiet ist München und Umgebung. Liegt Ihr Projekt etwas außerhalb, sprechen Sie uns gern an.',
+        },
+        {
+            q: 'Arbeiten Sie als Subunternehmer für Bauunternehmen?',
+            a: 'Ja. Wir unterstützen Bauunternehmen und Generalunternehmer als Subunternehmer – für einzelne Bauabschnitte, als zusätzliche Kapazität bei engem Zeitplan oder bei wiederkehrenden Aufträgen.',
+        },
+        {
+            q: 'Kann ich mehrere Leistungen kombinieren?',
+            a: 'Ja. Abbruch, Entkernung, Baureinigung und Bauendreinigung lassen sich in einem Projekt zusammenführen – mit einem Ansprechpartner statt mehrerer Firmen.',
+        },
+        {
+            q: 'Was ist der Unterschied zwischen Baureinigung und Bauendreinigung?',
+            a: 'Die Baureinigung (Baustellenreinigung) findet während der Bauphase statt: Grob- und Zwischenreinigung für sichere Laufwege und saubere Übergaben zwischen den Gewerken. Die Bauendreinigung ist die gründliche Schlussreinigung vor der Abnahme – Glasflächen, Rahmen, Böden und Sanitär.',
+        },
+        {
+            q: 'Übernehmen Sie auch Transporte?',
+            a: 'Unsere Baustellenlogistik umfasst die Koordination von Materialbedarf, Anlieferfenstern, Lagerflächen und Einsatzzeiten. Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
+        },
+        {
+            q: 'Wie läuft eine Anfrage ab?',
+            a: 'Sie schreiben uns kurz, was, wo und wann. Wir klären Leistungsumfang, Termine und Zuständigkeiten, koordinieren Personal und Material, führen die Arbeiten aus und übergeben das Ergebnis mit klaren nächsten Schritten.',
+        },
+    ],
+
     // "Über uns" — one short line each.
     highlights: [
         '24/7 erreichbar – auch nach Feierabend.',
