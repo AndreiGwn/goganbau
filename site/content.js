@@ -36,8 +36,9 @@ export default {
         owner: 'Cosmin Gogan',
         legalForm: 'Einzelunternehmen',
         // USt-IdNr. (format DE + 9 digits). Shown in the Impressum only when filled in.
-        // Do not put the Steuernummer here: it is not required and should not be published.
         vatId: '',
+        // Steuernummer from the Finanzamt. Shown in the Impressum only when filled in.
+        taxNumber: '147/146/01297',
     },
 
     contact: {

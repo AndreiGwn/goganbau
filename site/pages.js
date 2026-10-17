@@ -658,6 +658,8 @@ const impressum = (ctx) =>
         <p>${esc(gb.name)}<br>Inhaber: ${esc(gb.legal.owner)} (${esc(gb.legal.legalForm)})<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>
         <h2>Kontakt</h2>
         <p>Telefon: ${esc(gb.contact.phone)}<br>E-Mail: ${esc(gb.contact.email)}</p>
+        ${gb.legal.taxNumber ? `<h2>Steuernummer</h2>
+        <p>${esc(gb.legal.taxNumber)}</p>` : ''}
         ${gb.legal.vatId ? `<h2>Umsatzsteuer-ID</h2>\n        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: ${esc(gb.legal.vatId)}</p>` : ''}
         <h2>Verantwortlich für den Inhalt</h2>
         <p>${esc(gb.legal.owner)}<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>`,
