@@ -1,0 +1,219 @@
+@import 'tailwindcss';
+
+@source '../../site';
+@source '../js';
+
+@theme {
+    --color-obsidian: #0a0e17;
+    --color-obsidian-2: #0e1420;
+    --color-steel: #1e293b;
+    --color-steel-2: #273449;
+    --color-steel-line: #334155;
+    --color-signal: #ff6b00;
+    --color-signal-soft: #ff8a33;
+    --color-signal-deep: #d65800;
+    --color-tech: #38bdf8;
+    --color-tech-deep: #0ea5e9;
+    --color-mist: #94a3b8;
+
+    --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --animate-pulse-ring: pulse-ring 2s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+    --animate-scan: scan 3.2s ease-in-out infinite;
+
+    @keyframes pulse-ring {
+        0% { transform: scale(0.8); opacity: 0.9; }
+        100% { transform: scale(2.4); opacity: 0; }
+    }
+
+    @keyframes scan {
+        0%, 100% { transform: translateY(0); opacity: 0; }
+        10%, 90% { opacity: 1; }
+        50% { transform: translateY(100%); }
+    }
+}
+
+@layer base {
+    html {
+        color-scheme: dark;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        background-color: var(--color-obsidian);
+    }
+
+    ::selection {
+        background: var(--color-signal);
+        color: #fff;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-signal);
+        outline-offset: 3px;
+    }
+
+    [x-cloak], [hidden] {
+        display: none !important;
+    }
+
+    input[type='date']::-webkit-calendar-picker-indicator {
+        filter: invert(0.7);
+    }
+}
+
+@utility btn {
+    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 px-5 py-3 font-display text-sm font-semibold tracking-wide uppercase transition duration-200 select-none disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+@layer components {
+    /* Frosted technical surface */
+    .glass {
+        @apply border border-white/10 bg-steel/45 backdrop-blur-md;
+    }
+
+    .glass-strong {
+        @apply border border-white/10 bg-obsidian/80 backdrop-blur-xl;
+    }
+
+    /* Sharp corner brackets — engineering-drawing feel */
+    .tech-frame {
+        position: relative;
+    }
+    .tech-frame::before,
+    .tech-frame::after {
+        content: '';
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        pointer-events: none;
+        border-color: var(--color-signal);
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+    .tech-frame::before {
+        top: -1px;
+        left: -1px;
+        border-top: 2px solid;
+        border-left: 2px solid;
+    }
+    .tech-frame::after {
+        right: -1px;
+        bottom: -1px;
+        border-right: 2px solid;
+        border-bottom: 2px solid;
+    }
+    .tech-frame:hover::before,
+    .tech-frame:hover::after,
+    .tech-frame.is-active::before,
+    .tech-frame.is-active::after {
+        width: 28px;
+        height: 28px;
+    }
+
+    .eyebrow {
+        @apply font-mono text-[11px] font-medium tracking-[0.22em] text-signal uppercase;
+    }
+
+    .section-title {
+        @apply font-display text-3xl leading-[1.05] font-bold tracking-tight text-white sm:text-4xl lg:text-5xl;
+    }
+
+    .badge {
+        @apply inline-flex items-center gap-2 border border-white/15 bg-obsidian/60 px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-slate-200 uppercase backdrop-blur-md;
+    }
+
+    .badge-signal {
+        @apply border-signal/50 bg-signal/10 text-signal-soft;
+    }
+
+    .live-dot {
+        @apply relative inline-flex size-2 rounded-full bg-signal;
+    }
+    .live-dot::after {
+        content: '';
+        @apply absolute inset-0 animate-pulse-ring rounded-full bg-signal;
+    }
+
+    .btn-primary {
+        @apply btn bg-signal text-white shadow-[0_0_0_1px_rgba(255,107,0,0.4),0_10px_40px_-10px_rgba(255,107,0,0.7)] hover:bg-signal-soft active:bg-signal-deep;
+    }
+
+    .btn-ghost {
+        @apply btn border border-white/20 bg-white/5 text-white backdrop-blur-md hover:border-signal hover:text-signal-soft;
+    }
+
+    .btn-tech {
+        @apply btn border border-tech/40 bg-tech/10 text-tech hover:bg-tech/20;
+    }
+
+    .btn-sm {
+        @apply min-h-9 px-3.5 py-2 text-xs;
+    }
+
+    .field-label {
+        @apply mb-1.5 block font-mono text-[11px] tracking-[0.14em] text-mist uppercase;
+    }
+
+    .field {
+        @apply w-full border border-white/12 bg-obsidian/70 px-3.5 py-3 text-base text-white sm:py-2.5 sm:text-sm placeholder:text-slate-500 transition outline-none focus:border-signal focus:ring-1 focus:ring-signal/60;
+    }
+
+    .field-error {
+        @apply mt-1.5 text-xs text-red-400;
+    }
+
+    .card {
+        @apply border border-white/10 bg-steel/40 p-6 transition duration-300 hover:border-white/20;
+    }
+
+    .blueprint-grid {
+        background-image:
+            linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+        background-size: 48px 48px;
+    }
+
+    .hazard-stripe {
+        background: repeating-linear-gradient(-45deg, var(--color-signal) 0 10px, transparent 10px 20px);
+    }
+
+    /* Scroll reveal (only when JS + motion allowed) */
+    .js-motion [data-reveal] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+        transition-delay: var(--reveal-delay, 0ms);
+    }
+    .js-motion [data-reveal].is-visible {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Service list ↔ 3D focus state */
+.service-card.is-active {
+    box-shadow: inset 3px 0 0 var(--color-signal);
+    background-color: rgb(30 41 59 / 0.75);
+}
+
+/* 3D canvas */
+#scene-canvas {
+    touch-action: pan-y;
+}
+.scene-fallback {
+    background:
+        radial-gradient(60% 50% at 70% 40%, rgba(56, 189, 248, 0.12), transparent 70%),
+        radial-gradient(40% 40% at 75% 65%, rgba(255, 107, 0, 0.12), transparent 70%),
+        var(--color-obsidian);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}

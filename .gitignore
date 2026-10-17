@@ -1,0 +1,9 @@
+/node_modules
+/dist
+
+# Generated from site/pages.js on every dev start / build — edit site/ instead.
+/index.html
+/404.html
+/leistungen/
+/impressum/
+/datenschutz/
