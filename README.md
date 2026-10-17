@@ -53,5 +53,5 @@ Put the images in `public/images/projekte/` using the file names listed under `p
 
 ## Before going live
 
-- Replace the placeholders on the legal pages in `site/pages.js` (Impressum, Datenschutz) and the postcode `[PLZ]` in `site/content.js`.
+- Replace the remaining placeholders on the legal pages in `site/pages.js` (Impressum: owner/legal form, VAT ID, person responsible; Datenschutz: your rights).
 - Set the Web3Forms key (see above) and send one test inquiry.
