@@ -161,6 +161,52 @@ export default {
             ],
             points: ['Unterhaltsreinigung im festen Rhythmus', 'Büros und Gewerbeflächen', 'Sonderreinigung nach Bedarf'],
         },
+        // scene: which zone of the 3D building to show for services without their own zone.
+        grundreinigung: {
+            number: '08',
+            title: 'Grundreinigung',
+            scene: 'gebaeudereinigung',
+            short: 'Intensivreinigung von Böden und Flächen.',
+            seoTitle: 'Grundreinigung München – Intensivreinigung | GoganBau',
+            description:
+                'Grundreinigung in München: gründliche Intensivreinigung von Büros, Gewerbeflächen und Böden – wenn die regelmäßige Reinigung nicht mehr ausreicht.',
+            text: 'Gründliche Intensivreinigung – wenn die regelmäßige Reinigung nicht mehr ausreicht.',
+            body: [
+                'Bei der Grundreinigung entfernen wir hartnäckige Verschmutzungen, die bei der laufenden Unterhaltsreinigung nicht erfasst werden – auf Böden, Oberflächen und in Sanitärbereichen. So bringen wir Büros und Gewerbeflächen wieder in einen gepflegten Grundzustand.',
+                'Typische Anlässe sind ein Mieterwechsel, ein Umzug oder der Start einer neuen Unterhaltsreinigung. Termin und Umfang stimmen wir direkt mit Ihnen ab.',
+            ],
+            points: ['Bodenreinigung und Oberflächen', 'Büros und Gewerbeflächen', 'Vor Mieterwechsel oder Neustart'],
+        },
+        treppenhausreinigung: {
+            number: '09',
+            title: 'Treppenhausreinigung',
+            scene: 'gebaeudereinigung',
+            short: 'Saubere Treppenhäuser und Eingangsbereiche.',
+            seoTitle: 'Treppenhausreinigung München – regelmäßig | GoganBau',
+            description:
+                'Treppenhausreinigung in München: regelmäßige Reinigung von Treppenhäusern, Eingangsbereichen und Fluren – für Hausverwaltungen und Gewerbeobjekte.',
+            text: 'Regelmäßige Reinigung von Treppenhäusern, Eingängen und Fluren – im festen Rhythmus.',
+            body: [
+                'Wir reinigen Treppenhäuser, Eingangsbereiche, Flure und Geländer in festen Intervallen – damit Bewohner, Mitarbeiter und Besucher einen gepflegten ersten Eindruck bekommen.',
+                'Für Hausverwaltungen und Eigentümer übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
+            ],
+            points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Für Hausverwaltungen und Gewerbe'],
+        },
+        praxisreinigung: {
+            number: '10',
+            title: 'Praxisreinigung',
+            scene: 'gebaeudereinigung',
+            short: 'Gründliche Reinigung von Arztpraxen.',
+            seoTitle: 'Praxisreinigung München – Arztpraxen | GoganBau',
+            description:
+                'Praxisreinigung in München: gründliche, regelmäßige Reinigung von Arzt- und Therapiepraxen – Wartebereiche, Behandlungsräume und Sanitär.',
+            text: 'Gründliche Reinigung von Arzt- und Therapiepraxen – nach Absprache außerhalb der Sprechzeiten.',
+            body: [
+                'In Arzt- und Therapiepraxen kommt es auf Sauberkeit besonders an. Wir reinigen Wartebereiche, Empfang, Behandlungsräume und Sanitärbereiche gründlich und in festen Intervallen.',
+                'Damit der Praxisbetrieb nicht gestört wird, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch außerhalb der Sprechzeiten.',
+            ],
+            points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
+        },
     },
 
     // Vorher / Nachher. Put the photos in public/images/projekte/ — a project only shows
@@ -192,8 +238,8 @@ export default {
         },
         {
             title: 'Gebäudereinigung & Baureinigung in München',
-            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir dafür, dass Flächen sicher, sauber und übergabefertig sind.',
-            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung'],
+            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
+            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'grundreinigung', 'treppenhausreinigung', 'praxisreinigung'],
         },
         {
             title: 'Montage & Baustellenlogistik',

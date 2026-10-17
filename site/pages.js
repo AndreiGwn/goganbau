@@ -360,7 +360,7 @@ function homePage(ctx, projects) {
                 <!-- Phones: narrow, title-only rows so the building stays visible on the right. -->
                 <ul class="mt-10 w-[62%] min-w-[13rem] divide-y divide-white/10 border-y border-white/10 bg-obsidian/60 backdrop-blur-sm sm:w-full">
                     ${each(services, ([key, s]) => `<li>
-                        <a href="${url(`leistungen/${key}/`)}" data-service-card="${key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-steel/60 sm:gap-4 sm:px-4">
+                        <a href="${url(`leistungen/${key}/`)}" data-service-card="${s.scene ?? key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-steel/60 sm:gap-4 sm:px-4">
                             <span class="hidden font-mono text-xs text-signal sm:inline">${s.number}</span>
                             <span class="min-w-0 flex-1">
                                 <span class="block font-display text-[15px] font-semibold text-white sm:text-base">${esc(s.title)}</span>
