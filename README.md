@@ -42,7 +42,7 @@ The HTML pages (`index.html`, `leistungen/*/index.html`, `impressum/`, `datensch
 
 - **Per WhatsApp senden** opens WhatsApp with the inquiry pre-written. It needs no setup.
 - **Per E-Mail senden** goes through [Web3Forms](https://web3forms.com), a free service that e-mails each inquiry:
-  1. On web3forms.com, enter `goganbau@gmail.com` and create an access key. It arrives by e-mail.
+  1. On web3forms.com, enter `info@goganbau.de` and create an access key. It arrives by e-mail.
   2. Paste it into `web3formsKey` in [`site/content.js`](site/content.js), then commit and push.
 
   Until a key is set, the button opens the visitor's own mail app with the inquiry pre-written, addressed to `inquiryEmail`. The key is public by design; Web3Forms only ever sends to the address it was created for.

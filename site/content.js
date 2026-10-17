@@ -42,11 +42,11 @@ export default {
     },
 
     // "Per E-Mail senden" goes through Web3Forms (https://web3forms.com), which e-mails each
-    // inquiry to the address the key was created with (goganbau@gmail.com). The key is
+    // inquiry to the address the key was created with (info@goganbau.de). The key is
     // public by design. While it is empty, the button opens the visitor's mail app instead.
     web3formsKey: '',
     // Fallback recipient for the mail-app fallback.
-    inquiryEmail: 'goganbau@gmail.com',
+    inquiryEmail: 'info@goganbau.de',
 
     // The key of each service is its URL (/leistungen/<key>/) and the camera focus key in the 3D scene.
     // title: name in menus and lists · short: one line on the home page · text: intro on the service
