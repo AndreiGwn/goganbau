@@ -236,9 +236,8 @@ function beforeAfter(project) {
 
 /* --------------------------------------------------------------- layout */
 
-function layout(ctx, { title, description, body }) {
-    // Service pages name the service and the city; the home page uses the longer content.homeTitle.
-    const fullTitle = !title ? gb.homeTitle : ctx.current ? `${title} in München · ${gb.shortName}` : `${title} · ${gb.name}`;
+// title: the full browser-tab / Google title. description: the text under the Google result.
+function layout(ctx, { title, description = gb.homeDescription, body }) {
     const canonical = ctx.path === null ? '' : `
     <link rel="canonical" href="${gb.siteUrl}/${ctx.path}">
     <meta property="og:url" content="${gb.siteUrl}/${ctx.path}">`;
@@ -247,11 +246,11 @@ function layout(ctx, { title, description, body }) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>${esc(fullTitle)}</title>
-    <meta name="description" content="${esc(description ?? `${gb.tagline} Abbruch, Entkernung, Rückbau, Tektalan-Montage, Baustellenlogistik und Reinigung.`)}">
+    <title>${esc(title)}</title>
+    <meta name="description" content="${esc(description)}">
     <meta name="theme-color" content="#0A0E17">
-    <meta property="og:title" content="${esc(`${gb.name} — ${gb.claim}`)}">
-    <meta property="og:description" content="${esc(gb.tagline)}">
+    <meta property="og:title" content="${esc(title)}">
+    <meta property="og:description" content="${esc(description)}">
     <meta property="og:type" content="website">${canonical}
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
     <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
@@ -284,6 +283,7 @@ function homePage(ctx, projects) {
     ];
 
     return layout(ctx, {
+        title: gb.homeTitle,
         body: `
     <!-- Fixed 3D canvas behind hero + services; later sections are opaque and cover it. -->
     <div class="fixed inset-0 z-0" aria-hidden="true">
@@ -295,8 +295,9 @@ function homePage(ctx, projects) {
     <section id="top" class="pointer-events-none relative z-10 flex min-h-[100svh] items-center pt-24 pb-16">
         <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="pointer-events-auto max-w-xl">
-                <p data-hero-item class="eyebrow">Rückbau · Montage · Reinigung</p>
-                <h1 data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</h1>
+                <!-- The keyword line is the h1 for search engines; the big claim below is styled text. -->
+                <h1 data-hero-item class="eyebrow">${esc(gb.eyebrow)}</h1>
+                <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
                 <p data-hero-item class="mt-8 text-lg text-slate-300">${esc(gb.tagline)}</p>
                 <div data-hero-item class="mt-10 flex flex-col gap-3 sm:flex-row">
                     <a href="#kontakt" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
@@ -353,6 +354,7 @@ function homePage(ctx, projects) {
                 <p class="eyebrow">Über uns</p>
                 <h2 class="section-title mt-4">Ein Partner, der mitdenkt.</h2>
                 <p class="mt-6 text-lg text-slate-400">Seit ${gb.founded} unterstützen wir Bauunternehmen in ${esc(gb.region)}.</p>
+                ${each(gb.about, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
             </div>
             <ul data-reveal style="--reveal-delay: 120ms" class="self-end">
                 ${each(gb.highlights, (item) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white sm:text-lg">${icon.check()} ${esc(item)}</li>`)}
@@ -391,8 +393,8 @@ function servicePage(ctx, key, projects) {
     const { url } = ctx;
     const s = gb.services[key];
     return layout(ctx, {
-        title: s.title,
-        description: s.text,
+        title: s.seoTitle,
+        description: s.description,
         body: `
     <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
@@ -401,8 +403,9 @@ function servicePage(ctx, key, projects) {
                 Alle Leistungen
             </a>
             <p class="eyebrow mt-8">Leistung ${s.number}</p>
-            <h1 class="section-title mt-4">${esc(s.title)}</h1>
+            <h1 class="section-title mt-4">${esc(s.title)} in München</h1>
             <p class="mt-6 text-lg text-slate-300">${esc(s.text)}</p>
+            ${each(s.body, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
             <ul class="mt-10 border-t border-white/10">
                 ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
             </ul>
@@ -448,7 +451,7 @@ function servicePage(ctx, key, projects) {
 
 function legalPage(ctx, title, body) {
     return layout(ctx, {
-        title,
+        title: `${title} · ${gb.name}`,
         body: `
     <section class="pt-28 pb-24 lg:pt-36">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
@@ -499,7 +502,7 @@ const datenschutz = (ctx) =>
 
 const notFound = (ctx) =>
     layout(ctx, {
-        title: 'Seite nicht gefunden',
+        title: `Seite nicht gefunden · ${gb.name}`,
         body: `
     <section class="flex min-h-[70svh] items-center pt-28 pb-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
