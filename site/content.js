@@ -58,167 +58,195 @@ export default {
     // Fallback recipient for the mail-app fallback.
     inquiryEmail: 'info@goganbau.de',
 
+    // Groups for the service list and menus, in this order.
+    serviceGroups: {
+        abbruch: 'Abbruch & Rückbau',
+        reinigung: 'Reinigung',
+        montage: 'Montage & Logistik',
+    },
+
+    // Places named under "Einsatzgebiet" on each service page (key = the service's area).
+    // Cleaning only lists towns within ~50 km of München.
+    areaPlaces: {
+        'ganz Bayern': ['München', 'Augsburg', 'Ingolstadt', 'Regensburg', 'Landshut', 'Rosenheim', 'Freising', 'Erding', 'Dachau', 'Fürstenfeldbruck', 'Starnberg'],
+        'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg'],
+    },
+
     // The key of each service is its URL (/leistungen/<key>/) and the camera focus key in the 3D scene.
     // title: name in menus and lists · short: one line on the home page · text: intro on the service
-    // page · body: the paragraphs below it · seoTitle / description: for Google.
+    // page · body: the paragraphs below it · seoTitle / description: for Google · area: Einsatzgebiet
+    // · scene: 3D zone for services without their own · h1: page heading (default "<title> in München").
+    // We work manually and with hand-held tools — no heavy machinery, so no "Gebäudeabbruch" claims.
     services: {
         abbruch: {
             number: '01',
+            group: 'abbruch',
             area: 'ganz Bayern',
-            title: 'Abbruch & Entkernung',
-            short: 'Abbrucharbeiten, Entkernung, Beräumung.',
-            seoTitle: 'Abbruchfirma München – Abbruch & Entkernung | GoganBau',
+            title: 'Abbrucharbeiten',
+            short: 'Innenabbruch und Teilabbruch.',
+            seoTitle: 'Abbrucharbeiten München – Abbruchfirma | GoganBau',
             description:
-                'Abbrucharbeiten und Entkernung in München und ganz Bayern: Wir entkernen Bestandsgebäude bis auf den Rohbau, demontieren Ausbauelemente und beräumen die Flächen.',
-            text: 'Wir entkernen Bestandsgebäude bis auf den Rohbau – sauber getrennt und bereit für den nächsten Schritt.',
+                'Abbrucharbeiten in München und ganz Bayern: Innenabbruch, Teilabbruch und manueller Abbruch von Innenwänden und Mauerwerk – für Bauunternehmen und Gewerbekunden.',
+            text: 'Innenabbruch und Teilabbruch – präzise, manuell und mit handgeführten Geräten.',
             body: [
-                'Als Abbruchfirma in München und ganz Bayern übernehmen wir Abbrucharbeiten, Demontage und die komplette Entkernung von Bestandsgebäuden. Wir trennen die Materialien sauber und beräumen die Flächen, damit das nächste Gewerk ohne Verzögerung starten kann.',
-                'Bauunternehmen und Generalunternehmer setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein – mit einem festen Ansprechpartner, der rund um die Uhr erreichbar ist.',
+                'Als Abbruchfirma in München und ganz Bayern übernehmen wir Abbrucharbeiten im Gebäudeinneren: Innenabbruch, Teilabbruch und den Abbruch von Innenwänden und Mauerwerk in Büro-, Gewerbe- und Wohngebäuden.',
+                'Wir arbeiten manuell und mit handgeführten Geräten – präzise und kontrolliert. Bauunternehmen und Gewerbekunden setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein, mit einem festen Ansprechpartner, der rund um die Uhr erreichbar ist.',
             ],
-            points: ['Entkernung bis auf den Rohbau', 'Demontage von Ausbauelementen', 'Beräumung der Flächen'],
+            points: ['Innenabbruch und Teilabbruch', 'Innenwände und Mauerwerk', 'Manuell, präzise, kontrolliert'],
+        },
+        entkernung: {
+            number: '02',
+            group: 'abbruch',
+            area: 'ganz Bayern',
+            title: 'Entkernung',
+            scene: 'abbruch',
+            short: 'Entkernung bis auf den Rohbau.',
+            seoTitle: 'Entkernung München – Entkernungsfirma | GoganBau',
+            description:
+                'Entkernung in München und ganz Bayern: Rückbau von Trennwänden, Decken, Bodenbelägen, Fliesen und Estrich – als Vorbereitung für Sanierung, Umbau oder Neubau.',
+            text: 'Entkernung bis auf den Rohbau – als Vorbereitung für Sanierung, Umbau oder Neubau.',
+            body: [
+                'Bei der Entkernung bauen wir Bestandsgebäude bis auf den Rohbau zurück: Trockenbau- und Trennwände, abgehängte Decken, Bodenbeläge, Fliesen und Estrich sowie Bäder und Küchen. Die Materialien trennen wir sauber, die Flächen werden beräumt.',
+                'Als Entkernungsfirma arbeiten wir für Bauunternehmen, Generalunternehmer und Sanierungsunternehmen in München und ganz Bayern – vor Sanierung, Umbau oder Neubau.',
+            ],
+            points: ['Trennwände, Decken, Bodenbeläge', 'Fliesen, Estrich, Bäder, Küchen', 'Sauber getrennt und beräumt'],
         },
         rueckbau: {
-            number: '02',
+            number: '03',
+            group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Rückbau',
-            short: 'Strukturiert – bereit für Umbau und Sanierung.',
-            seoTitle: 'Rückbau München – Rückbauunternehmen | GoganBau',
+            short: 'Selektiver Rückbau für Umbau und Sanierung.',
+            seoTitle: 'Rückbau München & Bayern – selektiver Rückbau | GoganBau',
             description:
-                'Rückbau in München und ganz Bayern: geplanter, abschnittsweiser Rückbau als Vorbereitung für Umbau und Sanierung – abgestimmt mit Ihrer Bauleitung.',
-            text: 'Geplanter Rückbau in klarer Reihenfolge – damit Umbau und Sanierung ohne Verzögerung starten.',
+                'Rückbau in München und ganz Bayern: selektiver, abschnittsweiser Rückbau von Büro- und Gewerbeimmobilien als Vorbereitung für Umbau und Sanierung.',
+            text: 'Selektiver Rückbau in klarer Reihenfolge – damit Umbau und Sanierung ohne Verzögerung starten.',
             body: [
-                'Als Rückbauunternehmen in München und ganz Bayern bauen wir Gebäudeteile abschnittsweise und in klarer Reihenfolge zurück. So bereiten wir Umbau und Sanierung vor, ohne dass der Zeitplan ins Stocken gerät.',
-                'Jeder Schritt wird mit der Bauleitung abgestimmt. Für Bauunternehmen arbeiten wir als Subunternehmer – für einzelne Abschnitte oder das gesamte Rückbauprojekt.',
+                'Als Rückbauunternehmen in München und ganz Bayern bauen wir Gebäudeteile selektiv und abschnittsweise zurück – die Materialien sortenrein getrennt. So bereiten wir Umbau und Sanierung von Büro- und Gewerbeimmobilien vor, ohne dass der Zeitplan ins Stocken gerät.',
+                'Jeder Schritt wird mit der Bauleitung abgestimmt. Für Bauunternehmen und Generalunternehmer arbeiten wir als Subunternehmer – für einzelne Abschnitte oder das gesamte Rückbauprojekt.',
             ],
-            points: ['Abschnittsweise geplant', 'Vorbereitung für Umbau und Sanierung', 'Abgestimmt mit der Bauleitung'],
+            points: ['Selektiv und abschnittsweise', 'Büro- und Gewerbeimmobilien', 'Abgestimmt mit der Bauleitung'],
         },
         'industrieller-rueckbau': {
-            number: '03',
+            number: '04',
+            group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Industrieller Rückbau',
             scene: 'rueckbau',
-            // h1 on the service page (default: "<title> in München").
             h1: 'Industrieller Rückbau in Bayern',
-            short: 'Rückbau von Industriehallen und Anlagen.',
-            seoTitle: 'Industrieller Rückbau Bayern – Industrieabbruch | GoganBau',
+            short: 'Demontage und Entkernung von Hallen.',
+            seoTitle: 'Industrieller Rückbau Bayern – Industriedemontage | GoganBau',
             description:
-                'Industrieller Rückbau in ganz Bayern: Rückbau von Industriehallen, Produktions- und Gewerbeanlagen – geplant und abgestimmt mit Ihrer Bauleitung.',
-            text: 'Rückbau von Industriehallen, Produktions- und Gewerbeanlagen – geplant und in ganz Bayern.',
+                'Industrieller Rückbau in ganz Bayern: Demontage und Entkernung von Industrie-, Lager- und Gewerbehallen – geplant und mit Ihrer Bauleitung abgestimmt.',
+            text: 'Demontage und Entkernung von Industrie-, Lager- und Gewerbehallen – in ganz Bayern.',
             body: [
-                'Beim industriellen Rückbau bauen wir Industriehallen, Produktions- und Gewerbeanlagen abschnittsweise zurück. Wir demontieren Anlagenteile und Ausbauelemente, trennen die Materialien und beräumen die Flächen für Umbau, Neubau oder Nachnutzung.',
-                'Jeder Abschnitt wird mit der Bauleitung abgestimmt. Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer in ganz Bayern.',
+                'Beim industriellen Rückbau demontieren und entkernen wir Industrie-, Lager- und Gewerbehallen abschnittsweise: Anlagenteile, Einbauten und Ausbauelemente. Die Materialien trennen wir und beräumen die Flächen für Umbau, Neubau oder Nachnutzung.',
+                'Wir arbeiten manuell und mit handgeführten Geräten – geplant und mit der Bauleitung abgestimmt. Als Subunternehmer sind wir für Bauunternehmen und Generalunternehmer in ganz Bayern im Einsatz.',
             ],
-            points: ['Industriehallen und Gewerbeanlagen', 'Demontage und Materialtrennung', 'Abschnittsweise geplant'],
-        },
-        tektalan: {
-            number: '04',
-            title: 'Tektalan-Montage',
-            short: 'Fachgerechte Montage von Dämmplatten.',
-            seoTitle: 'Tektalan-Montage München – Dämmplatten | GoganBau',
-            description:
-                'Tektalan-Montage in München: fachgerechte Montage von Tektalan-Dämmplatten an Decken und Wänden in Tiefgaragen, Kellern und Gewerbeflächen.',
-            text: 'Montage von Tektalan-Dämmplatten an Decken und Wänden – für Wärme-, Brand- und Schallschutz.',
-            body: [
-                'Wir montieren Tektalan-Dämmplatten an Decken und Wänden – für Wärme-, Brand- und Schallschutz. Typische Einsatzorte sind Tiefgaragen, Keller und Gewerbeflächen.',
-                'Als Subunternehmer übernehmen wir die Montage termingerecht im Ablauf Ihrer Baustelle und stimmen uns direkt mit der Bauleitung ab.',
-            ],
-            points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
-        },
-        logistik: {
-            number: '05',
-            title: 'Baustellenlogistik',
-            short: 'Material, Lieferungen und Abläufe koordiniert.',
-            seoTitle: 'Baustellenlogistik München – Koordination | GoganBau',
-            description:
-                'Baustellenlogistik in München: Wir koordinieren Materialbedarf, Lieferungen, Lagerflächen und Einsatzzeiten, damit Ihre Gewerke ohne Leerlauf arbeiten.',
-            text: 'Wir koordinieren Material, Lieferungen und Einsatzzeiten – damit Ihre Gewerke ohne Leerlauf arbeiten.',
-            body: [
-                'Wir planen Materialbedarf, Anlieferfenster und Lagerflächen und stimmen die Einsatzzeiten der Gewerke aufeinander ab. So entstehen weniger Wartezeiten und weniger Stillstand auf der Baustelle.',
-                'Unser Schwerpunkt liegt auf Koordination und Organisation – für Bauunternehmen, die bei der Baustellenorganisation Entlastung brauchen.',
-            ],
-            points: ['Materialbedarf und Lieferungen', 'Anlieferfenster und Lagerflächen', 'Einsatzzeiten der Gewerke'],
-            note: 'Wir koordinieren – Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
+            points: ['Industrie-, Lager- und Gewerbehallen', 'Demontage von Anlagenteilen', 'Materialtrennung und Beräumung'],
         },
         baureinigung: {
-            number: '06',
+            number: '05',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Baureinigung',
             short: 'Baustellenreinigung während der Bauphase.',
             seoTitle: 'Baureinigung & Baustellenreinigung München | GoganBau',
             description:
-                'Baureinigung und Baustellenreinigung in München: Grob- und Bauzwischenreinigung während der Bauphase – für sichere Laufwege und saubere Übergaben.',
+                'Baureinigung und Baustellenreinigung in München: Grob- und Bauzwischenreinigung während der Bauphase – für Bauunternehmen, Generalunternehmer und Bauträger.',
             text: 'Grob- und Zwischenreinigung während der Bauphase – für sichere Wege und saubere Übergaben.',
             body: [
-                'Während der Bauphase übernehmen wir die Baustellenreinigung in München: Grobreinigung, Bauzwischenreinigung und die Beräumung von Bauabfällen – für freie, sichere Laufwege.',
-                'Bauunternehmen und Generalunternehmer setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
+                'Während der Bauphase übernehmen wir die Baustellenreinigung in München: Grobreinigung, Bauzwischenreinigung und die Beräumung von Bauabfällen – für freie, sichere Laufwege bei Neubau, Umbau und Sanierung.',
+                'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
             ],
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
         },
         bauendreinigung: {
-            number: '07',
+            number: '06',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Bauendreinigung',
-            short: 'Bauschlussreinigung vor der Abnahme.',
-            seoTitle: 'Bauendreinigung München – Bauschlussreinigung | GoganBau',
+            short: 'Baufeinreinigung vor der Abnahme.',
+            seoTitle: 'Bauendreinigung & Baufeinreinigung München | GoganBau',
             description:
-                'Bauendreinigung in München: gründliche Bauschlussreinigung vor der Abnahme – Glasflächen, Rahmen, Böden und Sanitär, übergabefertig für Ihren Bauherrn.',
+                'Bauendreinigung in München: Baufeinreinigung und Bauschlussreinigung vor der Abnahme – Glasflächen, Rahmen, Böden und Sanitär, übergabefertig für Ihren Bauherrn.',
             text: 'Gründliche Endreinigung vor der Abnahme – übergabefertig für Ihren Bauherrn.',
             body: [
-                'Vor der Abnahme sorgen wir mit der Bauendreinigung (Bauschlussreinigung) dafür, dass Neubau, Umbau oder Ausbau übergabefertig sind: Glasflächen und Rahmen, Böden, Sanitärbereiche und alle sichtbaren Oberflächen.',
-                'Für Bauunternehmen übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter.',
+                'Vor der Abnahme sorgen wir mit der Bauendreinigung (Baufeinreinigung, Bauschlussreinigung) dafür, dass Neubau, Umbau oder Renovierung übergabefertig sind: Glasflächen und Rahmen, Böden, Sanitärbereiche und alle sichtbaren Oberflächen.',
+                'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
             ],
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
         },
         gebaeudereinigung: {
-            number: '08',
+            number: '07',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Gebäudereinigung',
-            short: 'Unterhaltsreinigung für Büros und Gewerbe.',
+            short: 'Unterhaltsreinigung für Gewerbe.',
             seoTitle: 'Gebäudereinigung & Unterhaltsreinigung München | GoganBau',
             description:
-                'Gebäudereinigung in München: Unterhaltsreinigung und Sonderreinigung für Büros und Gewerbeflächen – in festen Intervallen, mit direktem Ansprechpartner.',
+                'Gebäudereinigung in München: Unterhaltsreinigung und Sonderreinigung für Gewerbeimmobilien und Hausverwaltungen – in festen Intervallen, mit direktem Ansprechpartner.',
             text: 'Unterhalts- und Sonderreinigung gewerblicher Objekte – mit festen Intervallen.',
             body: [
-                'Als Reinigungsfirma in München übernehmen wir die Unterhaltsreinigung gewerblicher Objekte – Büros und Gewerbeflächen – in festen Intervallen.',
-                'Zusätzlich bieten wir Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
+                'Als Reinigungsfirma in München übernehmen wir die Unterhaltsreinigung gewerblicher Objekte – Geschäftsräume, Gewerbe- und Verwaltungsflächen – täglich, wöchentlich oder in dem Rhythmus, den Sie vereinbaren.',
+                'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
             ],
-            points: ['Unterhaltsreinigung im festen Rhythmus', 'Büros und Gewerbeflächen', 'Sonderreinigung nach Bedarf'],
+            points: ['Unterhaltsreinigung im festen Rhythmus', 'Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf'],
         },
-        // scene: which zone of the 3D building to show for services without their own zone.
+        bueroreinigung: {
+            number: '08',
+            group: 'reinigung',
+            area: 'München und Umkreis bis 50 km',
+            title: 'Büroreinigung',
+            scene: 'gebaeudereinigung',
+            short: 'Regelmäßige Reinigung von Büros.',
+            seoTitle: 'Büroreinigung München – Büroreinigungsfirma | GoganBau',
+            description:
+                'Büroreinigung in München: regelmäßige Reinigung von Büroräumen, Besprechungsräumen, Empfang, Teeküchen und Sanitär – nach Absprache auch nach Feierabend.',
+            text: 'Regelmäßige Reinigung von Büros – nach Absprache auch nach Feierabend.',
+            body: [
+                'Als Büroreinigungsfirma in München reinigen wir Arbeitsplätze, Besprechungs- und Konferenzräume, Empfangsbereiche, Teeküchen und Sanitärbereiche – täglich, wöchentlich oder in dem Rhythmus, den Sie brauchen.',
+                'Damit Ihr Team ungestört arbeiten kann, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch nach Feierabend. Für kleine Büros ebenso wie für größere Bürogebäude.',
+            ],
+            points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
+        },
         grundreinigung: {
             number: '09',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
             scene: 'gebaeudereinigung',
             short: 'Intensivreinigung von Böden und Flächen.',
             seoTitle: 'Grundreinigung München – Intensivreinigung | GoganBau',
             description:
-                'Grundreinigung in München: gründliche Intensivreinigung von Büros, Gewerbeflächen und Böden – wenn die regelmäßige Reinigung nicht mehr ausreicht.',
+                'Grundreinigung in München: gründliche Intensivreinigung von Büros, Gewerbeflächen, Böden und Sanitäranlagen – wenn die regelmäßige Reinigung nicht mehr ausreicht.',
             text: 'Gründliche Intensivreinigung – wenn die regelmäßige Reinigung nicht mehr ausreicht.',
             body: [
-                'Bei der Grundreinigung entfernen wir hartnäckige Verschmutzungen, die bei der laufenden Unterhaltsreinigung nicht erfasst werden – auf Böden, Oberflächen und in Sanitärbereichen. So bringen wir Büros und Gewerbeflächen wieder in einen gepflegten Grundzustand.',
+                'Bei der Grundreinigung entfernen wir hartnäckige Verschmutzungen, die bei der laufenden Unterhaltsreinigung nicht erfasst werden – auf Böden, Oberflächen und in Sanitäranlagen. So bringen wir Büros, Geschäftsräume und Gewerbeflächen wieder in einen gepflegten Grundzustand.',
                 'Typische Anlässe sind ein Mieterwechsel, ein Umzug oder der Start einer neuen Unterhaltsreinigung. Termin und Umfang stimmen wir direkt mit Ihnen ab.',
             ],
-            points: ['Bodenreinigung und Oberflächen', 'Büros und Gewerbeflächen', 'Vor Mieterwechsel oder Neustart'],
+            points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
         },
         treppenhausreinigung: {
             number: '10',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
             scene: 'gebaeudereinigung',
-            short: 'Saubere Treppenhäuser und Eingangsbereiche.',
-            seoTitle: 'Treppenhausreinigung München – regelmäßig | GoganBau',
+            short: 'Saubere Treppenhäuser und Eingänge.',
+            seoTitle: 'Treppenhausreinigung München – Hausverwaltungen | GoganBau',
             description:
-                'Treppenhausreinigung in München: regelmäßige Reinigung von Treppenhäusern, Eingangsbereichen und Fluren – für Hausverwaltungen und Gewerbeobjekte.',
+                'Treppenhausreinigung in München: regelmäßige Reinigung von Treppenhäusern, Eingangsbereichen und Fluren – für Hausverwaltungen, Mehrfamilienhäuser und Wohnanlagen.',
             text: 'Regelmäßige Reinigung von Treppenhäusern, Eingängen und Fluren – im festen Rhythmus.',
             body: [
                 'Wir reinigen Treppenhäuser, Eingangsbereiche, Flure und Geländer in festen Intervallen – damit Bewohner, Mitarbeiter und Besucher einen gepflegten ersten Eindruck bekommen.',
-                'Für Hausverwaltungen und Eigentümer übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
+                'Für Hausverwaltungen und Eigentümer von Mehrfamilienhäusern, Wohnanlagen und Gewerbeimmobilien übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
             ],
-            points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Für Hausverwaltungen und Gewerbe'],
+            points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
         },
         praxisreinigung: {
             number: '11',
+            group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Praxisreinigung',
             scene: 'gebaeudereinigung',
@@ -233,6 +261,64 @@ export default {
             ],
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
         },
+        tektalan: {
+            number: '12',
+            group: 'montage',
+            title: 'Tektalan-Montage',
+            short: 'Fachgerechte Montage von Dämmplatten.',
+            seoTitle: 'Tektalan-Montage München – Dämmplatten | GoganBau',
+            description:
+                'Tektalan-Montage in München: fachgerechte Montage von Tektalan-Dämmplatten an Decken und Wänden in Tiefgaragen, Kellern und Gewerbeflächen.',
+            text: 'Montage von Tektalan-Dämmplatten an Decken und Wänden – für Wärme-, Brand- und Schallschutz.',
+            body: [
+                'Wir montieren Tektalan-Dämmplatten an Decken und Wänden – für Wärme-, Brand- und Schallschutz. Typische Einsatzorte sind Tiefgaragen, Keller und Gewerbeflächen.',
+                'Als Subunternehmer übernehmen wir die Montage termingerecht im Ablauf Ihrer Baustelle und stimmen uns direkt mit der Bauleitung ab.',
+            ],
+            points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
+        },
+        logistik: {
+            number: '13',
+            group: 'montage',
+            title: 'Baustellenlogistik',
+            short: 'Material, Lieferungen und Abläufe koordiniert.',
+            seoTitle: 'Baustellenlogistik München – Koordination | GoganBau',
+            description:
+                'Baustellenlogistik in München: Wir koordinieren Materialbedarf, Lieferungen, Lagerflächen und Einsatzzeiten, damit Ihre Gewerke ohne Leerlauf arbeiten.',
+            text: 'Wir koordinieren Material, Lieferungen und Einsatzzeiten – damit Ihre Gewerke ohne Leerlauf arbeiten.',
+            body: [
+                'Wir planen Materialbedarf, Anlieferfenster und Lagerflächen und stimmen die Einsatzzeiten der Gewerke aufeinander ab. So entstehen weniger Wartezeiten und weniger Stillstand auf der Baustelle.',
+                'Unser Schwerpunkt liegt auf Koordination und Organisation – für Bauunternehmen, die bei der Baustellenorganisation Entlastung brauchen.',
+            ],
+            points: ['Materialbedarf und Lieferungen', 'Anlieferfenster und Lagerflächen', 'Einsatzzeiten der Gewerke'],
+            note: 'Wir koordinieren – Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
+        },
+    },
+
+    // "Für Bauunternehmen" page (/bauunternehmen/) — B2B page for contractors.
+    b2b: {
+        seoTitle: 'Subunternehmer Abbruch & Baureinigung Bayern | GoganBau',
+        description:
+            'Subunternehmer für Bauunternehmen und Generalunternehmer: Abbruch, Entkernung und Rückbau in ganz Bayern, Baureinigung in München – 24/7 erreichbar.',
+        h1: 'Abbruch, Rückbau und Baureinigung für Bauunternehmen und Generalunternehmer',
+        intro: [
+            'Als Subunternehmer (Nachunternehmer) unterstützen wir Bauunternehmen, Generalunternehmer, Bauträger und Sanierungsunternehmen – dort, wo zusätzliche Kapazität gebraucht wird.',
+            'Abbrucharbeiten, Entkernung und Rückbau – auch industriellen Rückbau – übernehmen wir in ganz Bayern. Baureinigung, Bauendreinigung und Gebäudereinigung bieten wir in München und im Umkreis von bis zu 50 km an. Wir arbeiten manuell und mit handgeführten Geräten.',
+        ],
+        // How we can be booked (from the original partnership models).
+        models: [
+            ['Bauabschnitte', 'Unterstützung in klar definierten Projektphasen.'],
+            ['Zusätzliche Kapazität', 'Entlastung, wenn Zeitplan oder Umfang mehr Personal erfordern.'],
+            ['Wiederkehrende Aufträge', 'Verlässliche Unterstützung bei ähnlichen Leistungsbereichen.'],
+            ['Langfristige Zusammenarbeit', 'Partnerschaft mit Blick auf weitere Projekte.'],
+        ],
+        // The 5-step workflow (from the original process).
+        process: [
+            ['Kontakt', 'Projekt, Standort, Bedarf und Zeitfenster aufnehmen.'],
+            ['Abstimmung', 'Leistungsumfang, Termine und Zuständigkeiten verbindlich klären.'],
+            ['Koordination', 'Material, Personal, Einsatzzeiten und Abläufe organisieren.'],
+            ['Ausführung', 'Vereinbarte Leistungen strukturiert umsetzen.'],
+            ['Übergabe', 'Ergebnis kontrollieren und den nächsten Schritt festlegen.'],
+        ],
     },
 
     // Vorher / Nachher. Put the photos in public/images/projekte/ — a project only shows
@@ -240,7 +326,7 @@ export default {
     // images, so they are labelled as such (not your own project photos).
     projects: [
         {
-            service: 'abbruch',
+            service: 'entkernung',
             title: 'Entkernung Bürogeschoss',
             before: 'images/projekte/abbruch-vorher.jpg',
             after: 'images/projekte/abbruch-nachher.jpg',
@@ -259,13 +345,13 @@ export default {
     focusAreas: [
         {
             title: 'Abbruch & Rückbau in ganz Bayern',
-            text: 'Als Abbruchfirma übernehmen wir Abbrucharbeiten, Demontage und die Entkernung bis auf den Rohbau – den geplanten Rückbau als Vorbereitung für Umbau und Sanierung – und den industriellen Rückbau von Hallen und Anlagen. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
-            services: ['abbruch', 'rueckbau', 'industrieller-rueckbau'],
+            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau, den selektiven Rückbau als Vorbereitung für Umbau und Sanierung und den industriellen Rückbau von Hallen. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
+            services: ['abbruch', 'entkernung', 'rueckbau', 'industrieller-rueckbau'],
         },
         {
             title: 'Gebäudereinigung & Baureinigung in München',
-            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
-            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'grundreinigung', 'treppenhausreinigung', 'praxisreinigung'],
+            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung und Büroreinigung: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
+            services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'bueroreinigung', 'grundreinigung', 'treppenhausreinigung', 'praxisreinigung'],
         },
         {
             title: 'Montage & Baustellenlogistik',
@@ -282,7 +368,7 @@ export default {
         },
         {
             q: 'In welchem Gebiet sind Sie tätig?',
-            a: 'Abbruch, Entkernung und Rückbau – auch industriellen Rückbau – übernehmen wir in ganz Bayern. Unsere Reinigungsleistungen bieten wir in München und im Umkreis von bis zu 50 km an.',
+            a: 'Abbruch, Entkernung und Rückbau – auch industriellen Rückbau – übernehmen wir in ganz Bayern – zum Beispiel in München, Augsburg, Ingolstadt, Regensburg, Landshut und Rosenheim. Unsere Reinigungsleistungen bieten wir in München und im Umkreis von bis zu 50 km an, etwa in Dachau, Freising, Erding, Fürstenfeldbruck und Starnberg.',
         },
         {
             q: 'Arbeiten Sie als Subunternehmer für Bauunternehmen?',

@@ -11,6 +11,9 @@ const esc = (value) =>
 
 const each = (list, fn) => list.map(fn).join('');
 const services = Object.entries(gb.services);
+// [[groupKey, label, [[key, service], …]], …] in the order of gb.serviceGroups
+const groups = Object.entries(gb.serviceGroups).map(([g, label]) => [g, label, services.filter(([, s]) => s.group === g)]);
+const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] tracking-[0.2em] text-mist uppercase">${esc(label)}</li>`;
 const wa = (text) => `https://wa.me/${gb.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 /* ---------------------------------------------------------------- icons */
@@ -59,11 +62,13 @@ function nav(ctx) {
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
                 </a>
                 <div class="invisible absolute top-full -left-4 pt-2 opacity-0 transition group-focus-within/dd:visible group-focus-within/dd:opacity-100 group-hover/dd:visible group-hover/dd:opacity-100">
-                    <ul class="glass-strong w-64 py-2 shadow-2xl">
-                        ${each(services, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-4 py-2.5 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`)}
-                    </ul>
+                    <!-- Two columns: Abbruch & Rückbau + Montage & Logistik | Reinigung -->
+                    <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 shadow-2xl">
+                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
+                    </div>
                 </div>
             </div>
+            <a href="${url('bauunternehmen/')}" class="transition hover:text-white">Für Bauunternehmen</a>
             <a href="${anchor('ueber-uns')}" class="transition hover:text-white">Über uns</a>
             <a href="${anchor('kontakt')}" class="transition hover:text-white">Kontakt</a>
         </nav>
@@ -91,10 +96,11 @@ function nav(ctx) {
                     Leistungen <span class="inline-flex text-mist transition group-open/acc:rotate-180">${icon.chevronDown}</span>
                 </summary>
                 <ul class="pb-3 pl-4 font-sans text-base font-normal">
-                    ${each(services, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block py-2.5 ${current === key ? 'text-signal' : 'text-slate-300'}">${esc(s.title)}</a></li>`)}
+                    ${each(groups, ([, label, list]) => groupLabel('pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block py-2.5 ${current === key ? 'text-signal' : 'text-slate-300'}">${esc(s.title)}</a></li>`))}
                     <li><a href="${anchor('leistungen')}" class="block py-2.5 font-semibold text-white">Alle Leistungen ansehen →</a></li>
                 </ul>
             </details>
+            <a href="${url('bauunternehmen/')}" class="border-b border-white/10 py-4">Für Bauunternehmen</a>
             <a href="${anchor('ueber-uns')}" class="border-b border-white/10 py-4">Über uns</a>
             <a href="${anchor('kontakt')}" class="py-4">Kontakt</a>
         </nav>
@@ -119,6 +125,7 @@ function footer({ url }) {
         <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-[11px] tracking-wider text-slate-500 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <span>© ${gb.founded}–${new Date().getFullYear()} ${esc(gb.name)}</span>
             <span class="flex gap-6">
+                <a href="${url('bauunternehmen/')}" class="hover:text-white">Für Bauunternehmen</a>
                 <a href="${url('impressum/')}" class="hover:text-white">Impressum</a>
                 <a href="${url('datenschutz/')}" class="hover:text-white">Datenschutz</a>
             </span>
@@ -182,7 +189,7 @@ function inquiryForm({ url }) {
             <label for="f-service" class="field-label">Leistung <span class="normal-case tracking-normal">(optional)</span></label>
             <select id="f-service" name="service" class="field">
                 <option value="">Noch offen</option>
-                ${each(services, ([key, s]) => `<option value="${esc(s.title)}" data-key="${key}">${esc(s.title)}</option>`)}
+                ${each(groups, ([, label, list]) => `<optgroup label="${esc(label)}">${each(list, ([key, s]) => `<option value="${esc(s.title)}" data-key="${key}">${esc(s.title)}</option>`)}</optgroup>`)}
             </select>
         </div>
 
@@ -316,6 +323,15 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
 `;
 }
 
+// "Einsatzgebiet: ganz Bayern" plus the example towns from gb.areaPlaces.
+function areaLine(area) {
+    const places = gb.areaPlaces[area] ?? [];
+    return `<div class="mt-6 flex gap-3 text-sm text-mist">
+                <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <p>Einsatzgebiet: <span class="text-white">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}</p>
+            </div>`;
+}
+
 /* ---------------------------------------------------------------- pages */
 
 function homePage(ctx, projects) {
@@ -362,7 +378,7 @@ function homePage(ctx, projects) {
                 <h2 class="section-title mt-4">Was wir machen.</h2>
                 <!-- Phones: narrow, title-only rows so the building stays visible on the right. -->
                 <ul class="mt-10 w-[62%] min-w-[13rem] divide-y divide-white/10 border-y border-white/10 bg-obsidian/60 backdrop-blur-sm sm:w-full">
-                    ${each(services, ([key, s]) => `<li>
+                    ${each(groups, ([, label, list]) => groupLabel('px-3 pt-4 pb-1.5 sm:px-4')(label) + each(list, ([key, s]) => `<li>
                         <a href="${url(`leistungen/${key}/`)}" data-service-card="${s.scene ?? key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-steel/60 sm:gap-4 sm:px-4">
                             <span class="hidden font-mono text-xs text-signal sm:inline">${s.number}</span>
                             <span class="min-w-0 flex-1">
@@ -371,7 +387,7 @@ function homePage(ctx, projects) {
                             </span>
                             ${icon.chevronRight('size-4 shrink-0 text-mist transition group-hover:translate-x-0.5 group-hover:text-signal')}
                         </a>
-                    </li>`)}
+                    </li>`))}
                 </ul>
                 <a href="#kontakt" class="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal uppercase hover:text-signal-soft">Passende Leistung dabei? Anfrage stellen ${icon.arrow()}</a>
             </div>
@@ -490,7 +506,7 @@ function servicePage(ctx, key, projects) {
             <ul class="mt-10 border-t border-white/10">
                 ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
             </ul>
-            ${s.area ? `<p class="mt-6 flex items-center gap-3 text-sm text-mist"><svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Einsatzgebiet: <span class="text-white">${esc(s.area)}</span></p>` : ''}
+            ${s.area ? areaLine(s.area) : ''}
             ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-300">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
                 <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
@@ -526,6 +542,89 @@ function servicePage(ctx, key, projects) {
                 </li>`,
                 )}
             </ul>
+        </div>
+    </section>`,
+    });
+}
+
+// "Für Bauunternehmen" (/bauunternehmen/): what we offer contractors, how they can book us, and how we work.
+function b2bPage(ctx) {
+    const { url, anchor } = ctx;
+    const b = gb.b2b;
+    const serviceLinks = (keys) =>
+        each(
+            keys.map((k) => [k, gb.services[k]]),
+            ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="group flex items-center gap-3 py-3">
+                <span class="font-mono text-xs text-signal">${s.number}</span>
+                <span class="flex-1 font-display font-semibold text-white group-hover:text-signal-soft">${esc(s.title)}</span>
+                ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal')}
+            </a></li>`,
+        );
+    const keysOf = (...g) => services.filter(([, s]) => g.includes(s.group)).map(([k]) => k);
+    const columns = [
+        ['Abbruch & Rückbau', keysOf('abbruch'), 'ganz Bayern'],
+        ['Baureinigung & Gebäudereinigung', keysOf('reinigung'), 'München und Umkreis bis 50 km'],
+        ['Montage & Logistik', keysOf('montage'), null],
+    ];
+
+    return layout(ctx, {
+        title: b.seoTitle,
+        description: b.description,
+        body: `
+    <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+            <p class="eyebrow">Für Bauunternehmen</p>
+            <h1 class="mt-4 font-display text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl">${esc(b.h1)}</h1>
+            ${each(b.intro, (p, i) => `<p class="mt-6 ${i === 0 ? 'text-lg text-slate-300' : 'text-slate-400'}">${esc(p)}</p>`)}
+            <div class="mt-10 grid gap-3 sm:grid-cols-2">
+                <a href="${anchor('kontakt')}" class="btn-primary">Projekt anfragen ${icon.arrow()}</a>
+                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">Leistungen für Bauunternehmen</p>
+            <div class="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
+                ${each(columns, ([title, keys, area], i) => `<div class="border-t-2 ${i === 1 ? 'border-emerald-400' : 'border-signal'} pt-5">
+                    <h2 class="font-display text-xl font-bold text-white">${esc(title)}</h2>
+                    ${area ? areaLine(area) : ''}
+                    <ul class="mt-4 divide-y divide-white/10 border-t border-white/10">${serviceLinks(keys)}</ul>
+                </div>`)}
+            </div>
+        </div>
+    </section>
+
+    <section class="border-t border-white/10 py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">Einsatzmodelle</p>
+            <h2 class="section-title mt-4">Flexibel dort, wo Kapazität gebraucht wird.</h2>
+            <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                ${each(b.models, ([title, text]) => `<div class="card">
+                    <div class="h-1 w-10 bg-signal"></div>
+                    <h3 class="mt-5 font-display text-sm font-semibold tracking-[0.12em] text-white uppercase">${esc(title)}</h3>
+                    <p class="mt-2 text-sm text-slate-400">${esc(text)}</p>
+                </div>`)}
+            </div>
+        </div>
+    </section>
+
+    <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p class="eyebrow">Zusammenarbeit</p>
+            <h2 class="section-title mt-4">Klarer Ablauf vom Kontakt bis zur Übergabe.</h2>
+            <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+                ${each(b.process, ([title, text], i) => `<li class="card">
+                    <span class="font-mono text-xs text-signal">${String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="mt-3 font-display text-sm font-semibold tracking-[0.12em] text-white uppercase">${esc(title)}</h3>
+                    <p class="mt-2 text-sm text-slate-400">${esc(text)}</p>
+                </li>`)}
+            </ol>
+            <div class="mt-12 flex flex-col gap-3 sm:flex-row">
+                <a href="${anchor('kontakt')}" class="btn-primary">Projekt anfragen ${icon.arrow()}</a>
+                <a href="${wa('Hallo, wir suchen einen Subunternehmer für ein Bauprojekt.')}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp anfragen</a>
+            </div>
         </div>
     </section>`,
     });
@@ -619,6 +718,7 @@ export function renderPages({ base, publicDir }) {
             file: `leistungen/${key}/index.html`,
             html: servicePage(context('service', `leistungen/${key}/`, key), key, projects.filter((p) => p.service === key)),
         })),
+        { file: 'bauunternehmen/index.html', html: b2bPage(context('b2b', 'bauunternehmen/')) },
         { file: 'impressum/index.html', html: impressum(context('legal', 'impressum/')) },
         { file: 'datenschutz/index.html', html: datenschutz(context('legal', 'datenschutz/')) },
         { file: '404.html', html: notFound(context('404', null)) },
