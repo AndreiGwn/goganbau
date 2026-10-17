@@ -62,9 +62,9 @@ function nav(ctx) {
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
                 </a>
                 <div class="invisible absolute top-full -left-4 pt-2 opacity-0 transition group-focus-within/dd:visible group-focus-within/dd:opacity-100 group-hover/dd:visible group-hover/dd:opacity-100">
-                    <!-- Two columns: Abbruch & Rückbau + Montage & Logistik | Reinigung -->
+                    <!-- Two columns: Abbruch & Rückbau + Kernbohrungen & Betonschneiden + Montage & Logistik | Reinigung -->
                     <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 shadow-2xl">
-                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
+                        ${each([['abbruch', 'beton', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
                     </div>
                 </div>
             </div>
@@ -400,8 +400,8 @@ function homePage(ctx, projects) {
                 <p class="eyebrow">Schwerpunkte</p>
                 <h2 class="section-title mt-4">Abbruch und Reinigung aus einer Hand.</h2>
             </div>
-            <div class="mt-12 grid gap-10 md:grid-cols-3 md:gap-8">
-                ${each(gb.focusAreas, (area, i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="border-t-2 ${i === 1 ? 'border-emerald-400' : 'border-signal'} pt-6">
+            <div class="mt-12 grid gap-10 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
+                ${each(gb.focusAreas, (area, i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="border-t-2 ${area.accent === 'emerald' ? 'border-emerald-400' : 'border-signal'} pt-6">
                     <h3 class="font-display text-xl font-bold text-white">${esc(area.title)}</h3>
                     <p class="mt-3 text-slate-400">${esc(area.text)}</p>
                     <ul class="mt-5 space-y-2 text-sm">
@@ -562,9 +562,11 @@ function b2bPage(ctx) {
         );
     const keysOf = (...g) => services.filter(([, s]) => g.includes(s.group)).map(([k]) => k);
     const columns = [
-        ['Abbruch & Rückbau', keysOf('abbruch'), 'ganz Bayern'],
-        ['Baureinigung & Gebäudereinigung', keysOf('reinigung'), 'München und Umkreis bis 50 km'],
-        ['Montage & Logistik', keysOf('montage'), null],
+        // [heading, service keys, Einsatzgebiet, green accent?]
+        ['Abbruch & Rückbau', keysOf('abbruch'), 'ganz Bayern', false],
+        ['Kernbohrungen & Betonschneiden', keysOf('beton'), 'ganz Bayern', false],
+        ['Baureinigung & Gebäudereinigung', keysOf('reinigung'), 'München und Umkreis bis 50 km', true],
+        ['Montage & Logistik', keysOf('montage'), null, false],
     ];
 
     return layout(ctx, {
@@ -586,8 +588,8 @@ function b2bPage(ctx) {
     <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p class="eyebrow">Leistungen für Bauunternehmen</p>
-            <div class="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
-                ${each(columns, ([title, keys, area], i) => `<div class="border-t-2 ${i === 1 ? 'border-emerald-400' : 'border-signal'} pt-5">
+            <div class="mt-8 grid gap-10 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
+                ${each(columns, ([title, keys, area, green]) => `<div class="border-t-2 ${green ? 'border-emerald-400' : 'border-signal'} pt-5">
                     <h2 class="font-display text-xl font-bold text-white">${esc(title)}</h2>
                     ${area ? areaLine(area) : ''}
                     <ul class="mt-4 divide-y divide-white/10 border-t border-white/10">${serviceLinks(keys)}</ul>
