@@ -237,7 +237,11 @@ function beforeAfter(project) {
 /* --------------------------------------------------------------- layout */
 
 function layout(ctx, { title, description, body }) {
-    const fullTitle = title ? `${title} · ${gb.name}` : gb.name;
+    // Service pages name the service and the city; the home page uses the longer content.homeTitle.
+    const fullTitle = !title ? gb.homeTitle : ctx.current ? `${title} in München · ${gb.shortName}` : `${title} · ${gb.name}`;
+    const canonical = ctx.path === null ? '' : `
+    <link rel="canonical" href="${gb.siteUrl}/${ctx.path}">
+    <meta property="og:url" content="${gb.siteUrl}/${ctx.path}">`;
     return `<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
@@ -248,7 +252,7 @@ function layout(ctx, { title, description, body }) {
     <meta name="theme-color" content="#0A0E17">
     <meta property="og:title" content="${esc(`${gb.name} — ${gb.claim}`)}">
     <meta property="og:description" content="${esc(gb.tagline)}">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="website">${canonical}
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
     <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
     <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
@@ -516,19 +520,20 @@ export function renderPages({ base, publicDir }) {
     // Only projects whose photos are actually in public/ are shown.
     const projects = gb.projects.filter((p) => fs.existsSync(path.join(publicDir, p.before)) && fs.existsSync(path.join(publicDir, p.after)));
 
-    const context = (page, current = null) => {
+    // path: the page's address below the site root (null = not a real page, e.g. 404).
+    const context = (page, path, current = null) => {
         const url = (p = '') => base + p;
-        return { url, current, anchor: (id) => (page === 'home' ? `#${id}` : url(`#${id}`)) };
+        return { url, path, current, anchor: (id) => (page === 'home' ? `#${id}` : url(`#${id}`)) };
     };
 
     return [
-        { file: 'index.html', html: homePage(context('home'), projects) },
+        { file: 'index.html', html: homePage(context('home', ''), projects) },
         ...services.map(([key]) => ({
             file: `leistungen/${key}/index.html`,
-            html: servicePage(context('service', key), key, projects.filter((p) => p.service === key)),
+            html: servicePage(context('service', `leistungen/${key}/`, key), key, projects.filter((p) => p.service === key)),
         })),
-        { file: 'impressum/index.html', html: impressum(context('legal')) },
-        { file: 'datenschutz/index.html', html: datenschutz(context('legal')) },
-        { file: '404.html', html: notFound(context('404')) },
+        { file: 'impressum/index.html', html: impressum(context('legal', 'impressum/')) },
+        { file: 'datenschutz/index.html', html: datenschutz(context('legal', 'datenschutz/')) },
+        { file: '404.html', html: notFound(context('404', null)) },
     ];
 }

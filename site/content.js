@@ -3,6 +3,11 @@
  * Edit text here; every page is generated from this file (see site/pages.js).
  */
 export default {
+    // Public address of the site, used for the sitemap, robots.txt and canonical links.
+    siteUrl: 'https://goganbau.de',
+    // Title of the home page in the browser tab and in Google results (best 50–60 characters).
+    homeTitle: 'GoganBau – Abbruch, Rückbau & Reinigung in München',
+
     name: 'GoganBau & Gebäudereinigung',
     shortName: 'GoganBau',
     founded: 2019,
