@@ -527,7 +527,8 @@ function servicePage(ctx, key, projects) {
     });
 }
 
-function legalPage(ctx, title, body) {
+// draft: shows a warning box while the page still contains placeholder text.
+function legalPage(ctx, title, body, { draft = false } = {}) {
     return layout(ctx, {
         title: `${title} · ${gb.name}`,
         body: `
@@ -535,7 +536,7 @@ function legalPage(ctx, title, body) {
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Rechtliches</p>
             <h1 class="mt-3 font-display text-4xl font-bold text-white">${title}</h1>
-            <div class="mt-6 border border-signal/40 bg-signal/10 px-4 py-3 text-sm text-signal-soft">Platzhalter – vor der Veröffentlichung durch rechtlich geprüfte Angaben ersetzen.</div>
+            ${draft ? '<div class="mt-6 border border-signal/40 bg-signal/10 px-4 py-3 text-sm text-signal-soft">Platzhalter – vor der Veröffentlichung durch rechtlich geprüfte Angaben ersetzen.</div>' : ''}
             <div class="mt-10 space-y-6 leading-relaxed text-slate-300 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white">${body}</div>
         </div>
     </section>`,
@@ -551,13 +552,12 @@ const impressum = (ctx) =>
         'Impressum',
         `
         <h2>Angaben gemäß § 5 DDG</h2>
-        <p>${esc(gb.name)}<br>[Inhaber / Rechtsform]<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>
+        <p>${esc(gb.name)}<br>Inhaber: ${esc(gb.legal.owner)} (${esc(gb.legal.legalForm)})<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>
         <h2>Kontakt</h2>
         <p>Telefon: ${esc(gb.contact.phone)}<br>E-Mail: ${esc(gb.contact.email)}</p>
-        <h2>Umsatzsteuer-ID</h2>
-        <p>[USt-IdNr. gemäß § 27a UStG]</p>
+        ${gb.legal.vatId ? `<h2>Umsatzsteuer-ID</h2>\n        <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG: ${esc(gb.legal.vatId)}</p>` : ''}
         <h2>Verantwortlich für den Inhalt</h2>
-        <p>[Name, Anschrift]</p>`,
+        <p>${esc(gb.legal.owner)}<br>${esc(gb.contact.street)}<br>${esc(cityLine)}</p>`,
     );
 
 const datenschutz = (ctx) =>
@@ -577,6 +577,7 @@ const datenschutz = (ctx) =>
         <p>Wir setzen keine Cookies ein. Schriftarten werden lokal ausgeliefert; es werden keine Tracking-Dienste eingebunden.</p>
         <h2>Ihre Rechte</h2>
         <p>[Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerderecht bei der Aufsichtsbehörde]</p>`,
+        { draft: true },
     );
 
 const notFound = (ctx) =>

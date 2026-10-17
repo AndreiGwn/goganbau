@@ -31,6 +31,15 @@ export default {
         'Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer: für einzelne Bauabschnitte, als zusätzliche Kapazität oder in langfristiger Zusammenarbeit.',
     ],
 
+    // Impressum details.
+    legal: {
+        owner: 'Cosmin Gogan',
+        legalForm: 'Einzelunternehmen',
+        // USt-IdNr. (format DE + 9 digits). Shown in the Impressum only when filled in.
+        // Do not put the Steuernummer here: it is not required and should not be published.
+        vatId: '',
+    },
+
     contact: {
         phone: '+49 1575 9283617',
         phoneHref: 'tel:+4915759283617',
