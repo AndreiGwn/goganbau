@@ -13,12 +13,12 @@ export default {
 
     homeTitle: 'Abbruchfirma & Gebäudereinigung München | GoganBau',
     homeDescription:
-        'Abbruchfirma und Reinigungsfirma in München: Abbrucharbeiten, Entkernung, Rückbau, Baureinigung und Gebäudereinigung – Subunternehmer, 24/7 erreichbar.',
+        'Abbruchfirma für ganz Bayern, Reinigungsfirma in München: Abbruch, Entkernung, industrieller Rückbau, Baureinigung und Gebäudereinigung – 24/7 erreichbar.',
 
     name: 'GoganBau & Gebäudereinigung',
     shortName: 'GoganBau',
     founded: 2019,
-    region: 'München & Umgebung',
+    region: 'München & Bayern',
     claim: 'Wir sind da, wenn es zählt.',
     motto: 'Praktisch denken. Direkt handeln. Verlässlich liefern.',
     // Small orange line above the big claim; it is the page's main heading (h1) for Google.
@@ -27,7 +27,7 @@ export default {
 
     // "Über uns" text on the home page.
     about: [
-        'GoganBau ist Abbruchunternehmen und Reinigungsfirma in einem. Wir übernehmen Abbrucharbeiten, Entkernung und Rückbau in München und Umgebung – und sorgen mit Baureinigung, Bauendreinigung und Unterhaltsreinigung dafür, dass Flächen sauber übergeben werden.',
+        'GoganBau ist Abbruchunternehmen und Reinigungsfirma in einem. Abbrucharbeiten, Entkernung und Rückbau – auch industriellen Rückbau – übernehmen wir in ganz Bayern. In München und im Umkreis von bis zu 50 km sorgen wir mit Baureinigung, Bauendreinigung und Unterhaltsreinigung dafür, dass Flächen sauber übergeben werden.',
         'Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer: für einzelne Bauabschnitte, als zusätzliche Kapazität oder in langfristiger Zusammenarbeit.',
     ],
 
@@ -64,34 +64,54 @@ export default {
     services: {
         abbruch: {
             number: '01',
+            area: 'ganz Bayern',
             title: 'Abbruch & Entkernung',
             short: 'Abbrucharbeiten, Entkernung, Beräumung.',
             seoTitle: 'Abbruchfirma München – Abbruch & Entkernung | GoganBau',
             description:
-                'Abbrucharbeiten und Entkernung in München: Wir entkernen Bestandsgebäude bis auf den Rohbau, demontieren Ausbauelemente und beräumen die Flächen.',
+                'Abbrucharbeiten und Entkernung in München und ganz Bayern: Wir entkernen Bestandsgebäude bis auf den Rohbau, demontieren Ausbauelemente und beräumen die Flächen.',
             text: 'Wir entkernen Bestandsgebäude bis auf den Rohbau – sauber getrennt und bereit für den nächsten Schritt.',
             body: [
-                'Als Abbruchfirma in München übernehmen wir Abbrucharbeiten, Demontage und die komplette Entkernung von Bestandsgebäuden. Wir trennen die Materialien sauber und beräumen die Flächen, damit das nächste Gewerk ohne Verzögerung starten kann.',
+                'Als Abbruchfirma in München und ganz Bayern übernehmen wir Abbrucharbeiten, Demontage und die komplette Entkernung von Bestandsgebäuden. Wir trennen die Materialien sauber und beräumen die Flächen, damit das nächste Gewerk ohne Verzögerung starten kann.',
                 'Bauunternehmen und Generalunternehmer setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein – mit einem festen Ansprechpartner, der rund um die Uhr erreichbar ist.',
             ],
             points: ['Entkernung bis auf den Rohbau', 'Demontage von Ausbauelementen', 'Beräumung der Flächen'],
         },
         rueckbau: {
             number: '02',
+            area: 'ganz Bayern',
             title: 'Rückbau',
             short: 'Strukturiert – bereit für Umbau und Sanierung.',
             seoTitle: 'Rückbau München – Rückbauunternehmen | GoganBau',
             description:
-                'Rückbau in München: geplanter, abschnittsweiser Rückbau als Vorbereitung für Umbau und Sanierung – abgestimmt mit Ihrer Bauleitung.',
+                'Rückbau in München und ganz Bayern: geplanter, abschnittsweiser Rückbau als Vorbereitung für Umbau und Sanierung – abgestimmt mit Ihrer Bauleitung.',
             text: 'Geplanter Rückbau in klarer Reihenfolge – damit Umbau und Sanierung ohne Verzögerung starten.',
             body: [
-                'Als Rückbauunternehmen in München bauen wir Gebäudeteile abschnittsweise und in klarer Reihenfolge zurück. So bereiten wir Umbau und Sanierung vor, ohne dass der Zeitplan ins Stocken gerät.',
+                'Als Rückbauunternehmen in München und ganz Bayern bauen wir Gebäudeteile abschnittsweise und in klarer Reihenfolge zurück. So bereiten wir Umbau und Sanierung vor, ohne dass der Zeitplan ins Stocken gerät.',
                 'Jeder Schritt wird mit der Bauleitung abgestimmt. Für Bauunternehmen arbeiten wir als Subunternehmer – für einzelne Abschnitte oder das gesamte Rückbauprojekt.',
             ],
             points: ['Abschnittsweise geplant', 'Vorbereitung für Umbau und Sanierung', 'Abgestimmt mit der Bauleitung'],
         },
-        tektalan: {
+        'industrieller-rueckbau': {
             number: '03',
+            area: 'ganz Bayern',
+            title: 'Industrieller Rückbau',
+            scene: 'rueckbau',
+            // h1 on the service page (default: "<title> in München").
+            h1: 'Industrieller Rückbau in Bayern',
+            short: 'Rückbau von Industriehallen und Anlagen.',
+            seoTitle: 'Industrieller Rückbau Bayern – Industrieabbruch | GoganBau',
+            description:
+                'Industrieller Rückbau in ganz Bayern: Rückbau von Industriehallen, Produktions- und Gewerbeanlagen – geplant und abgestimmt mit Ihrer Bauleitung.',
+            text: 'Rückbau von Industriehallen, Produktions- und Gewerbeanlagen – geplant und in ganz Bayern.',
+            body: [
+                'Beim industriellen Rückbau bauen wir Industriehallen, Produktions- und Gewerbeanlagen abschnittsweise zurück. Wir demontieren Anlagenteile und Ausbauelemente, trennen die Materialien und beräumen die Flächen für Umbau, Neubau oder Nachnutzung.',
+                'Jeder Abschnitt wird mit der Bauleitung abgestimmt. Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer in ganz Bayern.',
+            ],
+            points: ['Industriehallen und Gewerbeanlagen', 'Demontage und Materialtrennung', 'Abschnittsweise geplant'],
+        },
+        tektalan: {
+            number: '04',
             title: 'Tektalan-Montage',
             short: 'Fachgerechte Montage von Dämmplatten.',
             seoTitle: 'Tektalan-Montage München – Dämmplatten | GoganBau',
@@ -105,7 +125,7 @@ export default {
             points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
         },
         logistik: {
-            number: '04',
+            number: '05',
             title: 'Baustellenlogistik',
             short: 'Material, Lieferungen und Abläufe koordiniert.',
             seoTitle: 'Baustellenlogistik München – Koordination | GoganBau',
@@ -120,7 +140,8 @@ export default {
             note: 'Wir koordinieren – Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
         },
         baureinigung: {
-            number: '05',
+            number: '06',
+            area: 'München und Umkreis bis 50 km',
             title: 'Baureinigung',
             short: 'Baustellenreinigung während der Bauphase.',
             seoTitle: 'Baureinigung & Baustellenreinigung München | GoganBau',
@@ -134,7 +155,8 @@ export default {
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
         },
         bauendreinigung: {
-            number: '06',
+            number: '07',
+            area: 'München und Umkreis bis 50 km',
             title: 'Bauendreinigung',
             short: 'Bauschlussreinigung vor der Abnahme.',
             seoTitle: 'Bauendreinigung München – Bauschlussreinigung | GoganBau',
@@ -148,7 +170,8 @@ export default {
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
         },
         gebaeudereinigung: {
-            number: '07',
+            number: '08',
+            area: 'München und Umkreis bis 50 km',
             title: 'Gebäudereinigung',
             short: 'Unterhaltsreinigung für Büros und Gewerbe.',
             seoTitle: 'Gebäudereinigung & Unterhaltsreinigung München | GoganBau',
@@ -163,7 +186,8 @@ export default {
         },
         // scene: which zone of the 3D building to show for services without their own zone.
         grundreinigung: {
-            number: '08',
+            number: '09',
+            area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
             scene: 'gebaeudereinigung',
             short: 'Intensivreinigung von Böden und Flächen.',
@@ -178,7 +202,8 @@ export default {
             points: ['Bodenreinigung und Oberflächen', 'Büros und Gewerbeflächen', 'Vor Mieterwechsel oder Neustart'],
         },
         treppenhausreinigung: {
-            number: '09',
+            number: '10',
+            area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
             scene: 'gebaeudereinigung',
             short: 'Saubere Treppenhäuser und Eingangsbereiche.',
@@ -193,7 +218,8 @@ export default {
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Für Hausverwaltungen und Gewerbe'],
         },
         praxisreinigung: {
-            number: '10',
+            number: '11',
+            area: 'München und Umkreis bis 50 km',
             title: 'Praxisreinigung',
             scene: 'gebaeudereinigung',
             short: 'Gründliche Reinigung von Arztpraxen.',
@@ -232,13 +258,13 @@ export default {
     // "Unsere Schwerpunkte" on the home page — the two SEO directions plus Montage & Logistik.
     focusAreas: [
         {
-            title: 'Abbruch & Rückbau in München',
-            text: 'Als Abbruchfirma übernehmen wir Abbrucharbeiten, Demontage und die Entkernung bis auf den Rohbau – und den geplanten Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
-            services: ['abbruch', 'rueckbau'],
+            title: 'Abbruch & Rückbau in ganz Bayern',
+            text: 'Als Abbruchfirma übernehmen wir Abbrucharbeiten, Demontage und die Entkernung bis auf den Rohbau – den geplanten Rückbau als Vorbereitung für Umbau und Sanierung – und den industriellen Rückbau von Hallen und Anlagen. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
+            services: ['abbruch', 'rueckbau', 'industrieller-rueckbau'],
         },
         {
             title: 'Gebäudereinigung & Baureinigung in München',
-            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
+            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung von Büros und Gewerbeflächen: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
             services: ['baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'grundreinigung', 'treppenhausreinigung', 'praxisreinigung'],
         },
         {
@@ -256,7 +282,7 @@ export default {
         },
         {
             q: 'In welchem Gebiet sind Sie tätig?',
-            a: 'Unser Einsatzgebiet ist München und Umgebung. Liegt Ihr Projekt etwas außerhalb, sprechen Sie uns gern an.',
+            a: 'Abbruch, Entkernung und Rückbau – auch industriellen Rückbau – übernehmen wir in ganz Bayern. Unsere Reinigungsleistungen bieten wir in München und im Umkreis von bis zu 50 km an.',
         },
         {
             q: 'Arbeiten Sie als Subunternehmer für Bauunternehmen?',

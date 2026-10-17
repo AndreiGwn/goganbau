@@ -260,7 +260,10 @@ function structuredData() {
             ...(gb.contact.postalCode && { postalCode: gb.contact.postalCode }),
             addressCountry: 'DE',
         },
-        areaServed: { '@type': 'City', name: 'München' },
+        areaServed: [
+            { '@type': 'City', name: 'München' },
+            { '@type': 'State', name: 'Bayern' },
+        ],
         hasOfferCatalog: {
             '@type': 'OfferCatalog',
             name: 'Leistungen',
@@ -481,12 +484,13 @@ function servicePage(ctx, key, projects) {
                 Alle Leistungen
             </a>
             <p class="eyebrow mt-8">Leistung ${s.number}</p>
-            <h1 class="section-title mt-4">${esc(s.title)} in München</h1>
+            <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
             <p class="mt-6 text-lg text-slate-300">${esc(s.text)}</p>
             ${each(s.body, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
             <ul class="mt-10 border-t border-white/10">
                 ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
             </ul>
+            ${s.area ? `<p class="mt-6 flex items-center gap-3 text-sm text-mist"><svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Einsatzgebiet: <span class="text-white">${esc(s.area)}</span></p>` : ''}
             ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-300">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
                 <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
