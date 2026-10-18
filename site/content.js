@@ -305,6 +305,7 @@ export default {
                 'Als Subunternehmer übernehmen wir die Montage termingerecht im Ablauf Ihrer Baustelle und stimmen uns direkt mit der Bauleitung ab.',
             ],
             points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
+            image: 'Tektalan-Montage in einer Tiefgarage: Arbeiter montiert Tektalan-Dämmplatten von einem Rollgerüst an die Betondecke',
         },
         logistik: {
             number: '14',
@@ -320,6 +321,7 @@ export default {
                 'Unser Schwerpunkt liegt auf Koordination und Organisation – für Bauunternehmen, die bei der Baustellenorganisation Entlastung brauchen.',
             ],
             points: ['Materialbedarf und Lieferungen', 'Anlieferfenster und Lagerflächen', 'Einsatzzeiten der Gewerke'],
+            image: 'Baustellenlogistik: Lieferplan, Material auf Paletten im markierten Lagerbereich und Transport mit dem Hubwagen',
             note: 'Wir koordinieren – Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
         },
     },

@@ -455,6 +455,66 @@ ${sparkle(110, 340, 9)}${sparkle(200, 346, 7)}${sparkle(270, 340, 9)}`,
     );
 }
 
+// ---------------------------------------------------------------- Montage & Logistik
+
+function tektalan() {
+    seed = 144;
+    const woodWool = (x0, x1, y0, y1, count) =>
+        times(count, () => {
+            const x = r(x0, x1 - 8);
+            const y = r(y0 + 2, y1 - 2);
+            return `<path d="M${n(x)} ${n(y)}l${n(r(4, 9))} ${n(r(-2, 2))}" stroke="#e7e5e4" stroke-opacity=".55" stroke-width="1.5"/>`;
+        });
+    const mounted = `<rect x="400" y="120" width="400" height="20" fill="#a8a29e"/>${woodWool(400, 800, 120, 140, 90)}${times(4, (i) => `<path d="M${500 + i * 100} 120v20" stroke="#57534e" stroke-width="2"/>`)}${times(8, (i) => `<circle cx="${425 + i * 50}" cy="130" r="2" fill="#57534e"/>`)}`;
+    const held = `<rect x="246" y="121" width="150" height="18" fill="#b8b2ac" stroke="#78716c" stroke-width="1.5"/>${woodWool(246, 396, 121, 139, 30)}`;
+    const podium = `<rect x="226" y="300" width="150" height="10" fill="${C.steel}"/><path d="M236 310V420M366 310V420M236 330L366 410M366 330L236 410" stroke="${C.mist}" stroke-width="5"/><path d="M236 300V250M366 300V250M236 252H366" stroke="${C.orange}" stroke-width="5" stroke-linecap="round"/>${[236, 366].map((x) => `<circle cx="${x}" cy="422" r="8" fill="#111827" stroke="${C.mist}" stroke-width="3"/>`).join('')}`;
+    const stack = times(6, (i) => `<rect x="${70 - (i % 2) * 4}" y="${416 - i * 14}" width="130" height="13" fill="${i % 2 ? '#a8a29e' : '#b8b2ac'}" stroke="#78716c" stroke-width="1"/>`);
+    const bays = times(6, (i) => `<path d="M${380 + i * 80} 496L${410 + i * 80} 436" stroke="${C.white}" stroke-opacity=".5" stroke-width="4"/>`);
+    const w = person({ x: 300, y: 300, top: C.orange, hatColor: C.white, hands: [[270, 141], [336, 141]] });
+    return frame(
+        'TEKTALAN-MONTAGE',
+        C.orange,
+        `<rect y="90" width="800" height="30" fill="${C.concrete}"/>${times(30, () => `<circle cx="${n(r(0, 800))}" cy="${n(r(94, 116))}" r="1.5" fill="${C.light}" fill-opacity=".35"/>`)}
+${mounted}
+<rect x="600" y="140" width="34" height="290" fill="${C.concrete}"/><rect x="603" y="250" width="28" height="28" rx="3" fill="#1d4ed8"/><text x="617" y="271" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#fff">P</text>
+<path d="M600 350h34" stroke="${C.yellow}" stroke-width="10" stroke-dasharray="10 10"/>
+${bays}${stack}${podium}${w.body}${held}${w.hands}`,
+    );
+}
+
+function logistik() {
+    seed = 155;
+    const rows = [
+        ['07:00', 'GIPSKARTON', true],
+        ['09:30', 'DÄMMUNG', true],
+        ['13:00', 'ESTRICH', false],
+        ['15:30', 'FLIESEN', false],
+    ];
+    const plan = rows
+        .map(([time, what, done], i) => {
+            const y = 186 + i * 26;
+            return `<text x="104" y="${y}" font-family="${mono}" font-size="12" fill="${C.orangeSoft}">${time}</text><text x="156" y="${y}" font-family="${mono}" font-size="12" letter-spacing="1" fill="${C.white}">${what}</text>${done ? `<path d="M272 ${y - 6}l5 5 9 -10" fill="none" stroke="${C.greenSoft}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` : `<rect x="272" y="${y - 12}" width="13" height="13" fill="none" stroke="${C.mist}" stroke-width="2"/>`}`;
+        })
+        .join('');
+    const pallet = (x, load) => `${load}<rect x="${x}" y="412" width="110" height="7" fill="#a16207"/><rect x="${x}" y="424" width="110" height="6" fill="#a16207"/>${[0, 50, 102].map((d) => `<rect x="${x + d}" y="419" width="8" height="5" fill="#78350f"/>`).join('')}`;
+    const sacks = (x) => times(9, (i) => `<rect x="${x + 4 + (i % 3) * 34}" y="${392 - Math.floor(i / 3) * 18}" width="32" height="17" rx="6" fill="${i % 2 ? '#d6d3d1' : '#e7e5e4'}"/>`);
+    const boards = (x) => times(5, (i) => `<rect x="${x + 2}" y="${398 - i * 12}" width="106" height="11" fill="${C.light}" stroke="${C.mist}" stroke-width="1"/>`);
+    const boxes = (x) => `<rect x="${x + 6}" y="344" width="46" height="66" fill="#b45309"/><rect x="${x + 56}" y="366" width="48" height="44" fill="#c2410c"/><rect x="${x + 10}" y="320" width="38" height="24" fill="#a16207"/><path d="M${x + 6} 370h46M${x + 56} 386h48" stroke="#000" stroke-opacity=".2" stroke-width="3"/>`;
+    const w = person({ x: 250, top: C.orange, hatColor: C.white, hands: [[290, 352], [306, 346]] });
+    const jack = `<path d="M300 349L342 412" stroke="${C.orange}" stroke-width="6" stroke-linecap="round"/><path d="M290 346l20 6" stroke="#1f2937" stroke-width="7" stroke-linecap="round"/><rect x="334" y="410" width="16" height="16" fill="${C.orange}"/><circle cx="342" cy="425" r="6" fill="#111827"/><rect x="348" y="420" width="126" height="6" fill="${C.mid}"/><circle cx="466" cy="427" r="3.5" fill="#111827"/>`;
+    return frame(
+        'BAUSTELLENLOGISTIK',
+        C.orange,
+        `<rect x="90" y="130" width="214" height="148" fill="${C.panel}" stroke="${C.line}" stroke-width="2"/><rect x="90" y="130" width="214" height="30" fill="${C.orange}"/>
+<text x="104" y="151" font-family="${mono}" font-size="12" letter-spacing="2" fill="${C.white}">LIEFERUNGEN</text>${plan}
+<rect x="560" y="190" width="120" height="34" fill="${C.yellow}"/><text x="620" y="213" text-anchor="middle" font-family="${mono}" font-size="15" font-weight="700" letter-spacing="3" fill="#1e293b">LAGER</text><path d="M620 224V256" stroke="${C.mist}" stroke-width="3"/>
+<rect x="512" y="440" width="276" height="54" fill="none" stroke="${C.yellow}" stroke-width="4" stroke-dasharray="14 10"/>
+${pallet(530, sacks(530))}${pallet(660, boards(660))}
+${w.body}${pallet(356, boxes(356))}${jack}${w.hands}
+<path d="M486 300h40" stroke="${C.orange}" stroke-width="3" stroke-dasharray="6 6"/><path d="M522 292l10 8 -10 8" fill="none" stroke="${C.orange}" stroke-width="3"/>`,
+    );
+}
+
 const scenes = {
     abbruch,
     entkernung,
@@ -468,6 +528,8 @@ const scenes = {
     bauendreinigung,
     gebaeudereinigung,
     praxisreinigung,
+    tektalan,
+    logistik,
 };
 
 fs.mkdirSync(OUT, { recursive: true });
