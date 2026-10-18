@@ -69,15 +69,16 @@ export default {
     // Places named under "Einsatzgebiet" on each service page (key = the service's area).
     // Cleaning only lists towns within ~50 km of München.
     areaPlaces: {
-        'ganz Bayern': ['München', 'Augsburg', 'Ingolstadt', 'Regensburg', 'Landshut', 'Rosenheim', 'Freising', 'Erding', 'Dachau', 'Fürstenfeldbruck', 'Starnberg'],
-        'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg'],
+        'ganz Bayern': ['München', 'Augsburg', 'Ingolstadt', 'Regensburg', 'Landshut', 'Rosenheim', 'Nürnberg', 'Fürth', 'Erlangen', 'Würzburg', 'Kempten', 'Passau', 'Straubing', 'Freising', 'Erding', 'Dachau', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg'],
+        'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg', 'Garching', 'Unterschleißheim', 'Oberschleißheim', 'Ismaning', 'Unterföhring', 'Germering', 'Unterhaching', 'Ottobrunn', 'Haar', 'Vaterstetten', 'Poing', 'Gräfelfing', 'Planegg', 'Puchheim', 'Olching', 'Karlsfeld', 'Grünwald', 'Pullach'],
     },
 
     // The key of each service is its URL (/leistungen/<key>/) and the camera focus key in the 3D scene.
     // title: name in menus and lists · short: one line on the home page · text: intro on the service
     // page · body: the paragraphs below it · seoTitle / description: for Google · area: Einsatzgebiet
     // · scene: 3D zone for services without their own · h1: page heading (default "<title> in München")
-    // · image: alt text of public/images/leistungen/<key>.svg, drawn by site/illustrations.js.
+    // · image: alt text of public/images/leistungen/<key>.svg, drawn by site/illustrations.js
+    // · scope: "Leistungsumfang" list · faq: questions on the service page (only state facts).
     // We work manually and with hand-held tools — no heavy machinery, so no "Gebäudeabbruch" claims.
     services: {
         abbruch: {
@@ -96,6 +97,22 @@ export default {
             ],
             points: ['Innenabbruch und Teilabbruch', 'Innenwände und Mauerwerk', 'Manuell, präzise, kontrolliert'],
             image: 'Abbrucharbeiten: Arbeiter bricht eine Innenwand aus Mauerwerk mit einem handgeführten Abbruchhammer ab',
+            scope: [
+                'Innenabbruch von nichttragenden Innenwänden und Mauerwerk',
+                'Teilabbruch einzelner Räume und Bauabschnitte',
+                'Abbruch von Bädern, Küchen und Sanitärbereichen',
+                'Abbruch von Trockenbauwänden und Vorwänden',
+                'Abbrucharbeiten in Wohnungen, Büros, Läden und Gewerbeflächen',
+                'Manuell und mit handgeführten Abbruchhämmern',
+                'Bauschutt sortiert, Flächen beräumt',
+                'Als Subunternehmer für Bauunternehmen und Generalunternehmer',
+            ],
+            faq: [
+                { q: 'Was kosten Abbrucharbeiten?', a: 'Die Kosten für Abbrucharbeiten hängen von Fläche, Material, Wandstärke und Zugang ab. Für ein Angebot brauchen wir Ort, Umfang und Zeitraum – gern mit Fotos oder Plänen per WhatsApp oder über das Anfrageformular.' },
+                { q: 'Arbeiten Sie mit Bagger oder schweren Maschinen?', a: 'Nein. Wir arbeiten manuell und mit handgeführten Geräten wie Abbruchhämmern. Das passt besonders für Innenabbruch und Teilabbruch in bestehenden Gebäuden, wo präzise gearbeitet werden muss.' },
+                { q: 'Übernehmen Sie Abbrucharbeiten als Subunternehmer?', a: 'Ja. Bauunternehmen und Generalunternehmer setzen uns als Subunternehmer (Nachunternehmer) für einzelne Bauabschnitte oder als zusätzliche Kapazität ein – in München und in ganz Bayern.' },
+                { q: 'Wie kurzfristig können Sie anfangen?', a: 'Wir sind rund um die Uhr erreichbar. Den Starttermin stimmen wir je nach Umfang direkt mit Ihnen ab.' },
+            ],
         },
         entkernung: {
             number: '02',
@@ -114,6 +131,21 @@ export default {
             ],
             points: ['Trennwände, Decken, Bodenbeläge', 'Fliesen, Estrich, Bäder, Küchen', 'Sauber getrennt und beräumt'],
             image: 'Entkernung: Trockenbauwände und abgehängte Decke werden bis auf den Rohbau zurückgebaut',
+            scope: [
+                'Rückbau von Trennwänden und Trockenbau',
+                'Entfernen abgehängter Decken und Deckenverkleidungen',
+                'Entfernen von Bodenbelägen: Teppich, Parkett, Laminat, PVC',
+                'Fliesen abschlagen und Estrich entfernen',
+                'Rückbau von Bädern, Küchen und Sanitärobjekten',
+                'Ausbau von Türen, Zargen und Einbauten',
+                'Entkernung bis auf den Rohbau vor Kernsanierung oder Umbau',
+                'Für Wohnungen, Häuser, Büros und Gewerbeimmobilien',
+            ],
+            faq: [
+                { q: 'Was kostet eine Entkernung?', a: 'Das hängt von Fläche und Aufbau ab – etwa ob Estrich, Fliesen oder abgehängte Decken entfernt werden. Für ein Angebot brauchen wir Ort, Umfang und Zeitraum – gern mit Fotos oder Plänen per WhatsApp oder über das Anfrageformular.' },
+                { q: 'Was bedeutet „Entkernung bis auf den Rohbau“?', a: 'Alle nichttragenden Bauteile und der Innenausbau werden entfernt: Trennwände, Decken, Bodenbeläge, Fliesen, Estrich und Einbauten. Übrig bleibt der Rohbau, auf dem Kernsanierung oder Umbau aufbauen.' },
+                { q: 'Entkernen Sie auch einzelne Wohnungen oder Etagen?', a: 'Ja. Wir entkernen einzelne Wohnungen, Etagen und Büroflächen ebenso wie ganze Gewerbeimmobilien – in München und in ganz Bayern.' },
+            ],
         },
         rueckbau: {
             number: '03',
@@ -131,6 +163,21 @@ export default {
             ],
             points: ['Selektiv und abschnittsweise', 'Büro- und Gewerbeimmobilien', 'Abgestimmt mit der Bauleitung'],
             image: 'Selektiver Rückbau: Trennwand wird demontiert, Materialien getrennt nach Holz, Metall, Gips und Bauschutt',
+            scope: [
+                'Selektiver Rückbau, nach Materialien getrennt',
+                'Abschnittsweiser Rückbau im laufenden Bauablauf',
+                'Rückbau von Mieterausbauten in Büro- und Gewerbeflächen',
+                'Rückbau von Trockenbau, Glastrennwänden und Innenausbau',
+                'Rückbau von Ladenflächen vor dem Mieterwechsel',
+                'Trennung von Holz, Metall, Gips und Bauschutt',
+                'Beräumte, übergabefertige Flächen',
+                'Abgestimmt mit Bauleitung und Gewerken',
+            ],
+            faq: [
+                { q: 'Was ist selektiver Rückbau?', a: 'Beim selektiven Rückbau werden Bauteile Schritt für Schritt ausgebaut und die Materialien – etwa Holz, Metall, Gips und Bauschutt – direkt getrennt. So werden Flächen gezielt für Umbau oder Sanierung vorbereitet.' },
+                { q: 'Bauen Sie Mieterausbauten zurück?', a: 'Ja. Wir bauen Büro-, Laden- und Gewerbeflächen auf den vereinbarten Zustand zurück, zum Beispiel vor einem Mieterwechsel.' },
+                { q: 'Was kostet ein Rückbau?', a: 'Das hängt von Fläche, Bauteilen und Materialien ab. Für ein Angebot brauchen wir Ort, Umfang und Zeitraum – gern mit Fotos oder Plänen per WhatsApp oder über das Anfrageformular.' },
+            ],
         },
         kernbohrungen: {
             number: '04',
@@ -149,6 +196,21 @@ export default {
             ],
             points: ['Beton und Stahlbeton', 'Wände, Decken und Böden', 'Für Lüftung, Sanitär, Elektro'],
             image: 'Kernbohrung in einer Stahlbetonwand mit Kernbohrgerät, daneben eine Rohrdurchführung',
+            scope: [
+                'Kernbohrungen in Beton und Stahlbeton',
+                'Bohrungen in Wänden, Decken und Bodenplatten',
+                'Durchbrüche für Lüftung, Klima und Abluft',
+                'Rohrdurchführungen für Sanitär, Heizung und Abwasser',
+                'Kabeldurchführungen für Elektro',
+                'Bohrungen für Hausanschlüsse',
+                'Diamantbohrungen mit Wasserkühlung',
+                'Für Haustechnik-Firmen, Bauunternehmen und Generalunternehmer',
+            ],
+            faq: [
+                { q: 'Was kostet eine Kernbohrung?', a: 'Der Preis hängt vor allem von Durchmesser, Bohrtiefe, Material und Anzahl der Bohrungen ab. Schicken Sie uns diese Angaben, gern mit Fotos – dann erhalten Sie ein Angebot.' },
+                { q: 'Wofür braucht man eine Kernbohrung?', a: 'Für saubere, runde Öffnungen in Beton und Stahlbeton – etwa für Lüftungs- und Klimaanlagen, Abwasser- und Heizungsrohre, Kabel oder Hausanschlüsse.' },
+                { q: 'Bohren Sie auch in Decken und Bodenplatten?', a: 'Ja. Wir führen Kernbohrungen in Wänden, Decken und Böden aus – in München und in ganz Bayern.' },
+            ],
         },
         unterhaltsreinigung: {
             number: '05',
@@ -167,6 +229,21 @@ export default {
             ],
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
             image: 'Unterhaltsreinigung nach festem Reinigungsplan mit Reinigungswagen und Wischmopp',
+            scope: [
+                'Regelmäßige Reinigung von Büros und Geschäftsräumen',
+                'Fester Reinigungsplan: täglich, wöchentlich oder monatlich',
+                'Böden saugen und wischen',
+                'Oberflächen, Tische und Kontaktflächen',
+                'Sanitäranlagen und Teeküchen',
+                'Abfallbehälter leeren',
+                'Treppenhäuser und Eingangsbereiche',
+                'Fester Ansprechpartner',
+            ],
+            faq: [
+                { q: 'Was gehört zur Unterhaltsreinigung?', a: 'Die laufende Reinigung nach festem Plan: Böden, Oberflächen, Sanitär, Teeküchen und Abfall. Umfang und Rhythmus legen wir gemeinsam mit Ihnen fest.' },
+                { q: 'Was kostet eine Unterhaltsreinigung?', a: 'Das hängt von Fläche, Art der Räume und Reinigungsrhythmus ab. Nennen Sie uns Fläche, Häufigkeit und Wunschzeiten – dann erhalten Sie ein Angebot.' },
+                { q: 'Wo bieten Sie Unterhaltsreinigung an?', a: 'In München und im Umkreis von bis zu 50 km – zum Beispiel in Garching, Unterschleißheim, Ismaning, Germering, Dachau, Freising und Erding.' },
+            ],
         },
         bueroreinigung: {
             number: '06',
@@ -185,6 +262,21 @@ export default {
             ],
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
             image: 'Büroreinigung nach Feierabend: Schreibtisch wird gereinigt und desinfiziert',
+            scope: [
+                'Arbeitsplätze, Schreibtische und Besprechungsräume',
+                'Empfang und Eingangsbereich',
+                'Teeküchen und Sozialräume',
+                'Sanitäranlagen',
+                'Böden saugen und wischen',
+                'Abfallbehälter leeren',
+                'Reinigung nach Feierabend oder zu festen Zeiten',
+                'Für kleine Büros, Kanzleien, Agenturen und Großraumbüros',
+            ],
+            faq: [
+                { q: 'Reinigen Sie Büros auch abends?', a: 'Ja. Die Zeiten richten sich nach Ihrem Betrieb – auf Wunsch nach Feierabend, damit Ihr Team ungestört arbeiten kann.' },
+                { q: 'Wie oft sollte ein Büro gereinigt werden?', a: 'Das hängt von Größe und Nutzung ab. Viele Büros lassen täglich oder mehrmals pro Woche reinigen, kleinere Büros oft wöchentlich. Den Rhythmus stimmen wir mit Ihnen ab.' },
+                { q: 'Was kostet Büroreinigung?', a: 'Das hängt von Bürofläche, Anzahl der Räume und Reinigungsrhythmus ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+            ],
         },
         grundreinigung: {
             number: '07',
@@ -203,6 +295,21 @@ export default {
             ],
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
             image: 'Grundreinigung eines Bodens mit Einscheibenmaschine, links verschmutzt, rechts sauber',
+            scope: [
+                'Gründliche Reinigung aller Böden',
+                'Entfernen von hartnäckigem Schmutz und Ablagerungen',
+                'Intensive Reinigung der Sanitäranlagen',
+                'Küchen und Teeküchen',
+                'Oberflächen, Türen und Heizkörper',
+                'Vor Mieterwechsel, Neueröffnung oder Start der Unterhaltsreinigung',
+                'Für Büros, Praxen, Gewerbeflächen und Treppenhäuser',
+                'Einmalig oder in festen Abständen',
+            ],
+            faq: [
+                { q: 'Was ist der Unterschied zwischen Grundreinigung und Unterhaltsreinigung?', a: 'Die Unterhaltsreinigung hält Räume regelmäßig sauber. Die Grundreinigung ist eine einmalige, gründliche Intensivreinigung – etwa wenn sich Schmutz festgesetzt hat, vor einem Mieterwechsel oder bevor eine regelmäßige Reinigung startet.' },
+                { q: 'Machen Sie Grundreinigung vor dem Mieterwechsel?', a: 'Ja. Wir reinigen Büros, Praxen und Gewerbeflächen gründlich, damit sie sauber übergeben werden können.' },
+                { q: 'Was kostet eine Grundreinigung?', a: 'Das hängt von Fläche, Bodenbelag und Verschmutzung ab. Schicken Sie uns Fläche und gern ein paar Fotos – dann erhalten Sie ein Angebot.' },
+            ],
         },
         treppenhausreinigung: {
             number: '08',
@@ -221,6 +328,21 @@ export default {
             ],
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
             image: 'Treppenhausreinigung in einem Mehrfamilienhaus: Treppenstufen werden gewischt',
+            scope: [
+                'Treppen, Podeste und Handläufe',
+                'Flure und Eingangsbereiche',
+                'Briefkastenanlagen, Türen und Klingeltableaus',
+                'Gemeinschaftsflächen',
+                'Fester Rhythmus: wöchentlich oder alle 14 Tage',
+                'Für Hausverwaltungen, Eigentümergemeinschaften (WEG) und Vermieter',
+                'Mehrfamilienhäuser und Wohnanlagen',
+                'Fester Ansprechpartner',
+            ],
+            faq: [
+                { q: 'Arbeiten Sie für Hausverwaltungen und WEGs?', a: 'Ja. Wir übernehmen die Treppenhausreinigung für Hausverwaltungen, Eigentümergemeinschaften und Vermieter – nach festem Plan, mit einem festen Ansprechpartner.' },
+                { q: 'Wie oft wird das Treppenhaus gereinigt?', a: 'Üblich ist wöchentlich oder alle 14 Tage. Den Rhythmus legen wir gemeinsam mit Ihnen fest.' },
+                { q: 'Was kostet eine Treppenhausreinigung?', a: 'Der Preis richtet sich nach Anzahl der Etagen, Größe des Treppenhauses und Reinigungsrhythmus. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+            ],
         },
         baureinigung: {
             number: '09',
@@ -238,6 +360,21 @@ export default {
             ],
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
             image: 'Baureinigung auf der Baustelle: Bauschutt und Baustaub werden mit Industriesauger entfernt',
+            scope: [
+                'Baugrobreinigung während der Bauphase',
+                'Bauzwischenreinigung zwischen den Gewerken',
+                'Zusammentragen von Bauresten und Verpackungen',
+                'Baustaub saugen, Böden kehren',
+                'Sichere, freie Laufwege',
+                'Für Neubau, Umbau und Sanierung',
+                'Für Bauunternehmen, Generalunternehmer und Bauträger',
+                'Als Subunternehmer, Termine nach Absprache',
+            ],
+            faq: [
+                { q: 'Was ist der Unterschied zwischen Baureinigung und Bauendreinigung?', a: 'Die Baureinigung (Grob- und Zwischenreinigung) läuft während der Bauphase und hält die Baustelle sauber und sicher. Die Bauendreinigung ist die Feinreinigung am Ende, direkt vor Abnahme oder Übergabe.' },
+                { q: 'Übernehmen Sie Baureinigung als Subunternehmer?', a: 'Ja. Bauunternehmen, Generalunternehmer und Bauträger setzen uns für Baustellenreinigung in München und im Umkreis bis 50 km ein – einmalig oder regelmäßig während der Bauphase.' },
+                { q: 'Was kostet eine Baureinigung?', a: 'Das hängt von Fläche, Bauphase und Verschmutzung ab. Nennen Sie uns Baustelle, Fläche und Zeitraum – dann erhalten Sie ein Angebot.' },
+            ],
         },
         bauendreinigung: {
             number: '10',
@@ -255,6 +392,21 @@ export default {
             ],
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
             image: 'Bauendreinigung vor der Abnahme: Fenster und Rahmen werden gereinigt, Böden übergabefertig',
+            scope: [
+                'Baufeinreinigung vor Abnahme und Übergabe',
+                'Fenster, Glasflächen und Rahmen',
+                'Entfernen von Schutzfolien und Aufklebern',
+                'Böden, Fliesen und Sockelleisten',
+                'Sanitär- und Küchenbereiche',
+                'Türen, Schalter und Heizkörper',
+                'Für Neubau, Wohnungen, Einfamilienhäuser und Bürogebäude',
+                'Übergabefertig für Bauherr oder Mieter',
+            ],
+            faq: [
+                { q: 'Was gehört zur Bauendreinigung?', a: 'Die gründliche Feinreinigung nach Abschluss aller Arbeiten: Fenster und Rahmen, Böden, Sanitär, Küchen, Türen und Schalter – inklusive Schutzfolien und Aufkleber. Danach ist alles bereit für Abnahme und Einzug.' },
+                { q: 'Wann sollte die Bauendreinigung stattfinden?', a: 'Wenn alle Gewerke fertig sind, kurz vor der Abnahme oder dem Einzug. Den Termin stimmen wir mit Ihrer Bauleitung ab.' },
+                { q: 'Was kostet eine Bauendreinigung?', a: 'Das hängt von Fläche, Anzahl der Fenster und Verschmutzung ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+            ],
         },
         gebaeudereinigung: {
             number: '11',
@@ -272,6 +424,21 @@ export default {
             ],
             points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
             image: 'Gebäudereinigung im Eingangsbereich eines Bürogebäudes mit Reinigungswagen',
+            scope: [
+                'Reinigung von Büro- und Verwaltungsgebäuden',
+                'Eingangsbereiche, Foyers und Aufzüge',
+                'Treppenhäuser und Flure',
+                'Sanitäranlagen und Sozialräume',
+                'Sonderreinigung nach Bedarf',
+                'Für Hausverwaltungen und Gewerbeimmobilien',
+                'Unterhalts-, Grund- und Baureinigung aus einer Hand',
+                'Fester Ansprechpartner, rund um die Uhr erreichbar',
+            ],
+            faq: [
+                { q: 'Welche Gebäude reinigen Sie?', a: 'Bürogebäude, Gewerbeimmobilien, Praxen, Wohnanlagen und Treppenhäuser – in München und im Umkreis von bis zu 50 km.' },
+                { q: 'Was ist eine Sonderreinigung?', a: 'Eine einmalige Reinigung außerhalb des normalen Plans – etwa nach einem Umbau, einer Veranstaltung oder vor einem Mieterwechsel.' },
+                { q: 'Was kostet Gebäudereinigung?', a: 'Das hängt von Gebäude, Fläche und Reinigungsrhythmus ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+            ],
         },
         praxisreinigung: {
             number: '12',
@@ -290,6 +457,21 @@ export default {
             ],
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
             image: 'Praxisreinigung: Wartebereich einer Arztpraxis wird gereinigt und desinfiziert',
+            scope: [
+                'Wartebereich und Empfang',
+                'Behandlungsräume',
+                'Sanitäranlagen',
+                'Kontaktflächen wie Türgriffe, Theken und Stühle',
+                'Böden in allen Räumen',
+                'Reinigung nach Praxisschluss',
+                'Für Arztpraxen, Zahnarztpraxen, Physiotherapie- und Therapiepraxen',
+                'Fester Rhythmus und fester Ansprechpartner',
+            ],
+            faq: [
+                { q: 'Wann reinigen Sie die Praxis?', a: 'Außerhalb Ihrer Sprechzeiten, zum Beispiel abends nach Praxisschluss – so, wie es zu Ihrem Ablauf passt.' },
+                { q: 'Welche Praxen reinigen Sie?', a: 'Arztpraxen, Zahnarztpraxen sowie Physiotherapie- und Therapiepraxen in München und im Umkreis von bis zu 50 km.' },
+                { q: 'Was kostet eine Praxisreinigung?', a: 'Das hängt von Praxisgröße, Anzahl der Räume und Reinigungsrhythmus ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+            ],
         },
         tektalan: {
             number: '13',

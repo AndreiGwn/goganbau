@@ -507,6 +507,14 @@ function servicePage(ctx, key, projects) {
             <ul class="mt-10 border-t border-white/10">
                 ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
             </ul>
+            ${
+                s.scope
+                    ? `<h2 class="mt-12 font-display text-xl font-bold text-white">Leistungsumfang: ${esc(s.title)}</h2>
+            <ul class="mt-4 grid gap-x-6 gap-y-2 text-slate-300 sm:grid-cols-2">
+                ${each(s.scope, (item) => `<li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 bg-signal"></span>${esc(item)}</li>`)}
+            </ul>`
+                    : ''
+            }
             ${s.area ? areaLine(s.area) : ''}
             ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-300">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
@@ -516,6 +524,25 @@ function servicePage(ctx, key, projects) {
             <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-white underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
         </div>
     </section>
+
+    ${
+        s.faq
+            ? `<section class="border-t border-white/10 py-16 lg:py-24">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+            <p class="eyebrow">Häufige Fragen</p>
+            <h2 class="section-title mt-4">${esc(s.title)}: kurz beantwortet.</h2>
+            <div class="mt-8 divide-y divide-white/10 border-y border-white/10">
+                ${each(s.faq, ({ q, a }) => `<details class="group/faq">
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-white [&::-webkit-details-marker]:hidden">
+                        ${esc(q)} <span class="inline-flex shrink-0 text-signal transition group-open/faq:rotate-180">${icon.chevronDown}</span>
+                    </summary>
+                    <p class="pb-5 text-slate-400">${esc(a)}</p>
+                </details>`)}
+            </div>
+        </div>
+    </section>`
+            : ''
+    }
 
     ${
         projects.length
