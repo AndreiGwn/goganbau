@@ -27,7 +27,7 @@ export default {
 
     // "Über uns" text on the home page.
     about: [
-        'GoganBau ist Abbruchunternehmen und Reinigungsfirma in einem. Abbrucharbeiten, Entkernung, Rückbau, Kernbohrungen und Betonschneiden übernehmen wir in ganz Bayern. In München und im Umkreis von bis zu 50 km sorgen wir mit Baureinigung, Bauendreinigung und Unterhaltsreinigung dafür, dass Flächen sauber übergeben werden.',
+        'GoganBau ist Abbruchunternehmen und Reinigungsfirma in einem. Abbrucharbeiten, Entkernung, Rückbau und Kernbohrungen übernehmen wir in ganz Bayern. In München und im Umkreis von bis zu 50 km sorgen wir mit Baureinigung, Bauendreinigung und Unterhaltsreinigung dafür, dass Flächen sauber übergeben werden.',
         'Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer: für einzelne Bauabschnitte, als zusätzliche Kapazität oder in langfristiger Zusammenarbeit.',
     ],
 
@@ -62,7 +62,6 @@ export default {
     // Groups for the service list and menus, in this order.
     serviceGroups: {
         abbruch: 'Abbruch & Rückbau',
-        beton: 'Kernbohrungen & Betonschneiden',
         reinigung: 'Reinigung',
         montage: 'Montage & Logistik',
     },
@@ -131,7 +130,7 @@ export default {
         },
         kernbohrungen: {
             number: '04',
-            group: 'beton',
+            group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Kernbohrungen',
             scene: 'abbruch',
@@ -146,25 +145,8 @@ export default {
             ],
             points: ['Beton und Stahlbeton', 'Wände, Decken und Böden', 'Für Lüftung, Sanitär, Elektro'],
         },
-        betonschneiden: {
-            number: '05',
-            group: 'beton',
-            area: 'ganz Bayern',
-            title: 'Betonschneiden',
-            scene: 'abbruch',
-            short: 'Öffnungen, Durchbrüche und Fugen in Beton.',
-            seoTitle: 'Betonschneiden München – Betonsägearbeiten | GoganBau',
-            description:
-                'Betonschneiden in München und ganz Bayern: Wand- und Deckensägen, Wanddurchbrüche, Tür- und Fensteröffnungen sowie Fugenschneiden in Beton und Stahlbeton.',
-            text: 'Wanddurchbrüche, Decken- und Türöffnungen – sauber in Beton und Stahlbeton geschnitten.',
-            body: [
-                'Beim Betonschneiden (Betonsägearbeiten) schneiden wir Öffnungen und Durchbrüche in Beton und Stahlbeton: Wanddurchbrüche, Tür- und Fensteröffnungen, Deckenöffnungen für Installationen sowie Fugen in Betonböden.',
-                'Für Bauunternehmen, Generalunternehmer und Sanierungsunternehmen arbeiten wir als Subunternehmer bei Umbau und Sanierung – präzise und mit der Bauleitung abgestimmt.',
-            ],
-            points: ['Wand- und Deckensägen', 'Tür-, Fenster- und Deckenöffnungen', 'Fugenschneiden in Beton'],
-        },
         unterhaltsreinigung: {
-            number: '06',
+            number: '05',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Unterhaltsreinigung',
@@ -181,7 +163,7 @@ export default {
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
         },
         bueroreinigung: {
-            number: '07',
+            number: '06',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Büroreinigung',
@@ -198,7 +180,7 @@ export default {
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
         },
         grundreinigung: {
-            number: '08',
+            number: '07',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
@@ -215,7 +197,7 @@ export default {
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
         },
         treppenhausreinigung: {
-            number: '09',
+            number: '08',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
@@ -232,7 +214,7 @@ export default {
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
         },
         baureinigung: {
-            number: '10',
+            number: '09',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Baureinigung',
@@ -248,7 +230,7 @@ export default {
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
         },
         bauendreinigung: {
-            number: '11',
+            number: '10',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Bauendreinigung',
@@ -264,7 +246,7 @@ export default {
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
         },
         gebaeudereinigung: {
-            number: '12',
+            number: '11',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Gebäudereinigung',
@@ -280,7 +262,7 @@ export default {
             points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
         },
         praxisreinigung: {
-            number: '13',
+            number: '12',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Praxisreinigung',
@@ -297,7 +279,7 @@ export default {
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
         },
         tektalan: {
-            number: '14',
+            number: '13',
             group: 'montage',
             title: 'Tektalan-Montage',
             short: 'Fachgerechte Montage von Dämmplatten.',
@@ -312,7 +294,7 @@ export default {
             points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
         },
         logistik: {
-            number: '15',
+            number: '14',
             group: 'montage',
             title: 'Baustellenlogistik',
             short: 'Material, Lieferungen und Abläufe koordiniert.',
@@ -333,11 +315,11 @@ export default {
     b2b: {
         seoTitle: 'Subunternehmer Abbruch & Baureinigung Bayern | GoganBau',
         description:
-            'Subunternehmer für Bauunternehmen: Abbruch, Entkernung, Rückbau, Kernbohrungen und Betonschneiden in ganz Bayern, Baureinigung in München – 24/7 erreichbar.',
+            'Subunternehmer für Bauunternehmen: Abbruch, Entkernung, Rückbau und Kernbohrungen in ganz Bayern, Baureinigung in München – 24/7 erreichbar.',
         h1: 'Abbruch, Rückbau und Baureinigung für Bauunternehmen und Generalunternehmer',
         intro: [
             'Als Subunternehmer (Nachunternehmer) unterstützen wir Bauunternehmen, Generalunternehmer, Bauträger und Sanierungsunternehmen – dort, wo zusätzliche Kapazität gebraucht wird.',
-            'Abbrucharbeiten, Entkernung, Rückbau, Kernbohrungen und Betonschneiden übernehmen wir in ganz Bayern. Baureinigung, Bauendreinigung, Unterhaltsreinigung und Gebäudereinigung bieten wir in München und im Umkreis von bis zu 50 km an. Wir arbeiten manuell und mit handgeführten Geräten.',
+            'Abbrucharbeiten, Entkernung, Rückbau und Kernbohrungen übernehmen wir in ganz Bayern. Baureinigung, Bauendreinigung, Unterhaltsreinigung und Gebäudereinigung bieten wir in München und im Umkreis von bis zu 50 km an. Wir arbeiten manuell und mit handgeführten Geräten.',
         ],
         // How we can be booked (from the original partnership models).
         models: [
@@ -380,13 +362,8 @@ export default {
     focusAreas: [
         {
             title: 'Abbruch & Rückbau in ganz Bayern',
-            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau und den selektiven Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab.',
-            services: ['abbruch', 'entkernung', 'rueckbau'],
-        },
-        {
-            title: 'Kernbohrungen & Betonschneiden in ganz Bayern',
-            text: 'Wir bohren und schneiden Beton und Stahlbeton: Kernbohrungen für Lüftung, Klima, Sanitär und Elektro, Wanddurchbrüche, Tür-, Fenster- und Deckenöffnungen sowie Fugenschneiden – für Neubau, Umbau und Sanierung.',
-            services: ['kernbohrungen', 'betonschneiden'],
+            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau und den selektiven Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab. Dazu kommen Kernbohrungen in Beton und Stahlbeton für Lüftung, Klima, Sanitär und Elektro.',
+            services: ['abbruch', 'entkernung', 'rueckbau', 'kernbohrungen'],
         },
         {
             title: 'Gebäudereinigung & Baureinigung in München',
@@ -409,15 +386,15 @@ export default {
         },
         {
             q: 'In welchem Gebiet sind Sie tätig?',
-            a: 'Abbruch, Entkernung, Rückbau, Kernbohrungen und Betonschneiden übernehmen wir in ganz Bayern – zum Beispiel in München, Augsburg, Ingolstadt, Regensburg, Landshut und Rosenheim. Unsere Reinigungsleistungen bieten wir in München und im Umkreis von bis zu 50 km an, etwa in Dachau, Freising, Erding, Fürstenfeldbruck und Starnberg.',
+            a: 'Abbruch, Entkernung, Rückbau und Kernbohrungen übernehmen wir in ganz Bayern – zum Beispiel in München, Augsburg, Ingolstadt, Regensburg, Landshut und Rosenheim. Unsere Reinigungsleistungen bieten wir in München und im Umkreis von bis zu 50 km an, etwa in Dachau, Freising, Erding, Fürstenfeldbruck und Starnberg.',
         },
         {
             q: 'Arbeiten Sie als Subunternehmer für Bauunternehmen?',
             a: 'Ja. Wir unterstützen Bauunternehmen und Generalunternehmer als Subunternehmer – für einzelne Bauabschnitte, als zusätzliche Kapazität bei engem Zeitplan oder bei wiederkehrenden Aufträgen.',
         },
         {
-            q: 'Bieten Sie auch Kernbohrungen und Betonschneiden an?',
-            a: 'Ja. Wir führen Kernbohrungen in Beton und Stahlbeton aus – etwa für Lüftung, Klima, Sanitär, Elektro und Rohrdurchführungen – und schneiden Wanddurchbrüche, Tür-, Fenster- und Deckenöffnungen sowie Fugen in Beton. In ganz Bayern, als Subunternehmer für Bauunternehmen.',
+            q: 'Bieten Sie auch Kernbohrungen an?',
+            a: 'Ja. Wir führen Kernbohrungen in Beton und Stahlbeton aus – etwa für Lüftung, Klima, Sanitär, Elektro und Rohrdurchführungen. In ganz Bayern, als Subunternehmer für Bauunternehmen.',
         },
         {
             q: 'Kann ich mehrere Leistungen kombinieren?',

@@ -62,9 +62,9 @@ function nav(ctx) {
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
                 </a>
                 <div class="invisible absolute top-full -left-4 pt-2 opacity-0 transition group-focus-within/dd:visible group-focus-within/dd:opacity-100 group-hover/dd:visible group-hover/dd:opacity-100">
-                    <!-- Two columns: Abbruch & Rückbau + Kernbohrungen & Betonschneiden + Montage & Logistik | Reinigung -->
+                    <!-- Two columns: Abbruch & Rückbau + Montage & Logistik | Reinigung -->
                     <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 shadow-2xl">
-                        ${each([['abbruch', 'beton', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
+                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
                     </div>
                 </div>
             </div>
@@ -564,7 +564,6 @@ function b2bPage(ctx) {
     const columns = [
         // [heading, service keys, Einsatzgebiet, green accent?]
         ['Abbruch & Rückbau', keysOf('abbruch'), 'ganz Bayern', false],
-        ['Kernbohrungen & Betonschneiden', keysOf('beton'), 'ganz Bayern', false],
         ['Baureinigung & Gebäudereinigung', keysOf('reinigung'), 'München und Umkreis bis 50 km', true],
         ['Montage & Logistik', keysOf('montage'), null, false],
     ];
