@@ -718,7 +718,7 @@ const datenschutz = (ctx) =>
         <p>Die im Anfrageformular angegebenen Daten (Name, Telefon, E-Mail, gewünschte Leistung, Nachricht) verarbeiten wir ausschließlich zur Bearbeitung Ihrer Anfrage und zur Anbahnung eines Auftrags (Art. 6 Abs. 1 lit. b DSGVO). Für den Versand per E-Mail nutzen wir den Dienst Web3Forms, der Ihre Angaben an unser Postfach weiterleitet.</p>
         <h2>Kontakt per WhatsApp</h2>
         <p>Wenn Sie uns über WhatsApp schreiben, wird Ihre Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Ltd.) übermittelt. Unsere Website überträgt dabei selbst keine Daten an WhatsApp; die Nachricht wird erst gesendet, wenn Sie sie in der WhatsApp-App bestätigen.</p>
-        <h2>Cookies</h2>
+        <h2>Keine Cookies, kein Tracking</h2>
         <p>Wir setzen keine Cookies ein. Schriftarten werden lokal ausgeliefert; es werden keine Tracking-Dienste eingebunden.</p>
         <h2>Ihre Rechte</h2>
         <p>[Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerderecht bei der Aufsichtsbehörde]</p>`,
