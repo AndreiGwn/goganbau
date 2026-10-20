@@ -302,6 +302,8 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:type" content="website">${canonical}
+    <!-- Ownership proof for Google Search Console — keep it, or Search Console loses access. -->
+    <meta name="google-site-verification" content="hM1Rnfjfe5SjXZnyC5Ol7mLi7O48SRVqfC0Dk7GG6Nk">
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
     <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
     <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
