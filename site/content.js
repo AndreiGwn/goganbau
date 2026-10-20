@@ -77,7 +77,8 @@ export default {
     // title: name in menus and lists · short: one line on the home page · text: intro on the service
     // page · body: the paragraphs below it · seoTitle / description: for Google · area: Einsatzgebiet
     // · scene: 3D zone for services without their own · h1: page heading (default "<title> in München")
-    // · image: alt text of public/images/leistungen/<key>.svg, drawn by site/illustrations.js
+    // · image: alt text of the service picture: public/images/leistungen/<key>.jpg (photo, shown as
+    //   "Symbolbild") if present, else <key>.svg (drawn by site/illustrations.js)
     // · scope: "Leistungsumfang" list · faq: questions on the service page (only state facts).
     // We work manually and with hand-held tools — no heavy machinery, so no "Gebäudeabbruch" claims.
     services: {
@@ -96,7 +97,7 @@ export default {
                 'Wir arbeiten manuell und mit handgeführten Geräten – präzise und kontrolliert. Bauunternehmen und Gewerbekunden setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein, mit einem festen Ansprechpartner, der rund um die Uhr erreichbar ist.',
             ],
             points: ['Innenabbruch und Teilabbruch', 'Innenwände und Mauerwerk', 'Manuell, präzise, kontrolliert'],
-            image: 'Abbrucharbeiten: Arbeiter bricht eine Innenwand aus Mauerwerk mit einem handgeführten Abbruchhammer ab',
+            image: 'Abbrucharbeiten: Arbeiter beim Innenabbruch mit handgeführtem Abbruchhammer zwischen Bauschutt',
             scope: [
                 'Innenabbruch von nichttragenden Innenwänden und Mauerwerk',
                 'Teilabbruch einzelner Räume und Bauabschnitte',
@@ -162,7 +163,7 @@ export default {
                 'Jeder Schritt wird mit der Bauleitung abgestimmt. Für Bauunternehmen und Generalunternehmer arbeiten wir als Subunternehmer – für einzelne Abschnitte oder das gesamte Rückbauprojekt.',
             ],
             points: ['Selektiv und abschnittsweise', 'Büro- und Gewerbeimmobilien', 'Abgestimmt mit der Bauleitung'],
-            image: 'Selektiver Rückbau: Trennwand wird demontiert, Materialien getrennt nach Holz, Metall, Gips und Bauschutt',
+            image: 'Rückbau: Arbeiter bauen Mauerwerk mit Abbruchhammer und Vorschlaghammer zurück',
             scope: [
                 'Selektiver Rückbau, nach Materialien getrennt',
                 'Abschnittsweiser Rückbau im laufenden Bauablauf',
@@ -195,7 +196,7 @@ export default {
                 'Bauunternehmen, Generalunternehmer und Haustechnik-Firmen setzen uns als Subunternehmer bei Neubau, Umbau und Sanierung ein – abgestimmt mit der Bauleitung und dem Ablauf der Gewerke.',
             ],
             points: ['Beton und Stahlbeton', 'Wände, Decken und Böden', 'Für Lüftung, Sanitär, Elektro'],
-            image: 'Kernbohrung in einer Stahlbetonwand mit Kernbohrgerät, daneben eine Rohrdurchführung',
+            image: 'Kernbohrung in einer Betonwand mit Kernbohrgerät und Wasserkühlung',
             scope: [
                 'Kernbohrungen in Beton und Stahlbeton',
                 'Bohrungen in Wänden, Decken und Bodenplatten',
@@ -228,7 +229,7 @@ export default {
                 'Den Rhythmus legen Sie fest – täglich, wöchentlich oder monatlich. Für Unternehmen, Gewerbemieter und Hausverwaltungen übernehmen wir die Unterhaltsreinigung mit einem direkten Ansprechpartner.',
             ],
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
-            image: 'Unterhaltsreinigung nach festem Reinigungsplan mit Reinigungswagen und Wischmopp',
+            image: 'Unterhaltsreinigung: Bodenreinigung mit Scheuersaugmaschine im Flur eines Bürogebäudes',
             scope: [
                 'Regelmäßige Reinigung von Büros und Geschäftsräumen',
                 'Fester Reinigungsplan: täglich, wöchentlich oder monatlich',
@@ -261,7 +262,7 @@ export default {
                 'Damit Ihr Team ungestört arbeiten kann, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch nach Feierabend. Für kleine Büros ebenso wie für größere Bürogebäude.',
             ],
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
-            image: 'Büroreinigung nach Feierabend: Schreibtisch wird gereinigt und desinfiziert',
+            image: 'Büroreinigung: Schreibtische und Arbeitsplätze werden gereinigt',
             scope: [
                 'Arbeitsplätze, Schreibtische und Besprechungsräume',
                 'Empfang und Eingangsbereich',
@@ -294,7 +295,7 @@ export default {
                 'Typische Anlässe sind ein Mieterwechsel, ein Umzug oder der Start einer neuen Unterhaltsreinigung. Termin und Umfang stimmen wir direkt mit Ihnen ab.',
             ],
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
-            image: 'Grundreinigung eines Bodens mit Einscheibenmaschine, links verschmutzt, rechts sauber',
+            image: 'Grundreinigung eines Steinbodens mit Reinigungsmaschine',
             scope: [
                 'Gründliche Reinigung aller Böden',
                 'Entfernen von hartnäckigem Schmutz und Ablagerungen',
@@ -327,7 +328,7 @@ export default {
                 'Für Hausverwaltungen und Eigentümer von Mehrfamilienhäusern, Wohnanlagen und Gewerbeimmobilien übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
             ],
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
-            image: 'Treppenhausreinigung in einem Mehrfamilienhaus: Treppenstufen werden gewischt',
+            image: 'Treppenhausreinigung: Treppenstufen werden gewischt',
             scope: [
                 'Treppen, Podeste und Handläufe',
                 'Flure und Eingangsbereiche',
@@ -359,7 +360,7 @@ export default {
                 'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
             ],
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
-            image: 'Baureinigung auf der Baustelle: Bauschutt und Baustaub werden mit Industriesauger entfernt',
+            image: 'Baureinigung: Baustaub wird auf der Baustelle mit Industriesauger entfernt',
             scope: [
                 'Baugrobreinigung während der Bauphase',
                 'Bauzwischenreinigung zwischen den Gewerken',
@@ -391,7 +392,7 @@ export default {
                 'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
             ],
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
-            image: 'Bauendreinigung vor der Abnahme: Fenster und Rahmen werden gereinigt, Böden übergabefertig',
+            image: 'Bauendreinigung: Fenster werden vor der Übergabe mit Abzieher gereinigt',
             scope: [
                 'Baufeinreinigung vor Abnahme und Übergabe',
                 'Fenster, Glasflächen und Rahmen',
@@ -423,7 +424,7 @@ export default {
                 'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
             ],
             points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
-            image: 'Gebäudereinigung im Eingangsbereich eines Bürogebäudes mit Reinigungswagen',
+            image: 'Gebäudereinigung im Eingangsbereich eines Bürogebäudes mit Staubsauger',
             scope: [
                 'Reinigung von Büro- und Verwaltungsgebäuden',
                 'Eingangsbereiche, Foyers und Aufzüge',
@@ -456,7 +457,7 @@ export default {
                 'Damit der Praxisbetrieb nicht gestört wird, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch außerhalb der Sprechzeiten.',
             ],
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
-            image: 'Praxisreinigung: Wartebereich einer Arztpraxis wird gereinigt und desinfiziert',
+            image: 'Praxisreinigung: Behandlungsstuhl einer Zahnarztpraxis wird gereinigt und desinfiziert',
             scope: [
                 'Wartebereich und Empfang',
                 'Behandlungsräume',

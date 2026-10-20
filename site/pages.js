@@ -486,7 +486,7 @@ function homePage(ctx, projects) {
     });
 }
 
-function servicePage(ctx, key, projects) {
+function servicePage(ctx, key, projects, photo) {
     const { url } = ctx;
     const s = gb.services[key];
     return layout(ctx, {
@@ -502,7 +502,16 @@ function servicePage(ctx, key, projects) {
             <p class="eyebrow mt-8">Leistung ${s.number}</p>
             <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
             <p class="mt-6 text-lg text-slate-300">${esc(s.text)}</p>
-            ${s.image ? `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-white/10">` : ''}
+            ${
+                !s.image
+                    ? ''
+                    : photo
+                      ? `<figure class="mt-8 sm:max-w-md">
+                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" class="w-full border border-white/10">
+                <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>
+            </figure>`
+                      : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-white/10">`
+            }
             ${each(s.body, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
             <ul class="mt-10 border-t border-white/10">
                 ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
@@ -747,7 +756,12 @@ export function renderPages({ base, publicDir }) {
         { file: 'index.html', html: homePage(context('home', ''), projects) },
         ...services.map(([key]) => ({
             file: `leistungen/${key}/index.html`,
-            html: servicePage(context('service', `leistungen/${key}/`, key), key, projects.filter((p) => p.service === key)),
+            html: servicePage(
+                context('service', `leistungen/${key}/`, key),
+                key,
+                projects.filter((p) => p.service === key),
+                fs.existsSync(path.join(publicDir, `images/leistungen/${key}.jpg`)),
+            ),
         })),
         { file: 'bauunternehmen/index.html', html: b2bPage(context('b2b', 'bauunternehmen/')) },
         { file: 'impressum/index.html', html: impressum(context('legal', 'impressum/')) },
