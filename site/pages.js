@@ -713,16 +713,18 @@ const datenschutz = (ctx) =>
         <h2>Verantwortlicher</h2>
         <p>${address}<br>${esc(gb.contact.email)}</p>
         <h2>Hosting</h2>
-        <p>Diese Website wird über GitHub Pages (GitHub Inc., USA) bereitgestellt. Beim Aufruf verarbeitet GitHub technisch notwendige Daten wie Ihre IP-Adresse in Server-Logfiles.</p>
+        <p>Diese Website wird über GitHub Pages (GitHub Inc., USA) bereitgestellt. Beim Aufruf verarbeitet GitHub technisch notwendige Daten wie Ihre IP-Adresse in Server-Logfiles. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und zuverlässigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).</p>
         <h2>Anfragen über das Kontaktformular</h2>
         <p>Die im Anfrageformular angegebenen Daten (Name, Telefon, E-Mail, gewünschte Leistung, Nachricht) verarbeiten wir ausschließlich zur Bearbeitung Ihrer Anfrage und zur Anbahnung eines Auftrags (Art. 6 Abs. 1 lit. b DSGVO). Für den Versand per E-Mail nutzen wir den Dienst Web3Forms, der Ihre Angaben an unser Postfach weiterleitet.</p>
         <h2>Kontakt per WhatsApp</h2>
         <p>Wenn Sie uns über WhatsApp schreiben, wird Ihre Nachricht über den Dienst WhatsApp (Meta Platforms Ireland Ltd.) übermittelt. Unsere Website überträgt dabei selbst keine Daten an WhatsApp; die Nachricht wird erst gesendet, wenn Sie sie in der WhatsApp-App bestätigen.</p>
         <h2>Keine Cookies, kein Tracking</h2>
         <p>Wir setzen keine Cookies ein. Schriftarten werden lokal ausgeliefert; es werden keine Tracking-Dienste eingebunden.</p>
+        <h2>Speicherdauer</h2>
+        <p>Wir speichern Ihre Angaben nur so lange, wie es für die Bearbeitung Ihrer Anfrage und einen daraus entstehenden Auftrag nötig ist. Danach löschen wir sie, soweit keine gesetzlichen Aufbewahrungspflichten (z. B. nach Handels- und Steuerrecht) bestehen.</p>
         <h2>Ihre Rechte</h2>
-        <p>[Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit, Beschwerderecht bei der Aufsichtsbehörde]</p>`,
-        { draft: true },
+        <p>Sie haben jederzeit das Recht auf Auskunft über die bei uns gespeicherten Daten (Art. 15 DSGVO), auf Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO) und Einschränkung der Verarbeitung (Art. 18 DSGVO) sowie auf Datenübertragbarkeit (Art. 20 DSGVO). Soweit wir Daten auf Grundlage berechtigter Interessen verarbeiten, können Sie der Verarbeitung widersprechen (Art. 21 DSGVO). Eine formlose Nachricht an ${esc(gb.contact.email)} genügt.</p>
+        <p>Außerdem können Sie sich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO). Für uns zuständig ist das Bayerische Landesamt für Datenschutzaufsicht (BayLDA), Promenade 18, 91522 Ansbach.</p>`,
     );
 
 const notFound = (ctx) =>
