@@ -371,7 +371,7 @@ function homePage(ctx, projects, photos) {
                     <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                     <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
                 </div>
-                <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-mist uppercase">
+                <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-ink uppercase">
                     Seit ${gb.founded} <span class="text-signal-deep">·</span> ${esc(gb.region)} <span class="text-signal-deep">·</span> 24/7
                 </p>
             </div>
