@@ -540,7 +540,7 @@ function servicePage(ctx, key, projects, photo) {
                 !s.image
                     ? ''
                     : photo
-                      ? `<figure class="mt-8 sm:max-w-md">
+                      ? `<figure class="mt-8">
                 <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" class="w-full border border-slate-200">
                 <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>
             </figure>`

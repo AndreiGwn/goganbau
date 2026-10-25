@@ -96,7 +96,7 @@ export default {
                 'Wir arbeiten manuell und mit handgeführten Geräten – präzise und kontrolliert. Bauunternehmen und Gewerbekunden setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein, mit einem festen Ansprechpartner, der rund um die Uhr erreichbar ist.',
             ],
             points: ['Innenabbruch und Teilabbruch', 'Innenwände und Mauerwerk', 'Manuell, präzise, kontrolliert'],
-            image: 'Abbrucharbeiten: Arbeiter beim Innenabbruch mit handgeführtem Abbruchhammer zwischen Bauschutt',
+            image: 'Abbrucharbeiten: Arbeiter bricht eine Betonwand mit handgeführtem Abbruchhammer ab',
             scope: [
                 'Innenabbruch von nichttragenden Innenwänden und Mauerwerk',
                 'Teilabbruch einzelner Räume und Bauabschnitte',
@@ -129,7 +129,7 @@ export default {
                 'Als Entkernungsfirma arbeiten wir für Bauunternehmen, Generalunternehmer und Sanierungsunternehmen in München und ganz Bayern – vor Sanierung, Umbau oder Neubau.',
             ],
             points: ['Trennwände, Decken, Bodenbeläge', 'Fliesen, Estrich, Bäder, Küchen', 'Sauber getrennt und beräumt'],
-            image: 'Entkernung: Trockenbauwände und abgehängte Decke werden bis auf den Rohbau zurückgebaut',
+            image: 'Entkernung: Arbeiter entfernen Putz und Innenausbau bis auf das Mauerwerk',
             scope: [
                 'Rückbau von Trennwänden und Trockenbau',
                 'Entfernen abgehängter Decken und Deckenverkleidungen',
@@ -160,7 +160,7 @@ export default {
                 'Jeder Schritt wird mit der Bauleitung abgestimmt. Für Bauunternehmen und Generalunternehmer arbeiten wir als Subunternehmer – für einzelne Abschnitte oder das gesamte Rückbauprojekt.',
             ],
             points: ['Selektiv und abschnittsweise', 'Büro- und Gewerbeimmobilien', 'Abgestimmt mit der Bauleitung'],
-            image: 'Rückbau: Arbeiter bauen Mauerwerk mit Abbruchhammer und Vorschlaghammer zurück',
+            image: 'Rückbau: Arbeiter bauen Mauerwerk mit Brechstange und Abbruchhammer zurück, Material getrennt in Containern',
             scope: [
                 'Selektiver Rückbau, nach Materialien getrennt',
                 'Abschnittsweiser Rückbau im laufenden Bauablauf',
@@ -224,7 +224,7 @@ export default {
                 'Den Rhythmus legen Sie fest – täglich, wöchentlich oder monatlich. Für Unternehmen, Gewerbemieter und Hausverwaltungen übernehmen wir die Unterhaltsreinigung mit einem direkten Ansprechpartner.',
             ],
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
-            image: 'Unterhaltsreinigung: Bodenreinigung mit Scheuersaugmaschine im Flur eines Bürogebäudes',
+            image: 'Unterhaltsreinigung im Büro: Glastür wird gereinigt, Boden gesaugt, Reinigungswagen im Einsatz',
             scope: [
                 'Regelmäßige Reinigung von Büros und Geschäftsräumen',
                 'Fester Reinigungsplan: täglich, wöchentlich oder monatlich',
@@ -256,7 +256,7 @@ export default {
                 'Damit Ihr Team ungestört arbeiten kann, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch nach Feierabend. Für kleine Büros ebenso wie für größere Bürogebäude.',
             ],
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
-            image: 'Büroreinigung: Schreibtische und Arbeitsplätze werden gereinigt',
+            image: 'Büroreinigung: Schreibtische werden gereinigt und Böden gesaugt',
             scope: [
                 'Arbeitsplätze, Schreibtische und Besprechungsräume',
                 'Empfang und Eingangsbereich',
@@ -288,7 +288,7 @@ export default {
                 'Typische Anlässe sind ein Mieterwechsel, ein Umzug oder der Start einer neuen Unterhaltsreinigung. Termin und Umfang stimmen wir direkt mit Ihnen ab.',
             ],
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
-            image: 'Grundreinigung eines Steinbodens mit Reinigungsmaschine',
+            image: 'Grundreinigung eines Bodens mit Einscheibenmaschine',
             scope: [
                 'Gründliche Reinigung aller Böden',
                 'Entfernen von hartnäckigem Schmutz und Ablagerungen',
@@ -320,7 +320,7 @@ export default {
                 'Für Hausverwaltungen und Eigentümer von Mehrfamilienhäusern, Wohnanlagen und Gewerbeimmobilien übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
             ],
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
-            image: 'Treppenhausreinigung: Treppenstufen werden gewischt',
+            image: 'Treppenhausreinigung: Geländer wird gereinigt und Treppe gewischt',
             scope: [
                 'Treppen, Podeste und Handläufe',
                 'Flure und Eingangsbereiche',
@@ -351,7 +351,7 @@ export default {
                 'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
             ],
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
-            image: 'Baureinigung: Baustaub wird auf der Baustelle mit Industriesauger entfernt',
+            image: 'Baureinigung auf der Baustelle: Bauschutt wird zusammengekehrt und Baustaub gesaugt',
             scope: [
                 'Baugrobreinigung während der Bauphase',
                 'Bauzwischenreinigung zwischen den Gewerken',
@@ -382,7 +382,7 @@ export default {
                 'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
             ],
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
-            image: 'Bauendreinigung: Fenster werden vor der Übergabe mit Abzieher gereinigt',
+            image: 'Bauendreinigung im Neubau: Fensterrahmen und Böden werden vor der Übergabe gereinigt',
             scope: [
                 'Baufeinreinigung vor Abnahme und Übergabe',
                 'Fenster, Glasflächen und Rahmen',
@@ -413,7 +413,7 @@ export default {
                 'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
             ],
             points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
-            image: 'Gebäudereinigung im Eingangsbereich eines Bürogebäudes mit Staubsauger',
+            image: 'Gebäudereinigung am Eingang eines Bürogebäudes: Glasflächen und Eingangsbereich werden gereinigt',
             scope: [
                 'Reinigung von Büro- und Verwaltungsgebäuden',
                 'Eingangsbereiche, Foyers und Aufzüge',
@@ -445,7 +445,7 @@ export default {
                 'Damit der Praxisbetrieb nicht gestört wird, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch außerhalb der Sprechzeiten.',
             ],
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
-            image: 'Praxisreinigung: Behandlungsstuhl einer Zahnarztpraxis wird gereinigt und desinfiziert',
+            image: 'Praxisreinigung: Behandlungsliege wird desinfiziert, Boden gesaugt',
             scope: [
                 'Wartebereich und Empfang',
                 'Behandlungsräume',
@@ -475,7 +475,7 @@ export default {
                 'Als Subunternehmer übernehmen wir die Montage termingerecht im Ablauf Ihrer Baustelle und stimmen uns direkt mit der Bauleitung ab.',
             ],
             points: ['Tiefgaragen, Keller, Gewerbeflächen', 'Decken- und Wandmontage', 'Fachgerechte Befestigung'],
-            image: 'Tektalan-Montage in einer Tiefgarage: Arbeiter montiert Tektalan-Dämmplatten von einem Rollgerüst an die Betondecke',
+            image: 'Tektalan-Montage: Dämmplatten werden an der Betondecke montiert',
         },
         logistik: {
             group: 'montage',
@@ -490,7 +490,7 @@ export default {
                 'Unser Schwerpunkt liegt auf Koordination und Organisation – für Bauunternehmen, die bei der Baustellenorganisation Entlastung brauchen.',
             ],
             points: ['Materialbedarf und Lieferungen', 'Anlieferfenster und Lagerflächen', 'Einsatzzeiten der Gewerke'],
-            image: 'Baustellenlogistik: Lieferplan, Material auf Paletten im markierten Lagerbereich und Transport mit dem Hubwagen',
+            image: 'Baustellenlogistik: Materialanlieferung wird auf der Baustelle koordiniert',
             note: 'Wir koordinieren – Transporte mit eigenen Fahrzeugen bieten wir nicht an.',
         },
     },
