@@ -269,8 +269,18 @@ function structuredData() {
             })),
         },
     };
-    return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+    return jsonLd(data);
 }
+
+const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+
+// The visible "Häufige Fragen" as schema.org FAQPage, so Google can read the questions and answers.
+const faqData = (faq) =>
+    jsonLd({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })),
+    });
 
 /* --------------------------------------------------------------- layout */
 
@@ -339,7 +349,7 @@ function homePage(ctx, projects, photos) {
 
     return layout(ctx, {
         title: gb.homeTitle,
-        head: structuredData(),
+        head: structuredData() + faqData(gb.faq),
         body: `
     <!-- Fixed 3D canvas behind the hero; the sections below are opaque and cover it. -->
     <div class="fixed inset-0 z-0" aria-hidden="true">
@@ -470,7 +480,7 @@ function homePage(ctx, projects, photos) {
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-24 lg:px-8">
             <div data-reveal>
                 <p class="eyebrow">Über uns</p>
-                <h2 class="section-title mt-4">Ein Partner, der mitdenkt.</h2>
+                <h2 class="section-title mt-4">Abbruch und Reinigung: ein Partner, der mitdenkt.</h2>
                 <p class="mt-6 text-lg text-slate-600">Seit ${gb.founded} unterstützen wir Bauunternehmen in ${esc(gb.region)}.</p>
                 ${each(gb.about, (p) => `<p class="mt-4 text-slate-600">${esc(p)}</p>`)}
             </div>
@@ -491,7 +501,7 @@ function homePage(ctx, projects, photos) {
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-4">
                 <p class="eyebrow">Häufige Fragen</p>
-                <h2 class="section-title mt-4">Kurz beantwortet.</h2>
+                <h2 class="section-title mt-4">Fragen zu Reinigung und Abbruch – kurz beantwortet.</h2>
             </div>
             <div data-reveal style="--reveal-delay: 120ms" class="divide-y divide-slate-200 border-y border-slate-200 lg:col-span-8">
                 ${each(gb.faq, ({ q, a }) => `<details class="group/faq">
@@ -508,7 +518,7 @@ function homePage(ctx, projects, photos) {
         <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-5">
                 <p class="eyebrow">Kontakt</p>
-                <h2 class="section-title mt-4">Sprechen wir über Ihr Projekt.</h2>
+                <h2 class="section-title mt-4">Kostenloses Angebot für Ihr Projekt in München.</h2>
                 <p class="mt-6 text-lg text-slate-600">Rund um die Uhr erreichbar.</p>
                 <ul class="mt-10 divide-y divide-slate-200 border-y border-slate-200">
                     ${each(channels, ([label, value, href, isWhatsapp]) => `<li>
@@ -582,6 +592,7 @@ function servicePage(ctx, key, projects, photo) {
     return layout(ctx, {
         title: s.seoTitle,
         description: s.description,
+        head: s.faq ? faqData(s.faq) : '',
         body: `
     <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
