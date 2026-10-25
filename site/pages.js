@@ -115,7 +115,6 @@ function footer({ url }) {
         <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-[11px] tracking-wider text-white/60 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <span>© ${gb.founded}–${new Date().getFullYear()} ${esc(gb.name)}</span>
             <span class="flex gap-6">
-                <a href="${url('bauunternehmen/')}" class="hover:text-white">Für Bauunternehmen</a>
                 <a href="${url('impressum/')}" class="hover:text-white">Impressum</a>
                 <a href="${url('datenschutz/')}" class="hover:text-white">Datenschutz</a>
             </span>
@@ -196,7 +195,7 @@ function inquiryForm({ url }) {
             <button type="button" data-send-whatsapp class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp senden</button>
         </div>
 
-        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-brand">Datenschutz</a></p>
+        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-brand">Datenschutzerklärung</a></p>
     </form>
 
     <div data-inquiry-success hidden tabindex="-1" class="py-10 text-center outline-none">
@@ -376,16 +375,17 @@ function homePage(ctx, projects, photos) {
             </div>
             <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 ${each(cleaning, ([key, s], i) => `<li data-reveal style="--reveal-delay: ${(i % 4) * 80}ms">
-                    <a href="${url(`leistungen/${key}/`)}" class="group flex h-full flex-col border-b-4 border-brand bg-paper transition duration-300 hover:-translate-y-1 hover:shadow-xl">
+                    <div class="group relative flex h-full flex-col border-b-4 border-brand bg-paper transition duration-300 hover:-translate-y-1 hover:shadow-xl">
                         <img src="${cardImage(key)}" alt="" width="640" height="480" loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-[4/3]">
                         <span class="flex flex-1 flex-col p-5">
-                            <span class="font-display text-lg font-bold text-brand">${esc(s.title)}</span>
+                            <!-- Only the title is the link (short link text for SEO); its ::after covers the card so all of it stays clickable. -->
+                            <a href="${url(`leistungen/${key}/`)}" class="font-display text-lg font-bold text-brand after:absolute after:inset-0">${esc(s.title)}</a>
                             <span class="mt-3 space-y-2 text-sm text-slate-600">
                                 ${each(s.points, (p) => `<span class="flex gap-2">${icon.check('size-4 mt-0.5')} ${esc(p)}</span>`)}
                             </span>
-                            <span class="mt-auto pt-5"><span class="inline-flex w-full items-center justify-center gap-2 border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink transition group-hover:border-brand group-hover:text-brand">Jetzt mehr erfahren ${icon.arrow('size-3.5')}</span></span>
+                            <span class="mt-auto pt-5"><span class="inline-flex w-full items-center justify-center gap-2 border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-ink transition group-hover:border-brand group-hover:text-brand" aria-hidden="true">Jetzt mehr erfahren ${icon.arrow('size-3.5')}</span></span>
                         </span>
-                    </a>
+                    </div>
                 </li>`)}
             </ul>
             <p class="mt-10 text-center"><a href="${url('leistungen/')}" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a></p>
@@ -422,7 +422,7 @@ function homePage(ctx, projects, photos) {
                 </li>`)}
             </ol>
             <div data-reveal class="mt-10 flex flex-col gap-3 sm:flex-row">
-                <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                <a href="#kontakt" class="btn-primary">Jetzt anfragen ${icon.arrow()}</a>
                 <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
             </div>
         </div>
