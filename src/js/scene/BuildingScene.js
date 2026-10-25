@@ -18,7 +18,7 @@ import { dotTexture, labelSprite, netTexture, woodWoolTexture } from './textures
  */
 
 const C = {
-    bg: 0x0a0e17,
+    bg: 0xf4f7fb, // matches --color-paper (light theme)
     signal: 0xff6b00,
     tech: 0x38bdf8,
     concrete: 0x9aa3ae,
@@ -27,7 +27,7 @@ const C = {
     steelDark: 0x263042,
     scaffold: 0xb4bcc6,
     tektalan: 0xd2bc90,
-    ground: 0x0b1019,
+    ground: 0xdde3ea,
     rust: 0x9a5a34,
 };
 
@@ -140,12 +140,12 @@ export class BuildingScene {
         this.renderer = new THREE.WebGLRenderer({ canvas, antialias: !this.lowPower, powerPreference: 'high-performance' });
         this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.lowPower ? 1.5 : 1.75));
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        this.renderer.toneMappingExposure = 1.3;
+        this.renderer.toneMappingExposure = 1.05;
         this.renderer.setClearColor(C.bg, 1);
 
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(C.bg);
-        this.scene.fog = new THREE.FogExp2(C.bg, 0.0085);
+        this.scene.fog = new THREE.FogExp2(C.bg, 0.0055);
 
         const pmrem = new THREE.PMREMGenerator(this.renderer);
         this.scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
@@ -262,13 +262,13 @@ export class BuildingScene {
     /* ------------------------------------------------------------------ */
 
     buildLights() {
-        this.scene.add(new THREE.HemisphereLight(0xc4dcff, 0x1a2230, 1.7));
+        this.scene.add(new THREE.HemisphereLight(0xf2f7ff, 0x8a94a3, 2.2));
 
         const key = new THREE.DirectionalLight(0xfff1e0, 3.2);
         key.position.set(30, 50, 25);
         this.scene.add(key);
 
-        const rim = new THREE.DirectionalLight(C.tech, 1.6);
+        const rim = new THREE.DirectionalLight(C.tech, 0.8);
         rim.position.set(-40, 18, -35);
         this.scene.add(rim);
 
@@ -292,15 +292,15 @@ export class BuildingScene {
 
         const pad = new THREE.Mesh(
             new THREE.PlaneGeometry(44, 32),
-            new THREE.MeshStandardMaterial({ color: 0x151c29, roughness: 0.95 }),
+            new THREE.MeshStandardMaterial({ color: 0xc9d0d9, roughness: 0.95 }),
         );
         pad.rotation.x = -Math.PI / 2;
         pad.position.set(-5, 0, 3);
         this.world.add(pad);
 
-        const grid = new THREE.GridHelper(240, 120, C.tech, 0x1e293b);
+        const grid = new THREE.GridHelper(240, 120, 0x023066, 0x9aa6b4);
         grid.material.transparent = true;
-        grid.material.opacity = 0.16;
+        grid.material.opacity = 0.22;
         grid.position.y = 0.01;
         this.world.add(grid);
     }

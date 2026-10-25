@@ -13,7 +13,7 @@ const each = (list, fn) => list.map(fn).join('');
 const services = Object.entries(gb.services);
 // [[groupKey, label, [[key, service], …]], …] in the order of gb.serviceGroups
 const groups = Object.entries(gb.serviceGroups).map(([g, label]) => [g, label, services.filter(([, s]) => s.group === g)]);
-const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] tracking-[0.2em] text-mist uppercase">${esc(label)}</li>`;
+const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] tracking-[0.2em] uppercase">${esc(label)}</li>`;
 const wa = (text) => `https://wa.me/${gb.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 /* ---------------------------------------------------------------- icons */
@@ -22,7 +22,7 @@ const icon = {
     arrow: (cls = 'size-4') => `<svg viewBox="0 0 24 24" class="${cls}" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`,
     chevronRight: (cls = 'size-4') => `<svg viewBox="0 0 24 24" class="${cls}" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg>`,
     chevronDown: '<svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>',
-    check: (cls = 'size-5') => `<svg viewBox="0 0 24 24" class="${cls} shrink-0 text-signal" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>`,
+    check: (cls = 'size-5') => `<svg viewBox="0 0 24 24" class="${cls} shrink-0 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>`,
     whatsapp: (cls = 'size-5') =>
         `<svg viewBox="0 0 24 24" class="${cls} shrink-0" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.35-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.23-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43m8.03-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.7 5.8.7 12.06c0 2 .52 3.95 1.52 5.67L.6 23.28l5.68-1.49a11.3 11.3 0 0 0 5.42 1.38h.01c6.25 0 11.35-5.09 11.35-11.35 0-3.03-1.18-5.88-3.32-8.02"/></svg>`,
 };
@@ -44,7 +44,7 @@ const logo = () => `<span class="flex items-center gap-3">
     ${logoMark()}
     <span class="leading-none">
         <span class="block font-display text-lg font-bold tracking-tight text-white">Gogan<span class="text-signal">Bau</span></span>
-        <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-mist uppercase">&amp; Gebäudereinigung</span>
+        <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-white/70 uppercase">&amp; Gebäudereinigung</span>
     </span>
 </span>`;
 
@@ -52,19 +52,19 @@ const logo = () => `<span class="flex items-center gap-3">
 
 function nav(ctx) {
     const { url, anchor, current } = ctx;
-    return `<header data-nav class="group/nav fixed inset-x-0 top-0 z-50 transition-colors duration-300 [&.is-scrolled]:border-b [&.is-scrolled]:border-white/10 [&.is-scrolled]:bg-obsidian/85 [&.is-scrolled]:backdrop-blur-xl">
+    return `<header data-nav class="group/nav fixed inset-x-0 top-0 z-50 bg-brand transition-shadow duration-300 [&.is-scrolled]:shadow-lg">
     <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-20 lg:px-8">
         <a href="${url()}" class="shrink-0" aria-label="${esc(gb.name)} – Startseite">${logo()}</a>
 
-        <nav class="hidden items-center gap-8 text-sm text-slate-300 lg:flex" aria-label="Hauptnavigation">
+        <nav class="hidden items-center gap-8 text-sm text-white/85 lg:flex" aria-label="Hauptnavigation">
             <div class="group/dd relative">
                 <a href="${anchor('leistungen')}" class="flex items-center gap-1.5 py-2 transition hover:text-white">
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
                 </a>
                 <div class="invisible absolute top-full -left-4 pt-2 opacity-0 transition group-focus-within/dd:visible group-focus-within/dd:opacity-100 group-hover/dd:visible group-hover/dd:opacity-100">
                     <!-- Two columns: Abbruch & Rückbau + Montage & Logistik | Reinigung -->
-                    <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 shadow-2xl">
-                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-white/5 hover:text-white ${current === key ? 'text-signal' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
+                    <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 text-slate-700 shadow-2xl">
+                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1 text-mist')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-slate-100 hover:text-brand ${current === key ? 'text-signal-deep' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
                     </div>
                 </div>
             </div>
@@ -74,34 +74,34 @@ function nav(ctx) {
         </nav>
 
         <div class="flex items-center gap-3">
-            <a href="${gb.contact.phoneHref}" class="hidden items-center gap-2.5 font-mono text-xs text-slate-200 xl:flex">
+            <a href="${gb.contact.phoneHref}" class="hidden items-center gap-2.5 font-mono text-xs text-white/90 xl:flex">
                 <span class="live-dot"></span>
                 <span><span class="text-signal">24/7</span> ${esc(gb.contact.phone)}</span>
             </a>
-            <a href="${wa()}" target="_blank" rel="noopener" class="btn-ghost btn-sm hidden lg:inline-flex">${icon.whatsapp('size-4')} WhatsApp</a>
+            <a href="${wa()}" target="_blank" rel="noopener" class="btn btn-sm hidden border border-white/30 text-white hover:bg-white/10 lg:inline-flex">${icon.whatsapp('size-4')} WhatsApp</a>
             <a href="${anchor('kontakt')}" class="btn-primary btn-sm hidden lg:inline-flex">Anfrage stellen</a>
             <!-- Phones: calling, WhatsApp and the form live in the bottom bar. -->
-            <button type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" class="grid size-11 place-items-center border border-white/15 text-white lg:hidden">
+            <button type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" class="grid size-11 place-items-center border border-white/30 text-white lg:hidden">
                 <span class="sr-only">Menü</span>
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
             </button>
         </div>
     </div>
 
-    <div id="mobile-menu" data-nav-menu hidden class="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t border-white/10 bg-obsidian/95 px-4 pb-4 backdrop-blur-xl lg:hidden">
+    <div id="mobile-menu" data-nav-menu hidden class="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t border-white/15 bg-brand px-4 pb-4 lg:hidden">
         <nav class="flex flex-col font-display text-xl font-semibold text-white" aria-label="Mobile Navigation">
-            <a href="${url()}" class="border-b border-white/10 py-4">Startseite</a>
-            <details class="group/acc border-b border-white/10"${current ? ' open' : ''}>
+            <a href="${url()}" class="border-b border-white/15 py-4">Startseite</a>
+            <details class="group/acc border-b border-white/15"${current ? ' open' : ''}>
                 <summary class="flex cursor-pointer list-none items-center justify-between py-4 [&::-webkit-details-marker]:hidden">
-                    Leistungen <span class="inline-flex text-mist transition group-open/acc:rotate-180">${icon.chevronDown}</span>
+                    Leistungen <span class="inline-flex text-white/60 transition group-open/acc:rotate-180">${icon.chevronDown}</span>
                 </summary>
                 <ul class="pb-3 pl-4 font-sans text-base font-normal">
-                    ${each(groups, ([, label, list]) => groupLabel('pt-3 pb-1')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block py-2.5 ${current === key ? 'text-signal' : 'text-slate-300'}">${esc(s.title)}</a></li>`))}
+                    ${each(groups, ([, label, list]) => groupLabel('pt-3 pb-1 text-white/60')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block py-2.5 ${current === key ? 'text-signal' : 'text-white/80'}">${esc(s.title)}</a></li>`))}
                     <li><a href="${anchor('leistungen')}" class="block py-2.5 font-semibold text-white">Alle Leistungen ansehen →</a></li>
                 </ul>
             </details>
-            <a href="${url('bauunternehmen/')}" class="border-b border-white/10 py-4">Für Bauunternehmen</a>
-            <a href="${anchor('ueber-uns')}" class="border-b border-white/10 py-4">Über uns</a>
+            <a href="${url('bauunternehmen/')}" class="border-b border-white/15 py-4">Für Bauunternehmen</a>
+            <a href="${anchor('ueber-uns')}" class="border-b border-white/15 py-4">Über uns</a>
             <a href="${anchor('kontakt')}" class="py-4">Kontakt</a>
         </nav>
     </div>
@@ -109,11 +109,11 @@ function nav(ctx) {
 }
 
 function footer({ url }) {
-    return `<footer class="relative z-10 border-t border-white/10 bg-obsidian">
+    return `<footer class="relative z-10 bg-brand text-white">
     <div class="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
         <div>
             ${logo()}
-            <p class="mt-4 text-sm text-mist">${esc(gb.motto)}</p>
+            <p class="mt-4 text-sm text-white/70">${esc(gb.motto)}</p>
         </div>
         <ul class="flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
             <li><a href="${gb.contact.phoneHref}" class="font-mono text-white transition hover:text-signal">${esc(gb.contact.phone)}</a></li>
@@ -121,8 +121,8 @@ function footer({ url }) {
             <li><a href="${wa()}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-white transition hover:text-signal">${icon.whatsapp('size-4')} WhatsApp</a></li>
         </ul>
     </div>
-    <div class="border-t border-white/10">
-        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-[11px] tracking-wider text-slate-500 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+    <div class="border-t border-white/15">
+        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-[11px] tracking-wider text-white/60 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <span>© ${gb.founded}–${new Date().getFullYear()} ${esc(gb.name)}</span>
             <span class="flex gap-6">
                 <a href="${url('bauunternehmen/')}" class="hover:text-white">Für Bauunternehmen</a>
@@ -136,12 +136,12 @@ function footer({ url }) {
 
 // Phones: the three ways to reach us, always one tap away.
 function mobileBar({ anchor }) {
-    return `<nav class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-white/10 bg-obsidian/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden" aria-label="Schnellkontakt">
-    <a href="${gb.contact.phoneHref}" class="flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium text-slate-200">
-        <svg viewBox="0 0 24 24" class="size-5 text-signal" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
+    return `<nav class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden" aria-label="Schnellkontakt">
+    <a href="${gb.contact.phoneHref}" class="flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium text-slate-700">
+        <svg viewBox="0 0 24 24" class="size-5 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
         Anrufen
     </a>
-    <a href="${wa()}" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 border-x border-white/10 py-2.5 text-[11px] font-medium text-slate-200">
+    <a href="${wa()}" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 border-x border-slate-200 py-2.5 text-[11px] font-medium text-slate-700">
         ${icon.whatsapp('size-5 text-[#25D366]')}
         WhatsApp
     </a>
@@ -199,21 +199,21 @@ function inquiryForm({ url }) {
             ${field('message')}
         </div>
 
-        <p data-form-error hidden role="alert" class="border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-300"></p>
+        <p data-form-error hidden role="alert" class="border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-700"></p>
 
         <div class="grid gap-3 sm:grid-cols-2">
             <button type="submit" class="btn-primary">Per E-Mail senden ${icon.arrow()}</button>
             <button type="button" data-send-whatsapp class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp senden</button>
         </div>
 
-        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-white">Datenschutz</a></p>
+        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-brand">Datenschutz</a></p>
     </form>
 
     <div data-inquiry-success hidden tabindex="-1" class="py-10 text-center outline-none">
-        <div class="mx-auto grid size-14 place-items-center border border-signal/50 bg-signal/10 text-signal">
+        <div class="mx-auto grid size-14 place-items-center border border-signal/50 bg-signal/10 text-signal-deep">
             <svg viewBox="0 0 24 24" class="size-7" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
         </div>
-        <p class="mt-5 font-display text-2xl font-bold text-white">Anfrage gesendet.</p>
+        <p class="mt-5 font-display text-2xl font-bold text-ink">Anfrage gesendet.</p>
         <p class="mx-auto mt-3 max-w-md text-sm">Danke! Wir melden uns so schnell wie möglich.</p>
     </div>
 </div>`;
@@ -222,20 +222,20 @@ function inquiryForm({ url }) {
 // Vorher/Nachher slider. Drag (or use arrow keys) to compare; without JS it shows a 50/50 split.
 function beforeAfter(project) {
     return `<figure data-compare style="--pos: 50%">
-    <div class="relative aspect-[4/3] overflow-hidden bg-steel select-none">
+    <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 select-none">
         <img src="/${project.after}" alt="Nachher: ${esc(project.title)}" loading="lazy" class="absolute inset-0 size-full object-cover">
         <img src="/${project.before}" alt="Vorher: ${esc(project.title)}" loading="lazy" class="absolute inset-0 size-full object-cover" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0)">
-        <span class="pointer-events-none absolute top-3 left-3 bg-obsidian/80 px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-white uppercase">Vorher</span>
+        <span class="pointer-events-none absolute top-3 left-3 bg-white/90 px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-ink uppercase">Vorher</span>
         <span class="pointer-events-none absolute top-3 right-3 bg-signal px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-white uppercase">Nachher</span>
         <div class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white" style="left: var(--pos)">
-            <span class="absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-obsidian shadow-lg">
+            <span class="absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-lg">
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg>
             </span>
         </div>
         <input type="range" min="0" max="100" value="50" data-compare-range aria-label="Vorher und Nachher vergleichen" class="absolute inset-0 size-full cursor-ew-resize touch-pan-y opacity-0">
     </div>
     <figcaption class="mt-3 flex items-baseline justify-between gap-4 text-sm">
-        <span class="font-display font-semibold text-white">${esc(project.title)}</span>
+        <span class="font-display font-semibold text-ink">${esc(project.title)}</span>
         ${project.symbolbild ? '<span class="font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</span>' : ''}
     </figcaption>
 </figure>`;
@@ -298,7 +298,7 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">
-    <meta name="theme-color" content="#0A0E17">
+    <meta name="theme-color" content="#023066">
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:type" content="website">${canonical}
@@ -312,7 +312,7 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
     <script type="module" src="/src/js/app.js"></script>
     ${head}
 </head>
-<body class="min-h-screen bg-obsidian pb-[calc(4rem+env(safe-area-inset-bottom))] font-sans text-slate-300 antialiased lg:pb-0">
+<body class="min-h-screen bg-white pb-[calc(4rem+env(safe-area-inset-bottom))] font-sans text-slate-700 antialiased lg:pb-0">
     <a href="#main" class="sr-only z-[100] bg-signal px-4 py-2 text-white focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Zum Inhalt springen</a>
     ${nav(ctx)}
     <main id="main">
@@ -329,8 +329,8 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
 function areaLine(area) {
     const places = gb.areaPlaces[area] ?? [];
     return `<div class="mt-6 flex gap-3 text-sm text-mist">
-                <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-                <p>Einsatzgebiet: <span class="text-white">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}</p>
+                <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <p>Einsatzgebiet: <span class="text-ink">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}</p>
             </div>`;
 }
 
@@ -351,8 +351,8 @@ function homePage(ctx, projects) {
     <!-- Fixed 3D canvas behind hero + services; later sections are opaque and cover it. -->
     <div class="fixed inset-0 z-0" aria-hidden="true">
         <canvas id="scene-canvas" class="block h-full w-full opacity-0"></canvas>
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/60 to-transparent lg:via-obsidian/30"></div>
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-obsidian to-transparent"></div>
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent lg:via-paper/40"></div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent"></div>
     </div>
 
     <section id="top" class="pointer-events-none relative z-10 flex min-h-[100svh] items-center pt-24 pb-16">
@@ -360,14 +360,14 @@ function homePage(ctx, projects) {
             <div class="pointer-events-auto max-w-xl">
                 <!-- The keyword line is the h1 for search engines; the big claim below is styled text. -->
                 <h1 data-hero-item class="eyebrow">${esc(gb.eyebrow)}</h1>
-                <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-white uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
-                <p data-hero-item class="mt-8 text-lg text-slate-300">${esc(gb.tagline)}</p>
+                <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-ink uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
+                <p data-hero-item class="mt-8 text-lg text-slate-700">${esc(gb.tagline)}</p>
                 <div data-hero-item class="mt-10 flex flex-col gap-3 sm:flex-row">
                     <a href="#kontakt" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
                     <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
                 </div>
                 <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-mist uppercase">
-                    Seit ${gb.founded} <span class="text-signal">·</span> ${esc(gb.region)} <span class="text-signal">·</span> 24/7
+                    Seit ${gb.founded} <span class="text-signal-deep">·</span> ${esc(gb.region)} <span class="text-signal-deep">·</span> 24/7
                 </p>
             </div>
         </div>
@@ -379,35 +379,35 @@ function homePage(ctx, projects) {
                 <p class="eyebrow">Leistungen</p>
                 <h2 class="section-title mt-4">Was wir machen.</h2>
                 <!-- Phones: narrow, title-only rows so the building stays visible on the right. -->
-                <ul class="mt-10 w-[62%] min-w-[13rem] divide-y divide-white/10 border-y border-white/10 bg-obsidian/60 backdrop-blur-sm sm:w-full">
-                    ${each(groups, ([, label, list]) => groupLabel('px-3 pt-4 pb-1.5 sm:px-4')(label) + each(list, ([key, s]) => `<li>
-                        <a href="${url(`leistungen/${key}/`)}" data-service-card="${s.scene ?? key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-steel/60 sm:gap-4 sm:px-4">
-                            <span class="hidden font-mono text-xs text-signal sm:inline">${s.number}</span>
+                <ul class="mt-10 w-[62%] min-w-[13rem] divide-y divide-slate-200 border-y border-slate-200 bg-white/85 backdrop-blur-sm sm:w-full">
+                    ${each(groups, ([, label, list]) => groupLabel('px-3 pt-4 pb-1.5 sm:px-4 text-mist')(label) + each(list, ([key, s]) => `<li>
+                        <a href="${url(`leistungen/${key}/`)}" data-service-card="${s.scene ?? key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-slate-100 sm:gap-4 sm:px-4">
+                            <span class="hidden font-mono text-xs text-signal-deep sm:inline">${s.number}</span>
                             <span class="min-w-0 flex-1">
-                                <span class="block font-display text-[15px] font-semibold text-white sm:text-base">${esc(s.title)}</span>
-                                <span class="mt-0.5 hidden text-sm text-slate-400 sm:block">${esc(s.short)}</span>
+                                <span class="block font-display text-[15px] font-semibold text-ink sm:text-base">${esc(s.title)}</span>
+                                <span class="mt-0.5 hidden text-sm text-slate-600 sm:block">${esc(s.short)}</span>
                             </span>
-                            ${icon.chevronRight('size-4 shrink-0 text-mist transition group-hover:translate-x-0.5 group-hover:text-signal')}
+                            ${icon.chevronRight('size-4 shrink-0 text-mist transition group-hover:translate-x-0.5 group-hover:text-signal-deep')}
                         </a>
                     </li>`))}
                 </ul>
-                <a href="#kontakt" class="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal uppercase hover:text-signal-soft">Passende Leistung dabei? Anfrage stellen ${icon.arrow()}</a>
+                <a href="#kontakt" class="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-signal-deep">Passende Leistung dabei? Anfrage stellen ${icon.arrow()}</a>
             </div>
         </div>
     </section>
 
-    <section id="schwerpunkte" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian py-24 lg:py-32">
+    <section id="schwerpunkte" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-white py-24 lg:py-32">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="max-w-2xl">
                 <p class="eyebrow">Schwerpunkte</p>
                 <h2 class="section-title mt-4">Abbruch und Reinigung aus einer Hand.</h2>
             </div>
             <div class="mt-12 grid gap-10 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
-                ${each(gb.focusAreas, (area, i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="border-t-2 ${area.accent === 'emerald' ? 'border-emerald-400' : 'border-signal'} pt-6">
-                    <h3 class="font-display text-xl font-bold text-white">${esc(area.title)}</h3>
-                    <p class="mt-3 text-slate-400">${esc(area.text)}</p>
+                ${each(gb.focusAreas, (area, i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="border-t-2 ${area.accent === 'emerald' ? 'border-emerald-500' : 'border-signal'} pt-6">
+                    <h3 class="font-display text-xl font-bold text-ink">${esc(area.title)}</h3>
+                    <p class="mt-3 text-slate-600">${esc(area.text)}</p>
                     <ul class="mt-5 space-y-2 text-sm">
-                        ${each(area.services, (key) => `<li><a href="${url(`leistungen/${key}/`)}" class="inline-flex items-center gap-2 text-white hover:text-signal-soft">${icon.arrow('size-3.5 text-signal')} ${esc(gb.services[key].title)}</a></li>`)}
+                        ${each(area.services, (key) => `<li><a href="${url(`leistungen/${key}/`)}" class="inline-flex items-center gap-2 text-ink hover:text-signal-deep">${icon.arrow('size-3.5 text-signal-deep')} ${esc(gb.services[key].title)}</a></li>`)}
                     </ul>
                 </div>`)}
             </div>
@@ -416,7 +416,7 @@ function homePage(ctx, projects) {
 
     ${
         projects.length
-            ? `<section id="projekte" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian-2 py-24 lg:py-32">
+            ? `<section id="projekte" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal>
                 <p class="eyebrow">Vorher / Nachher</p>
@@ -429,58 +429,58 @@ function homePage(ctx, projects) {
             : ''
     }
 
-    <section id="ueber-uns" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian py-24 lg:py-32">
+    <section id="ueber-uns" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-white py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-24 lg:px-8">
             <div data-reveal>
                 <p class="eyebrow">Über uns</p>
                 <h2 class="section-title mt-4">Ein Partner, der mitdenkt.</h2>
-                <p class="mt-6 text-lg text-slate-400">Seit ${gb.founded} unterstützen wir Bauunternehmen in ${esc(gb.region)}.</p>
-                ${each(gb.about, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
+                <p class="mt-6 text-lg text-slate-600">Seit ${gb.founded} unterstützen wir Bauunternehmen in ${esc(gb.region)}.</p>
+                ${each(gb.about, (p) => `<p class="mt-4 text-slate-600">${esc(p)}</p>`)}
             </div>
             <ul data-reveal style="--reveal-delay: 120ms" class="self-end">
-                ${each(gb.highlights, (item) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white sm:text-lg">${icon.check()} ${esc(item)}</li>`)}
+                ${each(gb.highlights, (item) => `<li class="flex items-center gap-4 border-b border-slate-200 py-4 text-ink sm:text-lg">${icon.check()} ${esc(item)}</li>`)}
             </ul>
         </div>
     </section>
 
     <!-- Answers stay collapsed until tapped, so the page stays short while search engines read the full text. -->
-    <section id="fragen" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian-2 py-24 lg:py-32">
+    <section id="fragen" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-4">
                 <p class="eyebrow">Häufige Fragen</p>
                 <h2 class="section-title mt-4">Kurz beantwortet.</h2>
             </div>
-            <div data-reveal style="--reveal-delay: 120ms" class="divide-y divide-white/10 border-y border-white/10 lg:col-span-8">
+            <div data-reveal style="--reveal-delay: 120ms" class="divide-y divide-slate-200 border-y border-slate-200 lg:col-span-8">
                 ${each(gb.faq, ({ q, a }) => `<details class="group/faq">
-                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-white [&::-webkit-details-marker]:hidden">
-                        ${esc(q)} <span class="inline-flex shrink-0 text-signal transition group-open/faq:rotate-180">${icon.chevronDown}</span>
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                        ${esc(q)} <span class="inline-flex shrink-0 text-signal-deep transition group-open/faq:rotate-180">${icon.chevronDown}</span>
                     </summary>
-                    <p class="pb-5 text-slate-400">${esc(a)}</p>
+                    <p class="pb-5 text-slate-600">${esc(a)}</p>
                 </details>`)}
             </div>
         </div>
     </section>
 
-    <section id="kontakt" class="relative z-10 scroll-mt-16 border-t border-white/10 bg-obsidian-2 py-24 lg:py-32">
+    <section id="kontakt" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-5">
                 <p class="eyebrow">Kontakt</p>
                 <h2 class="section-title mt-4">Sprechen wir über Ihr Projekt.</h2>
-                <p class="mt-6 text-lg text-slate-400">Rund um die Uhr erreichbar.</p>
-                <ul class="mt-10 divide-y divide-white/10 border-y border-white/10">
+                <p class="mt-6 text-lg text-slate-600">Rund um die Uhr erreichbar.</p>
+                <ul class="mt-10 divide-y divide-slate-200 border-y border-slate-200">
                     ${each(channels, ([label, value, href, isWhatsapp]) => `<li>
                         <a href="${href}"${isWhatsapp ? ' target="_blank" rel="noopener"' : ''} class="group flex items-center justify-between gap-4 py-4">
                             <span>
                                 <span class="block font-mono text-[11px] tracking-[0.2em] text-mist uppercase">${label}</span>
-                                <span class="mt-1 flex items-center gap-2 font-display text-lg font-bold text-white transition group-hover:text-signal-soft">${isWhatsapp ? icon.whatsapp('size-5 text-[#25D366]') : ''} ${value}</span>
+                                <span class="mt-1 flex items-center gap-2 font-display text-lg font-bold text-ink transition group-hover:text-signal-deep">${isWhatsapp ? icon.whatsapp('size-5 text-[#25D366]') : ''} ${value}</span>
                             </span>
-                            ${icon.arrow('size-4 shrink-0 text-mist transition group-hover:text-signal')}
+                            ${icon.arrow('size-4 shrink-0 text-mist transition group-hover:text-signal-deep')}
                         </a>
                     </li>`)}
                 </ul>
             </div>
             <div data-reveal style="--reveal-delay: 120ms" class="glass p-5 sm:p-8 lg:col-span-7">
-                <p class="mb-6 font-display text-xl font-bold text-white">Anfrage senden</p>
+                <p class="mb-6 font-display text-xl font-bold text-ink">Anfrage senden</p>
                 ${inquiryForm(ctx)}
             </div>
         </div>
@@ -497,57 +497,57 @@ function servicePage(ctx, key, projects, photo) {
         body: `
     <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
-            <a href="${url('#leistungen')}" class="inline-flex items-center gap-2 py-2 text-sm text-mist hover:text-white">
+            <a href="${url('#leistungen')}" class="inline-flex items-center gap-2 py-2 text-sm text-mist hover:text-brand">
                 <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
                 Alle Leistungen
             </a>
             <p class="eyebrow mt-8">Leistung ${s.number}</p>
             <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
-            <p class="mt-6 text-lg text-slate-300">${esc(s.text)}</p>
+            <p class="mt-6 text-lg text-slate-700">${esc(s.text)}</p>
             ${
                 !s.image
                     ? ''
                     : photo
                       ? `<figure class="mt-8 sm:max-w-md">
-                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" class="w-full border border-white/10">
+                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" class="w-full border border-slate-200">
                 <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>
             </figure>`
-                      : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-white/10">`
+                      : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-slate-200">`
             }
-            ${each(s.body, (p) => `<p class="mt-4 text-slate-400">${esc(p)}</p>`)}
-            <ul class="mt-10 border-t border-white/10">
-                ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-white/10 py-4 text-white">${icon.check()} ${esc(p)}</li>`)}
+            ${each(s.body, (p) => `<p class="mt-4 text-slate-600">${esc(p)}</p>`)}
+            <ul class="mt-10 border-t border-slate-200">
+                ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-slate-200 py-4 text-ink">${icon.check()} ${esc(p)}</li>`)}
             </ul>
             ${
                 s.scope
-                    ? `<h2 class="mt-12 font-display text-xl font-bold text-white">Leistungsumfang: ${esc(s.title)}</h2>
-            <ul class="mt-4 grid gap-x-6 gap-y-2 text-slate-300 sm:grid-cols-2">
+                    ? `<h2 class="mt-12 font-display text-xl font-bold text-ink">Leistungsumfang: ${esc(s.title)}</h2>
+            <ul class="mt-4 grid gap-x-6 gap-y-2 text-slate-700 sm:grid-cols-2">
                 ${each(s.scope, (item) => `<li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 bg-signal"></span>${esc(item)}</li>`)}
             </ul>`
                     : ''
             }
             ${s.area ? areaLine(s.area) : ''}
-            ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-300">${esc(s.note)}</p>` : ''}
+            ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-700">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
                 <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
                 <a href="${wa(`Hallo, ich interessiere mich für ${s.title}.`)}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp fragen</a>
             </div>
-            <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-white underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
+            <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-ink underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
         </div>
     </section>
 
     ${
         s.faq
-            ? `<section class="border-t border-white/10 py-16 lg:py-24">
+            ? `<section class="border-t border-slate-200 py-16 lg:py-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Häufige Fragen</p>
             <h2 class="section-title mt-4">${esc(s.title)}: kurz beantwortet.</h2>
-            <div class="mt-8 divide-y divide-white/10 border-y border-white/10">
+            <div class="mt-8 divide-y divide-slate-200 border-y border-slate-200">
                 ${each(s.faq, ({ q, a }) => `<details class="group/faq">
-                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-white [&::-webkit-details-marker]:hidden">
-                        ${esc(q)} <span class="inline-flex shrink-0 text-signal transition group-open/faq:rotate-180">${icon.chevronDown}</span>
+                    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-display text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                        ${esc(q)} <span class="inline-flex shrink-0 text-signal-deep transition group-open/faq:rotate-180">${icon.chevronDown}</span>
                     </summary>
-                    <p class="pb-5 text-slate-400">${esc(a)}</p>
+                    <p class="pb-5 text-slate-600">${esc(a)}</p>
                 </details>`)}
             </div>
         </div>
@@ -557,7 +557,7 @@ function servicePage(ctx, key, projects, photo) {
 
     ${
         projects.length
-            ? `<section class="border-t border-white/10 py-16 lg:py-24">
+            ? `<section class="border-t border-slate-200 py-16 lg:py-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Vorher / Nachher</p>
             <div class="mt-6 grid gap-10">${each(projects, beforeAfter)}</div>
@@ -566,17 +566,17 @@ function servicePage(ctx, key, projects, photo) {
             : ''
     }
 
-    <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
+    <section class="border-t border-slate-200 bg-paper py-16 lg:py-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Weitere Leistungen</p>
-            <ul class="mt-6 divide-y divide-white/10 border-y border-white/10">
+            <ul class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
                 ${each(
                     services.filter(([k]) => k !== key),
                     ([k, o]) => `<li>
                     <a href="${url(`leistungen/${k}/`)}" class="group flex items-center gap-4 py-4">
-                        <span class="font-mono text-xs text-signal">${o.number}</span>
-                        <span class="flex-1 font-display font-semibold text-white group-hover:text-signal-soft">${esc(o.title)}</span>
-                        ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal')}
+                        <span class="font-mono text-xs text-signal-deep">${o.number}</span>
+                        <span class="flex-1 font-display font-semibold text-ink group-hover:text-signal-deep">${esc(o.title)}</span>
+                        ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal-deep')}
                     </a>
                 </li>`,
                 )}
@@ -594,9 +594,9 @@ function b2bPage(ctx) {
         each(
             keys.map((k) => [k, gb.services[k]]),
             ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="group flex items-center gap-3 py-3">
-                <span class="font-mono text-xs text-signal">${s.number}</span>
-                <span class="flex-1 font-display font-semibold text-white group-hover:text-signal-soft">${esc(s.title)}</span>
-                ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal')}
+                <span class="font-mono text-xs text-signal-deep">${s.number}</span>
+                <span class="flex-1 font-display font-semibold text-ink group-hover:text-signal-deep">${esc(s.title)}</span>
+                ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal-deep')}
             </a></li>`,
         );
     const keysOf = (...g) => services.filter(([, s]) => g.includes(s.group)).map(([k]) => k);
@@ -614,8 +614,8 @@ function b2bPage(ctx) {
     <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Für Bauunternehmen</p>
-            <h1 class="mt-4 font-display text-3xl leading-tight font-bold tracking-tight text-white sm:text-4xl">${esc(b.h1)}</h1>
-            ${each(b.intro, (p, i) => `<p class="mt-6 ${i === 0 ? 'text-lg text-slate-300' : 'text-slate-400'}">${esc(p)}</p>`)}
+            <h1 class="mt-4 font-display text-3xl leading-tight font-bold tracking-tight text-ink sm:text-4xl">${esc(b.h1)}</h1>
+            ${each(b.intro, (p, i) => `<p class="mt-6 ${i === 0 ? 'text-lg text-slate-700' : 'text-slate-600'}">${esc(p)}</p>`)}
             <div class="mt-10 grid gap-3 sm:grid-cols-2">
                 <a href="${anchor('kontakt')}" class="btn-primary">Projekt anfragen ${icon.arrow()}</a>
                 <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
@@ -623,42 +623,42 @@ function b2bPage(ctx) {
         </div>
     </section>
 
-    <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
+    <section class="border-t border-slate-200 bg-paper py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p class="eyebrow">Leistungen für Bauunternehmen</p>
             <div class="mt-8 grid gap-10 md:grid-cols-2 md:gap-8 xl:grid-cols-4">
-                ${each(columns, ([title, keys, area, green]) => `<div class="border-t-2 ${green ? 'border-emerald-400' : 'border-signal'} pt-5">
-                    <h2 class="font-display text-xl font-bold text-white">${esc(title)}</h2>
+                ${each(columns, ([title, keys, area, green]) => `<div class="border-t-2 ${green ? 'border-emerald-500' : 'border-signal'} pt-5">
+                    <h2 class="font-display text-xl font-bold text-ink">${esc(title)}</h2>
                     ${area ? areaLine(area) : ''}
-                    <ul class="mt-4 divide-y divide-white/10 border-t border-white/10">${serviceLinks(keys)}</ul>
+                    <ul class="mt-4 divide-y divide-slate-200 border-t border-slate-200">${serviceLinks(keys)}</ul>
                 </div>`)}
             </div>
         </div>
     </section>
 
-    <section class="border-t border-white/10 py-16 lg:py-24">
+    <section class="border-t border-slate-200 py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p class="eyebrow">Einsatzmodelle</p>
             <h2 class="section-title mt-4">Flexibel dort, wo Kapazität gebraucht wird.</h2>
             <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                 ${each(b.models, ([title, text]) => `<div class="card">
                     <div class="h-1 w-10 bg-signal"></div>
-                    <h3 class="mt-5 font-display text-sm font-semibold tracking-[0.12em] text-white uppercase">${esc(title)}</h3>
-                    <p class="mt-2 text-sm text-slate-400">${esc(text)}</p>
+                    <h3 class="mt-5 font-display text-sm font-semibold tracking-[0.12em] text-ink uppercase">${esc(title)}</h3>
+                    <p class="mt-2 text-sm text-slate-600">${esc(text)}</p>
                 </div>`)}
             </div>
         </div>
     </section>
 
-    <section class="border-t border-white/10 bg-obsidian-2 py-16 lg:py-24">
+    <section class="border-t border-slate-200 bg-paper py-16 lg:py-24">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p class="eyebrow">Zusammenarbeit</p>
             <h2 class="section-title mt-4">Klarer Ablauf vom Kontakt bis zur Übergabe.</h2>
             <ol class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
                 ${each(b.process, ([title, text], i) => `<li class="card">
-                    <span class="font-mono text-xs text-signal">${String(i + 1).padStart(2, '0')}</span>
-                    <h3 class="mt-3 font-display text-sm font-semibold tracking-[0.12em] text-white uppercase">${esc(title)}</h3>
-                    <p class="mt-2 text-sm text-slate-400">${esc(text)}</p>
+                    <span class="font-mono text-xs text-signal-deep">${String(i + 1).padStart(2, '0')}</span>
+                    <h3 class="mt-3 font-display text-sm font-semibold tracking-[0.12em] text-ink uppercase">${esc(title)}</h3>
+                    <p class="mt-2 text-sm text-slate-600">${esc(text)}</p>
                 </li>`)}
             </ol>
             <div class="mt-12 flex flex-col gap-3 sm:flex-row">
@@ -678,9 +678,9 @@ function legalPage(ctx, title, body, { draft = false } = {}) {
     <section class="pt-28 pb-24 lg:pt-36">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">
             <p class="eyebrow">Rechtliches</p>
-            <h1 class="mt-3 font-display text-4xl font-bold text-white">${title}</h1>
-            ${draft ? '<div class="mt-6 border border-signal/40 bg-signal/10 px-4 py-3 text-sm text-signal-soft">Platzhalter – vor der Veröffentlichung durch rechtlich geprüfte Angaben ersetzen.</div>' : ''}
-            <div class="mt-10 space-y-6 leading-relaxed text-slate-300 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-white">${body}</div>
+            <h1 class="mt-3 font-display text-4xl font-bold text-ink">${title}</h1>
+            ${draft ? '<div class="mt-6 border border-signal/40 bg-signal/10 px-4 py-3 text-sm text-signal-deep">Platzhalter – vor der Veröffentlichung durch rechtlich geprüfte Angaben ersetzen.</div>' : ''}
+            <div class="mt-10 space-y-6 leading-relaxed text-slate-700 [&_h2]:mt-10 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-ink">${body}</div>
         </div>
     </section>`,
     });

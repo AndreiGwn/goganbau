@@ -4,17 +4,17 @@
 @source '../js';
 
 @theme {
-    --color-obsidian: #0a0e17;
-    --color-obsidian-2: #0e1420;
-    --color-steel: #1e293b;
-    --color-steel-2: #273449;
-    --color-steel-line: #334155;
+    /* Light theme: white pages, dark text, header/footer in the logo blue. */
+    --color-paper: #f4f7fb; /* alternate section background */
+    --color-ink: #0f1d33; /* headings and strong text */
+    --color-brand: #023066; /* the blue of the GoganBau logo */
+    --color-brand-soft: #0b4a94;
     --color-signal: #ff6b00;
     --color-signal-soft: #ff8a33;
-    --color-signal-deep: #d65800;
+    --color-signal-deep: #c2410c; /* orange for small text on white (readable contrast) */
     --color-tech: #38bdf8;
     --color-tech-deep: #0ea5e9;
-    --color-mist: #94a3b8;
+    --color-mist: #64748b;
 
     --font-display: 'Space Grotesk Variable', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
     --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -37,12 +37,12 @@
 
 @layer base {
     html {
-        color-scheme: dark;
+        color-scheme: light;
         -webkit-tap-highlight-color: transparent;
     }
 
     body {
-        background-color: var(--color-obsidian);
+        background-color: #fff;
     }
 
     ::selection {
@@ -58,10 +58,6 @@
     [x-cloak], [hidden] {
         display: none !important;
     }
-
-    input[type='date']::-webkit-calendar-picker-indicator {
-        filter: invert(0.7);
-    }
 }
 
 @utility btn {
@@ -71,11 +67,11 @@
 @layer components {
     /* Frosted technical surface */
     .glass {
-        @apply border border-white/10 bg-steel/45 backdrop-blur-md;
+        @apply border border-slate-200 bg-white shadow-sm;
     }
 
     .glass-strong {
-        @apply border border-white/10 bg-obsidian/80 backdrop-blur-xl;
+        @apply border border-slate-200 bg-white/95 backdrop-blur-xl;
     }
 
     /* Sharp corner brackets — engineering-drawing feel */
@@ -113,19 +109,19 @@
     }
 
     .eyebrow {
-        @apply font-mono text-[11px] font-medium tracking-[0.22em] text-signal uppercase;
+        @apply font-mono text-[11px] font-medium tracking-[0.22em] text-signal-deep uppercase;
     }
 
     .section-title {
-        @apply font-display text-3xl leading-[1.05] font-bold tracking-tight text-white sm:text-4xl lg:text-5xl;
+        @apply font-display text-3xl leading-[1.05] font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl;
     }
 
     .badge {
-        @apply inline-flex items-center gap-2 border border-white/15 bg-obsidian/60 px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-slate-200 uppercase backdrop-blur-md;
+        @apply inline-flex items-center gap-2 border border-slate-300 bg-white/80 px-3 py-1.5 font-mono text-[11px] tracking-[0.16em] text-slate-700 uppercase backdrop-blur-md;
     }
 
     .badge-signal {
-        @apply border-signal/50 bg-signal/10 text-signal-soft;
+        @apply border-signal/50 bg-signal/10 text-signal-deep;
     }
 
     .live-dot {
@@ -137,15 +133,15 @@
     }
 
     .btn-primary {
-        @apply btn bg-signal text-white shadow-[0_0_0_1px_rgba(255,107,0,0.4),0_10px_40px_-10px_rgba(255,107,0,0.7)] hover:bg-signal-soft active:bg-signal-deep;
+        @apply btn bg-signal text-white shadow-[0_10px_30px_-12px_rgba(255,107,0,0.6)] hover:bg-signal-soft active:bg-signal-deep;
     }
 
     .btn-ghost {
-        @apply btn border border-white/20 bg-white/5 text-white backdrop-blur-md hover:border-signal hover:text-signal-soft;
+        @apply btn border border-slate-300 bg-white text-ink hover:border-brand hover:text-brand;
     }
 
     .btn-tech {
-        @apply btn border border-tech/40 bg-tech/10 text-tech hover:bg-tech/20;
+        @apply btn border border-brand/30 bg-brand/5 text-brand hover:bg-brand/10;
     }
 
     .btn-sm {
@@ -157,21 +153,21 @@
     }
 
     .field {
-        @apply w-full border border-white/12 bg-obsidian/70 px-3.5 py-3 text-base text-white sm:py-2.5 sm:text-sm placeholder:text-slate-500 transition outline-none focus:border-signal focus:ring-1 focus:ring-signal/60;
+        @apply w-full border border-slate-300 bg-white px-3.5 py-3 text-base text-ink sm:py-2.5 sm:text-sm placeholder:text-slate-400 transition outline-none focus:border-signal focus:ring-1 focus:ring-signal/60;
     }
 
     .field-error {
-        @apply mt-1.5 text-xs text-red-400;
+        @apply mt-1.5 text-xs text-red-600;
     }
 
     .card {
-        @apply border border-white/10 bg-steel/40 p-6 transition duration-300 hover:border-white/20;
+        @apply border border-slate-200 bg-white p-6 transition duration-300 hover:border-slate-300 hover:shadow-sm;
     }
 
     .blueprint-grid {
         background-image:
-            linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px);
+            linear-gradient(rgba(2, 48, 102, 0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(2, 48, 102, 0.06) 1px, transparent 1px);
         background-size: 48px 48px;
     }
 
@@ -195,7 +191,7 @@
 /* Service list ↔ 3D focus state */
 .service-card.is-active {
     box-shadow: inset 3px 0 0 var(--color-signal);
-    background-color: rgb(30 41 59 / 0.75);
+    background-color: rgb(241 245 249);
 }
 
 /* 3D canvas */
@@ -204,9 +200,9 @@
 }
 .scene-fallback {
     background:
-        radial-gradient(60% 50% at 70% 40%, rgba(56, 189, 248, 0.12), transparent 70%),
+        radial-gradient(60% 50% at 70% 40%, rgba(2, 48, 102, 0.1), transparent 70%),
         radial-gradient(40% 40% at 75% 65%, rgba(255, 107, 0, 0.12), transparent 70%),
-        var(--color-obsidian);
+        #eef2f7;
 }
 
 @media (prefers-reduced-motion: reduce) {
