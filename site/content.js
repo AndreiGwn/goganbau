@@ -11,9 +11,10 @@ export default {
     // Public address of the site, used for the sitemap, robots.txt and canonical links.
     siteUrl: 'https://goganbau.de',
 
-    homeTitle: 'Abbruchfirma & Gebäudereinigung München | GoganBau',
+    // The home page is about cleaning; demolition and the other services are on /leistungen/.
+    homeTitle: 'Gebäudereinigung & Reinigungsfirma München | GoganBau',
     homeDescription:
-        'Abbruchfirma für ganz Bayern, Reinigungsfirma in München: Abbruch, Entkernung, Rückbau, Baureinigung und Unterhaltsreinigung – 24/7 erreichbar.',
+        'Reinigungsfirma in München: Unterhaltsreinigung, Büroreinigung, Bau- und Bauendreinigung, Treppenhaus- und Praxisreinigung – kostenloses Angebot, 24/7 erreichbar.',
 
     name: 'GoganBau & Gebäudereinigung',
     shortName: 'GoganBau',
@@ -21,9 +22,29 @@ export default {
     region: 'München & Bayern',
     claim: 'Wir sind da, wenn es zählt.',
     motto: 'Praktisch denken. Direkt handeln. Verlässlich liefern.',
-    // Small orange line above the big claim; it is the page's main heading (h1) for Google.
-    eyebrow: 'Abbruchfirma & Gebäudereinigung in München',
-    tagline: 'Abbruch, Entkernung, Rückbau und Reinigung – Ihr Subunternehmer für Bauunternehmen.',
+    // Home hero: the small orange line is the page's main heading (h1) for Google.
+    eyebrow: 'Gebäudereinigung & Reinigungsfirma in München',
+    heroClaim: 'Sauberkeit, auf die Sie sich verlassen können.',
+    heroText:
+        'Unterhaltsreinigung, Büroreinigung, Bau- und Bauendreinigung, Treppenhaus- und Praxisreinigung – für Unternehmen, Hausverwaltungen und Bauunternehmen in München und im Umkreis von 50 km. Sie kümmern sich um Ihr Geschäft, wir um die Sauberkeit.',
+    heroPoints: ['Seit 2019 in München', '24/7 erreichbar', 'Fester Ansprechpartner', 'Kostenloses Angebot'],
+
+    // "Sie kennen das bestimmt": [the problem with other cleaning firms, our answer].
+    painIntro:
+        'Sie möchten saubere Räume, ohne sich selbst darum kümmern zu müssen. Mit der falschen Reinigungsfirma wird Sauberkeit aber schnell zur zusätzlichen Aufgabe.',
+    painPoints: [
+        ['Ständig neue Gesichter – und niemand weiß, was vereinbart war.', 'Fester Ansprechpartner'],
+        ['Absprachen werden nicht eingehalten, Sie müssen alles nachkontrollieren.', 'Klarer Reinigungsplan'],
+        ['Wenn es schnell gehen muss, erreichen Sie niemanden.', 'Rund um die Uhr erreichbar'],
+    ],
+
+    // "Ihre Vorteile auf einen Blick": [title, text]. Only promise what we always do.
+    advantages: [
+        ['Zeit sparen', 'Sie beauftragen uns einmal – um Reinigungsplan, Personal und Ablauf kümmern wir uns.'],
+        ['Ein Ansprechpartner', 'Fragen und Änderungen klären Sie direkt mit uns, rund um die Uhr.'],
+        ['Planbare Sauberkeit', 'Fester Reinigungsplan: täglich, wöchentlich oder monatlich – so, wie es zu Ihnen passt.'],
+        ['Auch für Baustellen', 'Bau- und Bauendreinigung vor der Abnahme – von einem Team, das selbst auf Baustellen zu Hause ist.'],
+    ],
 
     // "Über uns" text on the home page: intro paragraphs, then the topic blocks below them. Only state facts.
     about: [
@@ -569,26 +590,6 @@ export default {
         },
     ],
 
-    // "Unsere Schwerpunkte" on the home page — the two SEO directions plus Montage & Logistik.
-    focusAreas: [
-        {
-            title: 'Gebäudereinigung & Baureinigung in München',
-            accent: 'emerald',
-            text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung und Büroreinigung: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
-            services: ['unterhaltsreinigung', 'bueroreinigung', 'grundreinigung', 'treppenhausreinigung', 'baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'praxisreinigung'],
-        },
-        {
-            title: 'Abbruch & Rückbau in ganz Bayern',
-            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau und den selektiven Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab. Dazu kommen Kernbohrungen in Beton und Stahlbeton für Lüftung, Klima, Sanitär und Elektro.',
-            services: ['abbruch', 'entkernung', 'rueckbau', 'kernbohrungen'],
-        },
-        {
-            title: 'Montage & Baustellenlogistik',
-            text: 'Ergänzend montieren wir Tektalan-Dämmplatten in Tiefgaragen, Kellern und Gewerbeflächen und koordinieren Material, Lieferungen und Einsatzzeiten auf der Baustelle.',
-            services: ['tektalan', 'logistik'],
-        },
-    ],
-
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
     steps: [
         ['Kostenloses Angebot anfordern', 'Per Formular, WhatsApp oder Telefon – rund um die Uhr. Kurz beschreiben, was, wo und wann; Fotos helfen uns bei der Einschätzung.'],
@@ -609,10 +610,6 @@ export default {
         {
             q: 'Arbeiten Sie als Subunternehmer für Bauunternehmen?',
             a: 'Ja. Wir unterstützen Bauunternehmen und Generalunternehmer als Subunternehmer – für einzelne Bauabschnitte, als zusätzliche Kapazität bei engem Zeitplan oder bei wiederkehrenden Aufträgen.',
-        },
-        {
-            q: 'Bieten Sie auch Kernbohrungen an?',
-            a: 'Ja. Wir führen Kernbohrungen in Beton und Stahlbeton aus – etwa für Lüftung, Klima, Sanitär, Elektro und Rohrdurchführungen. In ganz Bayern, als Subunternehmer für Bauunternehmen.',
         },
         {
             q: 'Kann ich mehrere Leistungen kombinieren?',
