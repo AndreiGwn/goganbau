@@ -462,6 +462,12 @@ function homePage(ctx, projects, photos) {
                 ${each(gb.highlights, (item) => `<li class="flex items-center gap-4 border-b border-slate-200 py-4 text-ink sm:text-lg">${icon.check()} ${esc(item)}</li>`)}
             </ul>
         </div>
+        <div class="mx-auto mt-16 grid max-w-7xl gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-x-16 lg:px-8">
+            ${each(gb.aboutBlocks, ([title, text], i) => `<div data-reveal style="--reveal-delay: ${(i % 2) * 100}ms" class="border-t-2 border-signal pt-6">
+                <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
+                <p class="mt-3 text-slate-600">${esc(text)}</p>
+            </div>`)}
+        </div>
     </section>
 
     <!-- Answers stay collapsed until tapped, so the page stays short while search engines read the full text. -->

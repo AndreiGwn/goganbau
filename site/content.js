@@ -25,10 +25,17 @@ export default {
     eyebrow: 'Abbruchfirma & Gebäudereinigung in München',
     tagline: 'Abbruch, Entkernung, Rückbau und Reinigung – Ihr Subunternehmer für Bauunternehmen.',
 
-    // "Über uns" text on the home page.
+    // "Über uns" text on the home page: intro paragraphs, then the topic blocks below them. Only state facts.
     about: [
+        'GoganBau wurde 2019 in München gegründet und wird von Inhaber Cosmin Gogan geführt. Seitdem arbeiten wir für Bauunternehmen, Generalunternehmer, Bauträger, Hausverwaltungen und Gewerbekunden – nach einem einfachen Grundsatz: praktisch denken, direkt handeln, verlässlich liefern.',
         'GoganBau ist Abbruchunternehmen und Reinigungsfirma in einem. Abbrucharbeiten, Entkernung, Rückbau und Kernbohrungen übernehmen wir in ganz Bayern. In München und im Umkreis von bis zu 50 km sorgen wir mit Baureinigung, Bauendreinigung und Unterhaltsreinigung dafür, dass Flächen sauber übergeben werden.',
         'Als Subunternehmer arbeiten wir für Bauunternehmen und Generalunternehmer: für einzelne Bauabschnitte, als zusätzliche Kapazität oder in langfristiger Zusammenarbeit.',
+    ],
+    aboutBlocks: [
+        ['Was wir machen', 'Im Bereich Abbruch und Rückbau übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau, den selektiven Rückbau mit sauberer Materialtrennung sowie Kernbohrungen in Beton und Stahlbeton. In der Reinigung reicht unser Angebot von der Baureinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhalts-, Büro-, Treppenhaus- und Praxisreinigung. Ergänzend montieren wir Tektalan-Dämmplatten und unterstützen bei der Baustellenlogistik.'],
+        ['Wie wir arbeiten', 'Wir arbeiten manuell und mit handgeführten Geräten – präzise und kontrolliert, auch in bestehenden Gebäuden und auf engem Raum. Umfang, Termin und Ablauf stimmen wir vorab mit Ihnen oder Ihrer Bauleitung ab. Während der Arbeiten halten wir Laufwege frei, trennen Materialien sauber und übergeben die Flächen besenrein oder übergabefertig – an das nächste Gewerk, den Bauherrn oder den Mieter.'],
+        ['Für wen wir arbeiten', 'Bauunternehmen und Generalunternehmer setzen uns als Subunternehmer für einzelne Bauabschnitte oder als zusätzliche Kapazität ein. Für Bauträger übernehmen wir die Bau- und Bauendreinigung vor der Übergabe. Für Hausverwaltungen, Unternehmen, Kanzleien und Praxen übernehmen wir die laufende Reinigung – mit festem Reinigungsplan und festem Ansprechpartner.'],
+        ['Alles aus einer Hand', 'Abbruch, Entkernung und Reinigung greifen auf der Baustelle direkt ineinander. Wenn ein Team die Flächen erst zurückbaut und anschließend reinigt, entfallen Abstimmungen zwischen mehreren Firmen und Wartezeiten zwischen den Gewerken. Sie haben einen Ansprechpartner, der rund um die Uhr erreichbar ist, den Ablauf im Blick behält und Ihnen ein kostenloses Angebot macht.'],
     ],
 
     // Impressum details.
@@ -631,5 +638,7 @@ export default {
         'Ein direkter Ansprechpartner.',
         'Flexible Kapazität für jede Bauphase.',
         'Mehrere Leistungen aus einer Hand.',
+        'Manuell und mit handgeführten Geräten.',
+        'Kostenloses Angebot für Ihr Projekt.',
     ],
 };
