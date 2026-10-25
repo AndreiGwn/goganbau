@@ -61,8 +61,8 @@ export default {
 
     // Groups for the service list and menus, in this order.
     serviceGroups: {
-        abbruch: 'Abbruch & Rückbau',
         reinigung: 'Reinigung',
+        abbruch: 'Abbruch & Rückbau',
         montage: 'Montage & Logistik',
     },
 
@@ -83,7 +83,6 @@ export default {
     // We work manually and with hand-held tools — no heavy machinery, so no "Gebäudeabbruch" claims.
     services: {
         abbruch: {
-            number: '01',
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Abbrucharbeiten',
@@ -116,7 +115,6 @@ export default {
             ],
         },
         entkernung: {
-            number: '02',
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Entkernung',
@@ -149,7 +147,6 @@ export default {
             ],
         },
         rueckbau: {
-            number: '03',
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Rückbau',
@@ -181,7 +178,6 @@ export default {
             ],
         },
         kernbohrungen: {
-            number: '04',
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Kernbohrungen',
@@ -214,7 +210,6 @@ export default {
             ],
         },
         unterhaltsreinigung: {
-            number: '05',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Unterhaltsreinigung',
@@ -247,7 +242,6 @@ export default {
             ],
         },
         bueroreinigung: {
-            number: '06',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Büroreinigung',
@@ -280,7 +274,6 @@ export default {
             ],
         },
         grundreinigung: {
-            number: '07',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
@@ -313,7 +306,6 @@ export default {
             ],
         },
         treppenhausreinigung: {
-            number: '08',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
@@ -346,7 +338,6 @@ export default {
             ],
         },
         baureinigung: {
-            number: '09',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Baureinigung',
@@ -378,7 +369,6 @@ export default {
             ],
         },
         bauendreinigung: {
-            number: '10',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Bauendreinigung',
@@ -410,7 +400,6 @@ export default {
             ],
         },
         gebaeudereinigung: {
-            number: '11',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Gebäudereinigung',
@@ -442,7 +431,6 @@ export default {
             ],
         },
         praxisreinigung: {
-            number: '12',
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Praxisreinigung',
@@ -475,7 +463,6 @@ export default {
             ],
         },
         tektalan: {
-            number: '13',
             group: 'montage',
             title: 'Tektalan-Montage',
             short: 'Fachgerechte Montage von Dämmplatten.',
@@ -491,7 +478,6 @@ export default {
             image: 'Tektalan-Montage in einer Tiefgarage: Arbeiter montiert Tektalan-Dämmplatten von einem Rollgerüst an die Betondecke',
         },
         logistik: {
-            number: '14',
             group: 'montage',
             title: 'Baustellenlogistik',
             short: 'Material, Lieferungen und Abläufe koordiniert.',
@@ -559,15 +545,15 @@ export default {
     // "Unsere Schwerpunkte" on the home page — the two SEO directions plus Montage & Logistik.
     focusAreas: [
         {
-            title: 'Abbruch & Rückbau in ganz Bayern',
-            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau und den selektiven Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab. Dazu kommen Kernbohrungen in Beton und Stahlbeton für Lüftung, Klima, Sanitär und Elektro.',
-            services: ['abbruch', 'entkernung', 'rueckbau', 'kernbohrungen'],
-        },
-        {
             title: 'Gebäudereinigung & Baureinigung in München',
             accent: 'emerald',
             text: 'Von der Baustellenreinigung während der Bauphase über die Bauendreinigung vor der Abnahme bis zur regelmäßigen Unterhaltsreinigung und Büroreinigung: Als Reinigungsfirma sorgen wir in München und im Umkreis von bis zu 50 km dafür, dass Flächen sicher, sauber und übergabefertig sind. Dazu kommen Grundreinigung, Treppenhausreinigung und Praxisreinigung.',
             services: ['unterhaltsreinigung', 'bueroreinigung', 'grundreinigung', 'treppenhausreinigung', 'baureinigung', 'bauendreinigung', 'gebaeudereinigung', 'praxisreinigung'],
+        },
+        {
+            title: 'Abbruch & Rückbau in ganz Bayern',
+            text: 'Als Abbruchfirma übernehmen wir Innenabbruch und Teilabbruch, die Entkernung bis auf den Rohbau und den selektiven Rückbau als Vorbereitung für Umbau und Sanierung. Wir trennen Materialien sauber, beräumen die Flächen und stimmen jeden Schritt mit Ihrer Bauleitung ab. Dazu kommen Kernbohrungen in Beton und Stahlbeton für Lüftung, Klima, Sanitär und Elektro.',
+            services: ['abbruch', 'entkernung', 'rueckbau', 'kernbohrungen'],
         },
         {
             title: 'Montage & Baustellenlogistik',

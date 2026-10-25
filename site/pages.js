@@ -10,7 +10,9 @@ const esc = (value) =>
     String(value).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 const each = (list, fn) => list.map(fn).join('');
-const services = Object.entries(gb.services);
+// All services, grouped in the order of gb.serviceGroups; menus, lists and "Leistung 01…" follow it.
+const services = Object.keys(gb.serviceGroups).flatMap((g) => Object.entries(gb.services).filter(([, s]) => s.group === g));
+const number = (key) => String(services.findIndex(([k]) => k === key) + 1).padStart(2, '0');
 // [[groupKey, label, [[key, service], …]], …] in the order of gb.serviceGroups
 const groups = Object.entries(gb.serviceGroups).map(([g, label]) => [g, label, services.filter(([, s]) => s.group === g)]);
 const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] tracking-[0.2em] uppercase">${esc(label)}</li>`;
@@ -62,9 +64,9 @@ function nav(ctx) {
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
                 </a>
                 <div class="invisible absolute top-full -left-4 pt-2 opacity-0 transition group-focus-within/dd:visible group-focus-within/dd:opacity-100 group-hover/dd:visible group-hover/dd:opacity-100">
-                    <!-- Two columns: Abbruch & Rückbau + Montage & Logistik | Reinigung -->
+                    <!-- Two columns: Reinigung | Abbruch & Rückbau + Montage & Logistik -->
                     <div class="glass-strong grid w-[34rem] grid-cols-2 gap-2 p-2 text-slate-700 shadow-2xl">
-                        ${each([['abbruch', 'montage'], ['reinigung']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1 text-mist')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-slate-100 hover:text-brand ${current === key ? 'text-signal-deep' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
+                        ${each([['reinigung'], ['abbruch', 'montage']], (column) => `<ul>${each(groups.filter(([g]) => column.includes(g)), ([, label, list]) => groupLabel('px-3 pt-3 pb-1 text-mist')(label) + each(list, ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="block px-3 py-2 hover:bg-slate-100 hover:text-brand ${current === key ? 'text-signal-deep' : ''}">${esc(s.title)}</a></li>`))}</ul>`)}
                     </div>
                 </div>
             </div>
@@ -531,7 +533,7 @@ function servicePage(ctx, key, projects, photo) {
                 <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
                 Alle Leistungen
             </a>
-            <p class="eyebrow mt-8">Leistung ${s.number}</p>
+            <p class="eyebrow mt-8">Leistung ${number(key)}</p>
             <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
             <p class="mt-6 text-lg text-slate-700">${esc(s.text)}</p>
             ${
@@ -604,7 +606,7 @@ function servicePage(ctx, key, projects, photo) {
                     services.filter(([k]) => k !== key),
                     ([k, o]) => `<li>
                     <a href="${url(`leistungen/${k}/`)}" class="group flex items-center gap-4 py-4">
-                        <span class="font-mono text-xs text-signal-deep">${o.number}</span>
+                        <span class="font-mono text-xs text-signal-deep">${number(k)}</span>
                         <span class="flex-1 font-display font-semibold text-ink group-hover:text-signal-deep">${esc(o.title)}</span>
                         ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal-deep')}
                     </a>
@@ -624,7 +626,7 @@ function b2bPage(ctx) {
         each(
             keys.map((k) => [k, gb.services[k]]),
             ([key, s]) => `<li><a href="${url(`leistungen/${key}/`)}" class="group flex items-center gap-3 py-3">
-                <span class="font-mono text-xs text-signal-deep">${s.number}</span>
+                <span class="font-mono text-xs text-signal-deep">${number(key)}</span>
                 <span class="flex-1 font-display font-semibold text-ink group-hover:text-signal-deep">${esc(s.title)}</span>
                 ${icon.chevronRight('size-4 shrink-0 text-mist group-hover:text-signal-deep')}
             </a></li>`,
