@@ -578,8 +578,8 @@ export default {
 
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
     steps: [
-        ['Anfrage senden', 'Per Formular, WhatsApp oder Telefon – rund um die Uhr. Kurz beschreiben, was, wo und wann; Fotos helfen uns bei der Einschätzung.'],
-        ['Angebot erhalten', 'Wir klären Umfang und Termin mit Ihnen und schicken Ihnen ein Angebot.'],
+        ['Kostenloses Angebot anfordern', 'Per Formular, WhatsApp oder Telefon – rund um die Uhr. Kurz beschreiben, was, wo und wann; Fotos helfen uns bei der Einschätzung.'],
+        ['Angebot erhalten', 'Wir klären Umfang und Termin mit Ihnen und schicken Ihnen ein kostenloses Angebot.'],
         ['Ausführung & Übergabe', 'Wir führen die Arbeiten aus – mit festem Ansprechpartner und abgestimmt mit Ihrer Bauleitung. Am Ende übergeben wir die Fläche sauber.'],
     ],
 

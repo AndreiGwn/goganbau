@@ -79,7 +79,7 @@ function nav(ctx) {
                 <span><span class="text-signal">24/7</span> ${esc(gb.contact.phone)}</span>
             </a>
             <a href="${wa()}" target="_blank" rel="noopener" class="btn btn-sm hidden border border-white/30 text-white hover:bg-white/10 lg:inline-flex">${icon.whatsapp('size-4')} WhatsApp</a>
-            <a href="${anchor('kontakt')}" class="btn-primary btn-sm hidden lg:inline-flex">Anfrage stellen</a>
+            <a href="${anchor('kontakt')}" class="btn-primary btn-sm hidden lg:inline-flex">Kostenloses Angebot</a>
             <!-- Phones: calling, WhatsApp and the form live in the bottom bar. -->
             <button type="button" data-nav-toggle aria-expanded="false" aria-controls="mobile-menu" class="grid size-11 place-items-center border border-white/30 text-white lg:hidden">
                 <span class="sr-only">Menü</span>
@@ -365,7 +365,7 @@ function homePage(ctx, projects, photos) {
                 <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-ink uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
                 <p data-hero-item class="mt-8 text-lg text-slate-700">${esc(gb.tagline)}</p>
                 <div data-hero-item class="mt-10 flex flex-col gap-3 sm:flex-row">
-                    <a href="#kontakt" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
+                    <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                     <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
                 </div>
                 <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-mist uppercase">
@@ -420,7 +420,7 @@ function homePage(ctx, projects, photos) {
                 </li>`)}
             </ol>
             <div data-reveal class="mt-10 flex flex-col gap-3 sm:flex-row">
-                <a href="#kontakt" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
+                <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                 <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
             </div>
         </div>
@@ -510,7 +510,7 @@ function homePage(ctx, projects, photos) {
                 </ul>
             </div>
             <div data-reveal style="--reveal-delay: 120ms" class="glass p-5 sm:p-8 lg:col-span-7">
-                <p class="mb-6 font-display text-xl font-bold text-ink">Anfrage senden</p>
+                <p class="mb-6 font-display text-xl font-bold text-ink">Kostenloses Angebot anfordern</p>
                 ${inquiryForm(ctx)}
             </div>
         </div>
@@ -559,7 +559,7 @@ function servicePage(ctx, key, projects, photo) {
             ${s.area ? areaLine(s.area) : ''}
             ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-700">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
-                <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
+                <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                 <a href="${wa(`Hallo, ich interessiere mich für ${s.title}.`)}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp fragen</a>
             </div>
             <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-ink underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
