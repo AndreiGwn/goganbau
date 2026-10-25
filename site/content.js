@@ -192,7 +192,7 @@ export default {
                 'Bauunternehmen, Generalunternehmer und Haustechnik-Firmen setzen uns als Subunternehmer bei Neubau, Umbau und Sanierung ein – abgestimmt mit der Bauleitung und dem Ablauf der Gewerke.',
             ],
             points: ['Beton und Stahlbeton', 'Wände, Decken und Böden', 'Für Lüftung, Sanitär, Elektro'],
-            image: 'Kernbohrung in einer Betonwand mit Kernbohrgerät und Wasserkühlung',
+            image: 'Kernbohrung in einer Betonwand mit wandgeführtem Kernbohrgerät und Wasserkühlung',
             scope: [
                 'Kernbohrungen in Beton und Stahlbeton',
                 'Bohrungen in Wänden, Decken und Bodenplatten',
