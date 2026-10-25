@@ -295,9 +295,9 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
     <!-- Ownership proof for Google Search Console — keep it, or Search Console loses access. -->
     <meta name="google-site-verification" content="hM1Rnfjfe5SjXZnyC5Ol7mLi7O48SRVqfC0Dk7GG6Nk">
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
-    <link rel="icon" href="/favicon.ico?v=2" sizes="32x32">
-    <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+    <link rel="icon" href="/favicon.ico?v=3" sizes="32x32">
+    <link rel="icon" href="/favicon.svg?v=3" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3">
     <link rel="stylesheet" href="/src/css/app.css">
     <script type="module" src="/src/js/app.js"></script>
     ${head}
