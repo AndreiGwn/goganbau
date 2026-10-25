@@ -342,28 +342,32 @@ function homePage(ctx, projects, photos) {
         title: gb.homeTitle,
         head: structuredData(),
         body: `
-    <section id="top" class="relative overflow-hidden bg-brand pt-16 lg:pt-20">
-        <img src="${url('images/hero-reinigung.jpg')}" alt="Reinigungskräfte von GoganBau bei der Büroreinigung" width="1024" height="572" fetchpriority="high" class="absolute inset-0 size-full object-cover object-[70%_center]">
-        <!-- Blue fade from the left keeps the white text readable on top of the photo. -->
-        <div class="absolute inset-0 bg-gradient-to-r from-brand via-brand/90 to-brand/30 max-lg:via-brand/85 max-lg:to-brand/70"></div>
-        <div class="relative mx-auto flex min-h-[78svh] max-w-7xl items-center px-4 py-16 sm:px-6 lg:min-h-[640px] lg:px-8">
-            <div class="max-w-2xl">
+    <!-- Fixed 3D canvas behind the hero; the sections below are opaque and cover it. -->
+    <div class="fixed inset-0 z-0" aria-hidden="true">
+        <canvas id="scene-canvas" class="block h-full w-full opacity-0"></canvas>
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent lg:via-paper/40"></div>
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent"></div>
+    </div>
+
+    <section id="top" class="pointer-events-none relative z-10 flex min-h-[100svh] items-center pt-24 pb-16">
+        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="pointer-events-auto max-w-xl">
                 <!-- The keyword line is the h1 for search engines; the big claim below is styled text. -->
-                <h1 class="font-mono text-[11px] font-medium tracking-[0.22em] text-signal uppercase">${esc(gb.eyebrow)}</h1>
-                <p class="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">${esc(gb.heroClaim)}</p>
-                <p class="mt-6 max-w-xl text-lg text-white/85">${esc(gb.heroText)}</p>
-                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+                <h1 data-hero-item class="eyebrow">${esc(gb.eyebrow)}</h1>
+                <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-ink uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
+                <p data-hero-item class="mt-8 text-lg text-slate-700">${esc(gb.tagline)}</p>
+                <div data-hero-item class="mt-10 flex flex-col gap-3 sm:flex-row">
                     <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
-                    <a href="${wa('Hallo, ich interessiere mich für eine Reinigung.')}" target="_blank" rel="noopener" class="btn border border-white/40 text-white hover:bg-white/10">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp anfragen</a>
+                    <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
                 </div>
-                <ul class="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 text-sm text-white sm:flex sm:flex-wrap">
-                    ${each(gb.heroPoints, (p) => `<li class="flex items-center gap-2">${icon.check('size-4 text-signal!')} ${esc(p)}</li>`)}
-                </ul>
+                <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-ink uppercase">
+                    Seit ${gb.founded} <span class="text-signal-deep">·</span> ${esc(gb.region)} <span class="text-signal-deep">·</span> 24/7
+                </p>
             </div>
         </div>
     </section>
 
-    <section id="leistungen" class="scroll-mt-16 bg-white py-20 lg:py-28">
+    <section id="leistungen" class="relative z-10 scroll-mt-16 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Reinigung in München und Umgebung</p>
@@ -388,7 +392,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="probleme" class="border-t border-slate-200 bg-paper py-20 lg:py-28">
+    <section id="probleme" class="relative z-10 border-t border-slate-200 bg-paper py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Sie kennen das bestimmt</p>
@@ -424,7 +428,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="vorteile" class="border-t border-slate-200 bg-white py-20 lg:py-28">
+    <section id="vorteile" class="relative z-10 border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Ihre Vorteile</p>

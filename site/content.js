@@ -22,12 +22,9 @@ export default {
     region: 'München & Bayern',
     claim: 'Wir sind da, wenn es zählt.',
     motto: 'Praktisch denken. Direkt handeln. Verlässlich liefern.',
-    // Home hero: the small orange line is the page's main heading (h1) for Google.
+    // Small orange line above the big claim; it is the page's main heading (h1) for Google.
     eyebrow: 'Abbruchfirma & Gebäudereinigung in München',
-    heroClaim: 'Sauberkeit, auf die Sie sich verlassen können.',
-    heroText:
-        'Unterhaltsreinigung, Büroreinigung, Bau- und Bauendreinigung, Treppenhaus- und Praxisreinigung – für Unternehmen, Hausverwaltungen und Bauunternehmen in München und im Umkreis von 50 km. Sie kümmern sich um Ihr Geschäft, wir um die Sauberkeit.',
-    heroPoints: ['Seit 2019 in München', '24/7 erreichbar', 'Fester Ansprechpartner', 'Kostenloses Angebot'],
+    tagline: 'Abbruch, Entkernung, Rückbau und Reinigung – Ihr Subunternehmer für Bauunternehmen.',
 
     // "Sie kennen das bestimmt": [the problem with other cleaning firms, our answer].
     painIntro:
