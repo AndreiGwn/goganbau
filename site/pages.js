@@ -31,7 +31,7 @@ const icon = {
 
 // Header/footer logo (both on logo blue): the vector mark from public/images/logo-mark.svg plus the wordmark as text.
 const logo = () => `<span class="flex items-center gap-2.5">
-    <img src="/images/logo-mark.svg" alt="" width="128" height="64" class="h-10 w-auto shrink-0 lg:h-12">
+    <img src="/images/logo-mark.svg" alt="GoganBau Logo" width="128" height="64" class="h-10 w-auto shrink-0 lg:h-12">
     <span class="leading-none">
         <span class="block font-display text-lg font-bold tracking-tight text-white lg:text-xl">Gogan<span class="text-signal">Bau</span></span>
         <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-white/70 uppercase">&amp; Gebäudereinigung</span>
@@ -108,7 +108,7 @@ function footer({ url }) {
         <ul class="flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
             <li><a href="${gb.contact.phoneHref}" class="font-mono text-white transition hover:text-signal">${esc(gb.contact.phone)}</a></li>
             <li><a href="mailto:${gb.contact.email}" class="font-mono text-white transition hover:text-signal">${esc(gb.contact.email)}</a></li>
-            <li><a href="${wa()}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-white transition hover:text-signal">${icon.whatsapp('size-4')} WhatsApp</a></li>
+            <li><a href="${wa()}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-white transition hover:text-signal">${icon.whatsapp('size-4')} WhatsApp<span class="sr-only"> schreiben</span></a></li>
         </ul>
     </div>
     <div class="border-t border-white/15">
@@ -132,7 +132,7 @@ function mobileBar({ anchor }) {
     </a>
     <a href="${wa()}" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 border-x border-slate-200 py-2.5 text-[11px] font-medium text-slate-700">
         ${icon.whatsapp('size-5 text-[#25D366]')}
-        WhatsApp
+        WhatsApp<span class="sr-only"> Chat</span>
     </a>
     <a href="${anchor('kontakt')}" class="flex flex-col items-center gap-1 bg-signal py-2.5 text-[11px] font-semibold text-white">
         <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
@@ -300,7 +300,8 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
     <meta name="theme-color" content="#023066">
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
-    <meta property="og:type" content="website">${canonical}
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="${gb.siteUrl}/apple-touch-icon.png">${canonical}
     <!-- Ownership proof for Google Search Console — keep it, or Search Console loses access. -->
     <meta name="google-site-verification" content="hM1Rnfjfe5SjXZnyC5Ol7mLi7O48SRVqfC0Dk7GG6Nk">
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
@@ -389,7 +390,7 @@ function homePage(ctx, projects, photos) {
                         <img src="${cardImage(key)}" alt="${esc(s.image ?? s.title)}" width="640" height="480" loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-[4/3]">
                         <span class="flex flex-1 flex-col p-5">
                             <!-- Only the title is the link (short link text for SEO); its ::after covers the card so all of it stays clickable. -->
-                            <a href="${url(`leistungen/${key}/`)}" class="font-display text-lg font-bold text-brand after:absolute after:inset-0">${esc(s.title)}</a>
+                            <a href="${url(`leistungen/${key}/`)}" class="font-display text-lg font-bold text-brand after:absolute after:inset-0">${esc(s.title)}<span class="sr-only"> in München</span></a>
                             <span class="mt-3 space-y-2 text-sm text-slate-600">
                                 ${each(s.points, (p) => `<span class="flex gap-2">${icon.check('size-4 mt-0.5')} ${esc(p)}</span>`)}
                             </span>
