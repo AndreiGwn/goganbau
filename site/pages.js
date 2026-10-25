@@ -29,25 +29,12 @@ const icon = {
         `<svg viewBox="0 0 24 24" class="${cls} shrink-0" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.64-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.35-.2-3.56.93.95-3.47-.22-.36a9.4 9.4 0 0 1-1.44-5.01c0-5.2 4.23-9.43 9.44-9.43 2.52 0 4.89.98 6.67 2.77a9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.23 9.43-9.44 9.43m8.03-17.46A11.27 11.27 0 0 0 12.05.72C5.8.72.7 5.8.7 12.06c0 2 .52 3.95 1.52 5.67L.6 23.28l5.68-1.49a11.3 11.3 0 0 0 5.42 1.38h.01c6.25 0 11.35-5.09 11.35-11.35 0-3.03-1.18-5.88-3.32-8.02"/></svg>`,
 };
 
-// GoganBau logo mark: tower crane over three buildings. Same drawing as public/favicon.svg and public/images/logo.svg.
-const logoMark = (cls = 'size-10') => `<svg viewBox="0 0 64 64" class="${cls} shrink-0" aria-hidden="true">
-    <rect width="64" height="64" fill="#0A0E17" stroke="rgba(255,255,255,.14)"/>
-    <g fill="#FF6B00">
-        <path d="M13 50V5M7 13h49M13 5 7 13M13 5l31 8" fill="none" stroke="#FF6B00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M48 13v10" fill="none" stroke="#FF6B00" stroke-width="1.5" stroke-linecap="round"/>
-        <rect x="5.5" y="13" width="5" height="4"/>
-        <rect x="44.5" y="23" width="7" height="4.5"/>
-    </g>
-    <path d="M19 50V30l9-4v24M31 50V19l9 4v27M43 50V35l8 3v12" fill="none" stroke="#E2E8F0" stroke-width="3" stroke-linejoin="round"/>
-    <path d="M7 54c14-6 36-6 50 0" fill="none" stroke="#FF6B00" stroke-width="4" stroke-linecap="round"/>
-</svg>`;
-
 // Header/footer logo (both on logo blue): the vector mark from public/images/logo-mark.svg plus the wordmark as text.
 const logo = () => `<span class="flex items-center gap-2.5">
     <img src="/images/logo-mark.svg" alt="" width="128" height="64" class="h-10 w-auto shrink-0 lg:h-12">
     <span class="leading-none">
-        <span class="block font-sans text-xl font-extrabold tracking-tight text-white lg:text-2xl">Gogan<span class="text-signal">Bau</span></span>
-        <span class="mt-1 block text-[9px] font-semibold tracking-[0.12em] text-white/80 uppercase lg:text-[10px]">&amp; Gebäudereinigung</span>
+        <span class="block font-display text-lg font-bold tracking-tight text-white lg:text-xl">Gogan<span class="text-signal">Bau</span></span>
+        <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-white/70 uppercase">&amp; Gebäudereinigung</span>
     </span>
 </span>`;
 
