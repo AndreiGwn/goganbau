@@ -386,7 +386,7 @@ function homePage(ctx, projects, photos) {
             <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
                 ${each(cleaning, ([key, s], i) => `<li data-reveal style="--reveal-delay: ${(i % 4) * 80}ms">
                     <div class="group relative flex h-full flex-col border-b-4 border-brand bg-paper transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                        <img src="${cardImage(key)}" alt="" width="640" height="480" loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-[4/3]">
+                        <img src="${cardImage(key)}" alt="${esc(s.image ?? s.title)}" width="640" height="480" loading="lazy" class="aspect-[16/10] w-full object-cover sm:aspect-[4/3]">
                         <span class="flex flex-1 flex-col p-5">
                             <!-- Only the title is the link (short link text for SEO); its ::after covers the card so all of it stays clickable. -->
                             <a href="${url(`leistungen/${key}/`)}" class="font-display text-lg font-bold text-brand after:absolute after:inset-0">${esc(s.title)}</a>
@@ -566,7 +566,7 @@ function leistungenPage(ctx, photos) {
                 <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
                     ${each(list, ([key, s]) => `<li>
                         <a href="${url(`leistungen/${key}/`)}" class="group flex h-full flex-col overflow-hidden border border-slate-200 bg-white transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg">
-                            <img src="${cardImage(key)}" alt="" width="640" height="480" loading="lazy" class="aspect-[4/3] w-full bg-paper object-cover">
+                            <img src="${cardImage(key)}" alt="${esc(s.image ?? s.title)}" width="640" height="480" loading="lazy" class="aspect-[4/3] w-full bg-paper object-cover">
                             <span class="flex flex-1 flex-col p-3 sm:p-4">
                                 <span class="font-display text-[15px] leading-snug font-semibold hyphens-auto text-ink group-hover:text-brand sm:text-base">${esc(s.title)}</span>
                                 <span class="mt-1 hidden text-sm text-slate-600 sm:block">${esc(s.short)}</span>
