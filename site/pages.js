@@ -434,7 +434,7 @@ function homePage(ctx, projects, photos) {
             </ol>
             <div data-reveal class="mt-10 flex flex-col gap-3 sm:flex-row">
                 <a href="#kontakt" class="btn-primary">Jetzt anfragen ${icon.arrow()}</a>
-                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
+                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> anrufen</span></a>
             </div>
         </div>
     </section>
@@ -456,7 +456,7 @@ function homePage(ctx, projects, photos) {
                     <p class="font-display text-2xl font-bold">Jetzt ist Ihre Zeit.</p>
                     <p class="mt-3 text-white/80">Sagen Sie uns, was gereinigt werden soll – Sie erhalten ein kostenloses Angebot.</p>
                     <a href="#kontakt" class="btn-primary mt-6">Kostenloses Angebot anfordern ${icon.arrow()}</a>
-                    <a href="${gb.contact.phoneHref}" class="mt-4 inline-flex items-center justify-center gap-2 font-mono text-sm text-white/90 hover:text-white"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
+                    <a href="${gb.contact.phoneHref}" class="mt-4 inline-flex items-center justify-center gap-2 font-mono text-sm text-white/90 hover:text-white"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> direkt anrufen</span></a>
                 </div>
             </div>
         </div>
