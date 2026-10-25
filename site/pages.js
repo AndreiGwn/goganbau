@@ -330,9 +330,10 @@ function layout(ctx, { title, description = gb.homeDescription, head = '', body 
 // "Einsatzgebiet: ganz Bayern" plus the example towns from gb.areaPlaces.
 function areaLine(area) {
     const places = gb.areaPlaces[area] ?? [];
+    const districts = gb.areaDistricts[area] ?? [];
     return `<div class="mt-6 flex gap-3 text-sm text-mist">
                 <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-                <p>Einsatzgebiet: <span class="text-ink">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}</p>
+                <p>Einsatzgebiet: <span class="text-ink">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}${districts.length ? `<br>Münchner Stadtteile: ${esc(districts.join(', '))}` : ''}</p>
             </div>`;
 }
 

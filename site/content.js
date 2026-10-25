@@ -68,9 +68,14 @@ export default {
 
     // Places named under "Einsatzgebiet" on each service page (key = the service's area).
     // Cleaning only lists towns within ~50 km of München.
+    // Munich districts named for the cleaning area (local searches like "Büroreinigung Schwabing").
+    areaDistricts: {
+        'München und Umkreis bis 50 km': ['Schwabing', 'Bogenhausen', 'Maxvorstadt', 'Altstadt-Lehel', 'Au-Haidhausen', 'Sendling', 'Neuhausen-Nymphenburg', 'Pasing', 'Laim', 'Moosach', 'Milbertshofen', 'Berg am Laim', 'Trudering-Riem', 'Ramersdorf-Perlach', 'Giesing', 'Schwanthalerhöhe', 'Feldmoching-Hasenbergl', 'Aubing-Freiham', 'Allach-Untermenzing', 'Obersendling', 'Solln', 'Hadern'],
+    },
+
     areaPlaces: {
         'ganz Bayern': ['München', 'Augsburg', 'Ingolstadt', 'Regensburg', 'Landshut', 'Rosenheim', 'Nürnberg', 'Fürth', 'Erlangen', 'Würzburg', 'Kempten', 'Passau', 'Straubing', 'Freising', 'Erding', 'Dachau', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg'],
-        'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg', 'Garching', 'Unterschleißheim', 'Oberschleißheim', 'Ismaning', 'Unterföhring', 'Germering', 'Unterhaching', 'Ottobrunn', 'Haar', 'Vaterstetten', 'Poing', 'Gräfelfing', 'Planegg', 'Puchheim', 'Olching', 'Karlsfeld', 'Grünwald', 'Pullach'],
+        'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg', 'Garching', 'Unterschleißheim', 'Oberschleißheim', 'Ismaning', 'Unterföhring', 'Germering', 'Unterhaching', 'Ottobrunn', 'Haar', 'Vaterstetten', 'Poing', 'Gräfelfing', 'Planegg', 'Puchheim', 'Olching', 'Karlsfeld', 'Grünwald', 'Pullach', 'Taufkirchen', 'Neubiberg', 'Aschheim', 'Kirchheim', 'Gilching', 'Gauting', 'Holzkirchen'],
     },
 
     // The key of each service is its URL (/leistungen/<key>/) and the camera focus key in the 3D scene.
@@ -222,6 +227,7 @@ export default {
             body: [
                 'Bei der Unterhaltsreinigung reinigen wir Ihre Räume regelmäßig nach einem festen Plan: Böden, Arbeitsflächen, Sanitäranlagen, Küchen und Aufenthaltsräume. So bleiben Büros, Geschäftsräume und Gewerbeflächen dauerhaft gepflegt.',
                 'Den Rhythmus legen Sie fest – täglich, wöchentlich oder monatlich. Für Unternehmen, Gewerbemieter und Hausverwaltungen übernehmen wir die Unterhaltsreinigung mit einem direkten Ansprechpartner.',
+                'Typische Objekte sind Büros und Kanzleien, Ladenflächen und Showrooms, Praxen sowie Gemeinschaftsflächen in Gewerbe- und Wohnimmobilien. Ob Sie zum ersten Mal eine Reinigungsfirma beauftragen oder Ihre Reinigungsfirma wechseln möchten: Reinigungsplan, Reinigungsintervalle und Zeiten stimmen wir mit Ihnen ab – zum Beispiel früh morgens oder abends außerhalb der Geschäftszeiten.',
             ],
             points: ['Fester Reinigungsplan', 'Täglich, wöchentlich oder monatlich', 'Büros, Geschäftsräume, Gewerbe'],
             image: 'Unterhaltsreinigung im Büro: Glastür wird gereinigt, Boden gesaugt, Reinigungswagen im Einsatz',
@@ -239,6 +245,7 @@ export default {
                 { q: 'Was gehört zur Unterhaltsreinigung?', a: 'Die laufende Reinigung nach festem Plan: Böden, Oberflächen, Sanitär, Teeküchen und Abfall. Umfang und Rhythmus legen wir gemeinsam mit Ihnen fest.' },
                 { q: 'Was kostet eine Unterhaltsreinigung?', a: 'Das hängt von Fläche, Art der Räume und Reinigungsrhythmus ab. Nennen Sie uns Fläche, Häufigkeit und Wunschzeiten – dann erhalten Sie ein Angebot.' },
                 { q: 'Wo bieten Sie Unterhaltsreinigung an?', a: 'In München und im Umkreis von bis zu 50 km – zum Beispiel in Garching, Unterschleißheim, Ismaning, Germering, Dachau, Freising und Erding.' },
+                { q: 'Können wir unsere Reinigungsfirma wechseln?', a: 'Ja. Wenn Sie mit Ihrer bisherigen Reinigungsfirma unzufrieden sind, besprechen wir Umfang, Reinigungsplan und Startdatum mit Ihnen und übernehmen die Unterhaltsreinigung mit einem festen Ansprechpartner.' },
             ],
         },
         bueroreinigung: {
@@ -254,6 +261,7 @@ export default {
             body: [
                 'Als Büroreinigungsfirma in München reinigen wir Arbeitsplätze, Besprechungs- und Konferenzräume, Empfangsbereiche, Teeküchen und Sanitärbereiche – täglich, wöchentlich oder in dem Rhythmus, den Sie brauchen.',
                 'Damit Ihr Team ungestört arbeiten kann, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch nach Feierabend. Für kleine Büros ebenso wie für größere Bürogebäude.',
+                'Zur Büroreinigung gehören Schreibtische, Konferenztische und Fensterbänke, Glastüren und Türklinken, Teeküche, Sozialräume und Büro-WCs. Wir reinigen kleine Büros und Kanzleien ebenso wie Großraumbüros, Agenturen und Coworking-Flächen – täglich oder zum Beispiel zwei- bis dreimal pro Woche, diskret und nach Feierabend.',
             ],
             points: ['Arbeitsplätze und Besprechungsräume', 'Empfang, Teeküche, Sanitär', 'Zeiten nach Absprache'],
             image: 'Büroreinigung: Schreibtische werden gereinigt und Böden gesaugt',
@@ -271,6 +279,7 @@ export default {
                 { q: 'Reinigen Sie Büros auch abends?', a: 'Ja. Die Zeiten richten sich nach Ihrem Betrieb – auf Wunsch nach Feierabend, damit Ihr Team ungestört arbeiten kann.' },
                 { q: 'Wie oft sollte ein Büro gereinigt werden?', a: 'Das hängt von Größe und Nutzung ab. Viele Büros lassen täglich oder mehrmals pro Woche reinigen, kleinere Büros oft wöchentlich. Den Rhythmus stimmen wir mit Ihnen ab.' },
                 { q: 'Was kostet Büroreinigung?', a: 'Das hängt von Bürofläche, Anzahl der Räume und Reinigungsrhythmus ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+                { q: 'Gehören Teeküche und Sanitärräume zur Büroreinigung?', a: 'Ja. Teeküchen, Sozialräume und Sanitärbereiche gehören bei uns zur Büroreinigung dazu – genauso wie Arbeitsplätze, Besprechungsräume und der Empfang.' },
             ],
         },
         grundreinigung: {
@@ -286,6 +295,7 @@ export default {
             body: [
                 'Bei der Grundreinigung entfernen wir hartnäckige Verschmutzungen, die bei der laufenden Unterhaltsreinigung nicht erfasst werden – auf Böden, Oberflächen und in Sanitäranlagen. So bringen wir Büros, Geschäftsräume und Gewerbeflächen wieder in einen gepflegten Grundzustand.',
                 'Typische Anlässe sind ein Mieterwechsel, ein Umzug oder der Start einer neuen Unterhaltsreinigung. Termin und Umfang stimmen wir direkt mit Ihnen ab.',
+                'Wir reinigen Hartböden wie Fliesen, PVC und Linoleum gründlich, entfernen Kalk in Sanitärräumen und reinigen auch schwer zugängliche Stellen, Türen, Zargen, Fußleisten und Heizkörper. Häufige Anlässe sind die Grundreinigung nach Auszug oder vor der Neuvermietung, nach längerem Leerstand, nach Handwerkerarbeiten oder als jährliche Grundreinigung – gern auch in den Betriebsferien, damit Ihr Betrieb ungestört bleibt.',
             ],
             points: ['Bodenreinigung und Oberflächen', 'Sanitäranlagen', 'Vor Mieterwechsel oder Neustart'],
             image: 'Grundreinigung eines Bodens mit Einscheibenmaschine',
@@ -303,6 +313,7 @@ export default {
                 { q: 'Was ist der Unterschied zwischen Grundreinigung und Unterhaltsreinigung?', a: 'Die Unterhaltsreinigung hält Räume regelmäßig sauber. Die Grundreinigung ist eine einmalige, gründliche Intensivreinigung – etwa wenn sich Schmutz festgesetzt hat, vor einem Mieterwechsel oder bevor eine regelmäßige Reinigung startet.' },
                 { q: 'Machen Sie Grundreinigung vor dem Mieterwechsel?', a: 'Ja. Wir reinigen Büros, Praxen und Gewerbeflächen gründlich, damit sie sauber übergeben werden können.' },
                 { q: 'Was kostet eine Grundreinigung?', a: 'Das hängt von Fläche, Bodenbelag und Verschmutzung ab. Schicken Sie uns Fläche und gern ein paar Fotos – dann erhalten Sie ein Angebot.' },
+                { q: 'Wann ist eine Grundreinigung sinnvoll?', a: 'Zum Beispiel nach dem Auszug, vor der Neuvermietung, nach längerem Leerstand, nach Handwerkerarbeiten oder einmal im Jahr als Frühjahrsputz für Büro, Praxis und Gewerbe.' },
             ],
         },
         treppenhausreinigung: {
@@ -318,6 +329,7 @@ export default {
             body: [
                 'Wir reinigen Treppenhäuser, Eingangsbereiche, Flure und Geländer in festen Intervallen – damit Bewohner, Mitarbeiter und Besucher einen gepflegten ersten Eindruck bekommen.',
                 'Für Hausverwaltungen und Eigentümer von Mehrfamilienhäusern, Wohnanlagen und Gewerbeimmobilien übernehmen wir die Treppenhausreinigung regelmäßig nach Plan, mit einem direkten Ansprechpartner für Fragen und Änderungen.',
+                'Zur Treppenhausreinigung – auch Hausflurreinigung oder Stiegenhausreinigung genannt – gehören Treppenstufen und Podeste, Handläufe und Geländer, Eingangsbereich und Haustür, Briefkastenanlage und Klingelschilder sowie Kellerabgänge. Nach dem Winter entfernen wir Streusalzränder und Splitt aus dem Eingangsbereich, damit Ihre Wohnanlage gepflegt aussieht.',
             ],
             points: ['Treppen, Flure und Eingänge', 'Fester Reinigungsrhythmus', 'Mehrfamilienhäuser und Wohnanlagen'],
             image: 'Treppenhausreinigung: Geländer wird gereinigt und Treppe gewischt',
@@ -335,6 +347,7 @@ export default {
                 { q: 'Arbeiten Sie für Hausverwaltungen und WEGs?', a: 'Ja. Wir übernehmen die Treppenhausreinigung für Hausverwaltungen, Eigentümergemeinschaften und Vermieter – nach festem Plan, mit einem festen Ansprechpartner.' },
                 { q: 'Wie oft wird das Treppenhaus gereinigt?', a: 'Üblich ist wöchentlich oder alle 14 Tage. Den Rhythmus legen wir gemeinsam mit Ihnen fest.' },
                 { q: 'Was kostet eine Treppenhausreinigung?', a: 'Der Preis richtet sich nach Anzahl der Etagen, Größe des Treppenhauses und Reinigungsrhythmus. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+                { q: 'Reinigen Sie auch Aufzug und Kellerabgänge?', a: 'Ja, nach Absprache gehören Aufzugskabine, Kellerabgänge und Gemeinschaftsräume mit zum Reinigungsplan.' },
             ],
         },
         baureinigung: {
@@ -349,6 +362,7 @@ export default {
             body: [
                 'Während der Bauphase übernehmen wir die Baustellenreinigung in München: Grobreinigung, Bauzwischenreinigung und die Beräumung von Bauabfällen – für freie, sichere Laufwege bei Neubau, Umbau und Sanierung.',
                 'Bauunternehmen, Generalunternehmer und Bauträger setzen uns als Subunternehmer für die Baureinigung ein – regelmäßig nach Plan oder kurzfristig vor einer Übergabe zwischen den Gewerken.',
+                'Typische Einsätze sind die Reinigung nach Rohbau, Trockenbau oder Malerarbeiten, nach Entkernung, Abbruch und Rückbau sowie nach Sanierung und Umbau. Wir reinigen baubegleitend nach Bauabschnitten und übergeben Flächen besenrein – im Wohnungsbau, Gewerbebau und bei Bürokomplexen. Weil wir selbst Abbruch und Entkernung ausführen, bekommen Sie Abbruch und Baureinigung auf Wunsch aus einer Hand.',
             ],
             points: ['Grob- und Zwischenreinigung', 'Sichere Laufwege', 'Saubere Übergaben zwischen Gewerken'],
             image: 'Baureinigung auf der Baustelle: Bauschutt wird zusammengekehrt und Baustaub gesaugt',
@@ -366,6 +380,7 @@ export default {
                 { q: 'Was ist der Unterschied zwischen Baureinigung und Bauendreinigung?', a: 'Die Baureinigung (Grob- und Zwischenreinigung) läuft während der Bauphase und hält die Baustelle sauber und sicher. Die Bauendreinigung ist die Feinreinigung am Ende, direkt vor Abnahme oder Übergabe.' },
                 { q: 'Übernehmen Sie Baureinigung als Subunternehmer?', a: 'Ja. Bauunternehmen, Generalunternehmer und Bauträger setzen uns für Baustellenreinigung in München und im Umkreis bis 50 km ein – einmalig oder regelmäßig während der Bauphase.' },
                 { q: 'Was kostet eine Baureinigung?', a: 'Das hängt von Fläche, Bauphase und Verschmutzung ab. Nennen Sie uns Baustelle, Fläche und Zeitraum – dann erhalten Sie ein Angebot.' },
+                { q: 'Übergeben Sie die Baustelle besenrein?', a: 'Ja. Nach Abbruch, Entkernung oder einzelnen Bauabschnitten kehren wir Bauschutt und Reste zusammen, saugen Baustaub und übergeben die Flächen besenrein an das nächste Gewerk.' },
             ],
         },
         bauendreinigung: {
@@ -380,6 +395,7 @@ export default {
             body: [
                 'Vor der Abnahme sorgen wir mit der Bauendreinigung (Baufeinreinigung, Bauschlussreinigung) dafür, dass Neubau, Umbau oder Renovierung übergabefertig sind: Glasflächen und Rahmen, Böden, Sanitärbereiche und alle sichtbaren Oberflächen.',
                 'Für Bauunternehmen und Bauträger übernehmen wir die Bauendreinigung als Subunternehmer – termingenau zur Übergabe an den Bauherrn oder Mieter, auch bei Wohnanlagen und Gewerbeimmobilien.',
+                'Zur Bauendreinigung gehören auch Fensterfalze und Rahmen, das Entfernen von Etiketten, Schutzfolien sowie Klebe- und Silikonresten, Türen und Zargen, Steckdosen, Lichtschalter und Heizkörper, Bäder, WCs und Einbauküchen. Wir reinigen Mehrfamilienhäuser und Wohnanlagen, Bürogebäude, Ladenflächen und Praxen nach Neubau, Kernsanierung oder Innenausbau – staubfrei und bereit für die Schlüsselübergabe.',
             ],
             points: ['Glasflächen und Rahmen', 'Böden und Sanitär', 'Bereit für die Abnahme'],
             image: 'Bauendreinigung im Neubau: Fensterrahmen und Böden werden vor der Übergabe gereinigt',
@@ -397,6 +413,7 @@ export default {
                 { q: 'Was gehört zur Bauendreinigung?', a: 'Die gründliche Feinreinigung nach Abschluss aller Arbeiten: Fenster und Rahmen, Böden, Sanitär, Küchen, Türen und Schalter – inklusive Schutzfolien und Aufkleber. Danach ist alles bereit für Abnahme und Einzug.' },
                 { q: 'Wann sollte die Bauendreinigung stattfinden?', a: 'Wenn alle Gewerke fertig sind, kurz vor der Abnahme oder dem Einzug. Den Termin stimmen wir mit Ihrer Bauleitung ab.' },
                 { q: 'Was kostet eine Bauendreinigung?', a: 'Das hängt von Fläche, Anzahl der Fenster und Verschmutzung ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+                { q: 'Können Sie kurzfristig vor der Übergabe reinigen?', a: 'Sprechen Sie uns an: Wir sind rund um die Uhr erreichbar und stimmen den Termin so kurzfristig wie möglich mit Ihrer Bauleitung ab.' },
             ],
         },
         gebaeudereinigung: {
@@ -411,6 +428,7 @@ export default {
             body: [
                 'Als Reinigungsfirma in München übernehmen wir die Gebäudereinigung gewerblicher Objekte – Geschäftsräume, Gewerbe- und Verwaltungsflächen. Von der regelmäßigen Unterhaltsreinigung über Büro- und Treppenhausreinigung bis zur Grundreinigung erhalten Sie alles aus einer Hand.',
                 'Für Unternehmen und Hausverwaltungen bieten wir zusätzlich Sonderreinigungen nach Bedarf. Sie haben einen direkten Ansprechpartner, der Termine und Leistungsumfang mit Ihnen abstimmt.',
+                'Wir reinigen Bürogebäude, Geschäftshäuser, Wohnanlagen und Gewerbeimmobilien – als Gebäudereinigungsfirma für Unternehmen, Hausverwaltungen und Immobilieneigentümer in München und im Umkreis bis 50 km. Eine regelmäßige Objektreinigung trägt zum Werterhalt Ihrer Immobilie bei; die laufende Reinigung übernehmen wir mit festem Ansprechpartner.',
             ],
             points: ['Gewerbe- und Verwaltungsflächen', 'Sonderreinigung nach Bedarf', 'Alles aus einer Hand'],
             image: 'Gebäudereinigung am Eingang eines Bürogebäudes: Glasflächen und Eingangsbereich werden gereinigt',
@@ -443,6 +461,7 @@ export default {
             body: [
                 'In Arzt- und Therapiepraxen kommt es auf Sauberkeit besonders an. Wir reinigen Wartebereiche, Empfang, Behandlungsräume und Sanitärbereiche gründlich und in festen Intervallen.',
                 'Damit der Praxisbetrieb nicht gestört wird, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch außerhalb der Sprechzeiten.',
+                'Wir reinigen Arztpraxen, Zahnarztpraxen, Facharzt- und Gemeinschaftspraxen sowie Physiotherapie- und Psychotherapiepraxen: Behandlungs- und Sprechzimmer, Behandlungsliegen und Stühle, Wartezimmer, Patienten- und Personal-WCs sowie Sozialräume. Kontaktflächen wie Türklinken, Handläufe und Lichtschalter reinigen wir besonders gründlich; Verbrauchsmaterial wie Seife und Papierhandtücher füllen wir nach Absprache auf.',
             ],
             points: ['Wartebereich und Empfang', 'Behandlungsräume und Sanitär', 'Zeiten nach Ihrer Praxis'],
             image: 'Praxisreinigung: Behandlungsliege wird desinfiziert, Boden gesaugt',
@@ -460,6 +479,7 @@ export default {
                 { q: 'Wann reinigen Sie die Praxis?', a: 'Außerhalb Ihrer Sprechzeiten, zum Beispiel abends nach Praxisschluss – so, wie es zu Ihrem Ablauf passt.' },
                 { q: 'Welche Praxen reinigen Sie?', a: 'Arztpraxen, Zahnarztpraxen sowie Physiotherapie- und Therapiepraxen in München und im Umkreis von bis zu 50 km.' },
                 { q: 'Was kostet eine Praxisreinigung?', a: 'Das hängt von Praxisgröße, Anzahl der Räume und Reinigungsrhythmus ab. Nennen Sie uns diese Angaben – dann erhalten Sie ein Angebot.' },
+                { q: 'Richten Sie sich nach unserem Hygieneplan?', a: 'Ja. Umfang und Abläufe der Praxisreinigung stimmen wir mit Ihnen ab und richten uns dabei nach Ihren Vorgaben, zum Beispiel aus Ihrem Hygieneplan.' },
             ],
         },
         tektalan: {
