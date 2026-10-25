@@ -336,19 +336,21 @@ function areaLine(area) {
 
 /* ---------------------------------------------------------------- pages */
 
-function homePage(ctx, projects) {
+// photos: keys of services with a photo in public/images/leistungen/ (the rest use their drawing).
+function homePage(ctx, projects, photos) {
     const { url } = ctx;
     const channels = [
         ['Telefon · 24/7', esc(gb.contact.phone), gb.contact.phoneHref, false],
         ['WhatsApp', 'Nachricht schreiben', wa(), true],
         ['E-Mail', esc(gb.contact.email), `mailto:${gb.contact.email}`, false],
     ];
+    const cardImage = (key) => url(photos.has(key) ? `images/leistungen/thumb/${key}.jpg` : `images/leistungen/${key}.svg`);
 
     return layout(ctx, {
         title: gb.homeTitle,
         head: structuredData(),
         body: `
-    <!-- Fixed 3D canvas behind hero + services; later sections are opaque and cover it. -->
+    <!-- Fixed 3D canvas behind the hero; the sections below are opaque and cover it. -->
     <div class="fixed inset-0 z-0" aria-hidden="true">
         <canvas id="scene-canvas" class="block h-full w-full opacity-0"></canvas>
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent lg:via-paper/40"></div>
@@ -373,25 +375,53 @@ function homePage(ctx, projects) {
         </div>
     </section>
 
-    <section id="leistungen" class="pointer-events-none relative z-10 scroll-mt-16 py-24 lg:py-32">
+    <section id="leistungen" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="pointer-events-auto max-w-md">
+            <div data-reveal class="max-w-2xl">
                 <p class="eyebrow">Leistungen</p>
                 <h2 class="section-title mt-4">Was wir machen.</h2>
-                <!-- Phones: narrow, title-only rows so the building stays visible on the right. -->
-                <ul class="mt-10 w-[62%] min-w-[13rem] divide-y divide-slate-200 border-y border-slate-200 bg-white/85 backdrop-blur-sm sm:w-full">
-                    ${each(groups, ([, label, list]) => groupLabel('px-3 pt-4 pb-1.5 sm:px-4 text-mist')(label) + each(list, ([key, s]) => `<li>
-                        <a href="${url(`leistungen/${key}/`)}" data-service-card="${s.scene ?? key}" class="service-card group flex items-center gap-3 px-3 py-3.5 transition-colors duration-300 hover:bg-slate-100 sm:gap-4 sm:px-4">
-                            <span class="hidden font-mono text-xs text-signal-deep sm:inline">${s.number}</span>
-                            <span class="min-w-0 flex-1">
-                                <span class="block font-display text-[15px] font-semibold text-ink sm:text-base">${esc(s.title)}</span>
-                                <span class="mt-0.5 hidden text-sm text-slate-600 sm:block">${esc(s.short)}</span>
+                <p class="mt-4 text-lg text-slate-600">Wählen Sie eine Leistung – dort finden Sie alle Details, das Einsatzgebiet und Antworten auf häufige Fragen.</p>
+            </div>
+            ${each(groups, ([, label, list]) => {
+                const area = list[0]?.[1].area;
+                return `<div data-reveal class="mt-14">
+                <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-slate-200 pb-3">
+                    <h3 class="font-display text-xl font-bold text-ink sm:text-2xl">${esc(label)}</h3>
+                    ${area ? `<p class="text-sm text-mist">Einsatzgebiet: <span class="font-medium text-ink">${esc(area)}</span></p>` : ''}
+                </div>
+                <ul class="mt-6 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+                    ${each(list, ([key, s]) => `<li>
+                        <a href="${url(`leistungen/${key}/`)}" class="group flex h-full flex-col overflow-hidden border border-slate-200 bg-white transition duration-300 hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-lg">
+                            <img src="${cardImage(key)}" alt="" width="640" height="480" loading="lazy" class="aspect-[4/3] w-full bg-paper object-cover">
+                            <span class="flex flex-1 flex-col p-3 sm:p-4">
+                                <span class="font-display text-[15px] leading-snug font-semibold hyphens-auto text-ink group-hover:text-brand sm:text-base">${esc(s.title)}</span>
+                                <span class="mt-1 hidden text-sm text-slate-600 sm:block">${esc(s.short)}</span>
+                                <span class="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold tracking-wide text-signal-deep uppercase">Mehr erfahren ${icon.arrow('size-3.5 transition group-hover:translate-x-0.5')}</span>
                             </span>
-                            ${icon.chevronRight('size-4 shrink-0 text-mist transition group-hover:translate-x-0.5 group-hover:text-signal-deep')}
                         </a>
-                    </li>`))}
+                    </li>`)}
                 </ul>
-                <a href="#kontakt" class="mt-8 inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-signal-deep">Passende Leistung dabei? Anfrage stellen ${icon.arrow()}</a>
+            </div>`;
+            })}
+        </div>
+    </section>
+
+    <section id="ablauf" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="max-w-2xl">
+                <p class="eyebrow">So funktioniert's</p>
+                <h2 class="section-title mt-4">In drei Schritten zum Auftrag.</h2>
+            </div>
+            <ol class="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
+                ${each(gb.steps, ([title, text], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="border border-slate-200 bg-white p-6 sm:p-8">
+                    <span class="grid size-12 place-items-center bg-brand font-display text-xl font-bold text-white">${i + 1}</span>
+                    <h3 class="mt-5 font-display text-xl font-bold text-ink">${esc(title)}</h3>
+                    <p class="mt-2 text-slate-600">${esc(text)}</p>
+                </li>`)}
+            </ol>
+            <div data-reveal class="mt-10 flex flex-col gap-3 sm:flex-row">
+                <a href="#kontakt" class="btn-primary">Anfrage stellen ${icon.arrow()}</a>
+                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}</a>
             </div>
         </div>
     </section>
@@ -750,6 +780,8 @@ export function renderPages({ base, publicDir }) {
     // Only projects whose photos are actually in public/ are shown.
     const projects = gb.projects.filter((p) => fs.existsSync(path.join(publicDir, p.before)) && fs.existsSync(path.join(publicDir, p.after)));
 
+    const photos = new Set(services.map(([key]) => key).filter((key) => fs.existsSync(path.join(publicDir, `images/leistungen/${key}.jpg`))));
+
     // path: the page's address below the site root (null = not a real page, e.g. 404).
     const context = (page, path, current = null) => {
         const url = (p = '') => base + p;
@@ -757,14 +789,14 @@ export function renderPages({ base, publicDir }) {
     };
 
     return [
-        { file: 'index.html', html: homePage(context('home', ''), projects) },
+        { file: 'index.html', html: homePage(context('home', ''), projects, photos) },
         ...services.map(([key]) => ({
             file: `leistungen/${key}/index.html`,
             html: servicePage(
                 context('service', `leistungen/${key}/`, key),
                 key,
                 projects.filter((p) => p.service === key),
-                fs.existsSync(path.join(publicDir, `images/leistungen/${key}.jpg`)),
+                photos.has(key),
             ),
         })),
         { file: 'bauunternehmen/index.html', html: b2bPage(context('b2b', 'bauunternehmen/')) },

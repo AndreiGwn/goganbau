@@ -7,8 +7,8 @@ import { fileURLToPath } from 'node:url';
 const OUT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../public/images/leistungen');
 
 const C = {
-    bg: '#0e1420',
-    floor: '#111827',
+    bg: '#eef2f7', // light theme, like the site
+    floor: '#d9dfe7',
     panel: '#1e293b',
     line: '#334155',
     mid: '#475569',
@@ -45,11 +45,11 @@ const mono = 'ui-monospace,SFMono-Regular,Menlo,Consolas,monospace';
 
 function frame(label, accent, body, floor = C.floor) {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="${label}">
-<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#fff" stroke-opacity=".045"/></pattern></defs>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#023066" stroke-opacity=".06"/></pattern></defs>
 <rect width="800" height="500" fill="${C.bg}"/><rect width="800" height="430" fill="url(#grid)"/>
-<rect y="430" width="800" height="70" fill="${floor}"/><path d="M0 430H800" stroke="${C.line}" stroke-width="2"/>
+<rect y="430" width="800" height="70" fill="${floor}"/><path d="M0 430H800" stroke="#b8c2ce" stroke-width="2"/>
 ${body}
-<g transform="translate(28 28)"><rect width="${label.length * 10.4 + 30}" height="30" fill="${C.bg}" fill-opacity=".88" stroke="${accent}" stroke-opacity=".6"/><rect width="4" height="30" fill="${accent}"/><text x="17" y="20" font-family="${mono}" font-size="13" letter-spacing="2.5" fill="${C.white}">${label}</text></g>
+<g transform="translate(28 28)"><rect width="${label.length * 10.4 + 30}" height="30" fill="#fff" fill-opacity=".92" stroke="${accent}" stroke-opacity=".6"/><rect width="4" height="30" fill="${accent}"/><text x="17" y="20" font-family="${mono}" font-size="13" letter-spacing="2.5" fill="#0f1d33">${label}</text></g>
 </svg>`;
 }
 

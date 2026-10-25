@@ -124,11 +124,27 @@ class Batch {
 
 const rand = (min, max) => min + Math.random() * (max - min);
 
+// Small speed readout for testing on a phone: open the page with ?fps
+function perfLabel() {
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;left:8px;bottom:80px;z-index:100;padding:4px 8px;background:#023066;color:#fff;font:12px monospace';
+    el.textContent = 'Messe …';
+    document.body.append(el);
+    return el;
+}
+
 export class BuildingScene {
     constructor(canvas, { reducedMotion = false } = {}) {
         this.canvas = canvas;
         this.reducedMotion = reducedMotion;
-        this.lowPower = window.matchMedia('(max-width: 768px)').matches || (navigator.hardwareConcurrency ?? 8) <= 4;
+        this.lowPower =
+            window.matchMedia('(max-width: 768px)').matches || (navigator.hardwareConcurrency ?? 8) <= 4 || (navigator.deviceMemory ?? 8) <= 4;
+        // Phones and weak devices: 30 fps cap. measurePerf() lowers quality further if even that is too slow.
+        this.frameInterval = this.lowPower ? 1 / 30 : 0;
+        this.pending = 0;
+        this.quality = 0; // 0 normal · 1 reduced resolution · 2 still image
+        this.perf = { frames: 0, time: 0 };
+        this.perfLabel = new URLSearchParams(location.search).has('fps') ? perfLabel() : null;
         this.active = true;
         this.viewShift = 0;
         this.current = 'overview';
@@ -138,7 +154,7 @@ export class BuildingScene {
         this.sparkRate = 120;
 
         this.renderer = new THREE.WebGLRenderer({ canvas, antialias: !this.lowPower, powerPreference: 'high-performance' });
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.lowPower ? 1.5 : 1.75));
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, this.lowPower ? 1 : 1.75));
         this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
         this.renderer.toneMappingExposure = 1.05;
         this.renderer.setClearColor(C.bg, 1);
@@ -255,6 +271,30 @@ export class BuildingScene {
 
     setActive(active) {
         this.active = active;
+    }
+
+    /**
+     * Built-in speed test: every 60 drawn frames, check the frame rate. Below 22 fps the
+     * resolution drops; if it is still too slow the building stops moving (one still frame).
+     */
+    measurePerf(elapsed) {
+        const p = this.perf;
+        p.frames += 1;
+        p.time += elapsed;
+        if (p.frames < 60) return;
+        const fps = p.frames / p.time;
+        p.frames = 0;
+        p.time = 0;
+        const levels = ['normal', 'reduziert', 'Standbild'];
+        if (this.perfLabel) this.perfLabel.textContent = `${fps.toFixed(0)} fps · Qualität ${levels[this.quality]}`;
+        if (fps >= 22 || this.quality >= 2) return;
+        this.quality += 1;
+        if (this.quality === 1) {
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 0.75));
+            this.frameInterval = 1 / 30;
+            this.onResize();
+        }
+        if (this.perfLabel) this.perfLabel.textContent += ` → ${levels[this.quality]}`;
     }
 
     /* ------------------------------------------------------------------ */
@@ -942,7 +982,7 @@ export class BuildingScene {
         const dot = this.textures.dot;
 
         // Ambient site dust
-        const n = this.lowPower ? 700 : 1800;
+        const n = this.lowPower ? 400 : 1800;
         const pos = new Float32Array(n * 3);
         for (let i = 0; i < n; i++) {
             pos[i * 3] = rand(-70, 70);
@@ -958,7 +998,7 @@ export class BuildingScene {
         this.world.add(this.dust);
 
         // Construction dust swirling on the fit-out floor (Baureinigung)
-        const fn = this.lowPower ? 120 : 280;
+        const fn = this.lowPower ? 60 : 280;
         const fpos = new Float32Array(fn * 3);
         this.floorDustSpeed = new Float32Array(fn);
         for (let i = 0; i < fn; i++) {
@@ -1064,8 +1104,14 @@ export class BuildingScene {
 
     tick() {
         this.raf = requestAnimationFrame(this.tick);
-        const dt = Math.min(this.clock.getDelta(), 0.05);
-        if (!this.active || document.hidden) return;
+        const delta = this.clock.getDelta();
+        if (!this.active || document.hidden || this.quality >= 2) return;
+        this.pending += delta;
+        if (this.pending < this.frameInterval) return;
+        const elapsed = this.pending;
+        const dt = Math.min(elapsed, 0.05);
+        this.pending = 0;
+        this.measurePerf(elapsed);
         const t = this.clock.elapsedTime;
         const motion = this.reducedMotion ? 0.15 : 1;
 
@@ -1131,6 +1177,8 @@ export class BuildingScene {
             this.camera.clearViewOffset();
         }
         this.camera.updateProjectionMatrix();
+        // A still image (slow device) is only redrawn when the size changes.
+        if (this.quality >= 2) this.renderer.render(this.scene, this.camera);
     }
 
     dispose() {

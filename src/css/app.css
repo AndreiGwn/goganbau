@@ -188,12 +188,6 @@
     }
 }
 
-/* Service list ↔ 3D focus state */
-.service-card.is-active {
-    box-shadow: inset 3px 0 0 var(--color-signal);
-    background-color: rgb(241 245 249);
-}
-
 /* 3D canvas */
 #scene-canvas {
     touch-action: pan-y;

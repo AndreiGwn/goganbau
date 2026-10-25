@@ -36,8 +36,7 @@ export async function initHome(canvas, { reducedMotion }) {
     applyFraming();
     desktop.addEventListener('change', applyFraming);
 
-    wireServices(scene);
-    wireSections(scene);
+    pauseWhenHidden(scene);
 }
 
 function heroIntro(reducedMotion) {
@@ -46,60 +45,8 @@ function heroIntro(reducedMotion) {
     gsap.from(items, { y: 28, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.09, delay: 0.15 });
 }
 
-/** Desktop: hovering a service row moves the camera to its zone of the building. */
-function wireServices(scene) {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    const cards = [...document.querySelectorAll('[data-service-card]')];
-    let hoverTimer = null;
-
-    const activate = (card) => {
-        cards.forEach((c) => c.classList.toggle('is-active', c === card));
-        scene.focus(card.dataset.serviceCard);
-    };
-
-    cards.forEach((card) => {
-        card.addEventListener('mouseenter', () => {
-            clearTimeout(hoverTimer);
-            hoverTimer = setTimeout(() => activate(card), 140);
-        });
-        card.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
-    });
-}
-
-/** Section-level camera presets + pausing the renderer when the model is covered. */
-function wireSections(scene) {
+/** The building only sits behind the hero; stop drawing it once the hero is scrolled away. */
+function pauseWhenHidden(scene) {
     const hero = document.getElementById('top');
-    const services = document.getElementById('leistungen');
-    const visible = new Set();
-
-    const io = new IntersectionObserver(
-        (entries) => {
-            for (const entry of entries) {
-                if (entry.isIntersecting) visible.add(entry.target.id);
-                else visible.delete(entry.target.id);
-            }
-            scene.setActive(visible.size > 0);
-        },
-        { threshold: 0 },
-    );
-    io.observe(hero);
-    io.observe(services);
-
-    // Switch preset when a section crosses the middle of the viewport
-    const presetIo = new IntersectionObserver(
-        (entries) => {
-            for (const entry of entries) {
-                if (!entry.isIntersecting) continue;
-                if (entry.target === hero) {
-                    document.querySelectorAll('[data-service-card].is-active').forEach((c) => c.classList.remove('is-active'));
-                    scene.focus('overview');
-                } else if (!document.querySelector('[data-service-card].is-active')) {
-                    scene.focus('services');
-                }
-            }
-        },
-        { rootMargin: '-45% 0px -45% 0px' },
-    );
-    presetIo.observe(hero);
-    presetIo.observe(services);
+    new IntersectionObserver(([entry]) => scene.setActive(entry.isIntersecting), { threshold: 0 }).observe(hero);
 }
