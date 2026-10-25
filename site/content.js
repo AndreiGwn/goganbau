@@ -11,10 +11,10 @@ export default {
     // Public address of the site, used for the sitemap, robots.txt and canonical links.
     siteUrl: 'https://goganbau.de',
 
-    // The home page is about cleaning; demolition and the other services are on /leistungen/.
-    homeTitle: 'Gebäudereinigung & Reinigungsfirma München | GoganBau',
+    // The home page shows the cleaning services; demolition and the rest are on /leistungen/.
+    homeTitle: 'Abbruchfirma & Gebäudereinigung München | GoganBau',
     homeDescription:
-        'Reinigungsfirma in München: Unterhaltsreinigung, Büroreinigung, Bau- und Bauendreinigung, Treppenhaus- und Praxisreinigung – kostenloses Angebot, 24/7 erreichbar.',
+        'Abbruchfirma & Gebäudereinigung in München: Unterhalts-, Büro-, Bau- und Treppenhausreinigung, Abbruch und Entkernung – kostenloses Angebot, 24/7.',
 
     name: 'GoganBau & Gebäudereinigung',
     shortName: 'GoganBau',
@@ -23,7 +23,7 @@ export default {
     claim: 'Wir sind da, wenn es zählt.',
     motto: 'Praktisch denken. Direkt handeln. Verlässlich liefern.',
     // Home hero: the small orange line is the page's main heading (h1) for Google.
-    eyebrow: 'Gebäudereinigung & Reinigungsfirma in München',
+    eyebrow: 'Abbruchfirma & Gebäudereinigung in München',
     heroClaim: 'Sauberkeit, auf die Sie sich verlassen können.',
     heroText:
         'Unterhaltsreinigung, Büroreinigung, Bau- und Bauendreinigung, Treppenhaus- und Praxisreinigung – für Unternehmen, Hausverwaltungen und Bauunternehmen in München und im Umkreis von 50 km. Sie kümmern sich um Ihr Geschäft, wir um die Sauberkeit.',
