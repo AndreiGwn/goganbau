@@ -42,11 +42,12 @@ const logoMark = (cls = 'size-10') => `<svg viewBox="0 0 64 64" class="${cls} sh
     <path d="M7 54c14-6 36-6 50 0" fill="none" stroke="#FF6B00" stroke-width="4" stroke-linecap="round"/>
 </svg>`;
 
-const logo = () => `<span class="flex items-center gap-3">
-    ${logoMark()}
+// Header/footer logo (both on logo blue): the vector mark from public/images/logo-mark.svg plus the wordmark as text.
+const logo = () => `<span class="flex items-center gap-2.5">
+    <img src="/images/logo-mark.svg" alt="" width="128" height="64" class="h-10 w-auto shrink-0 lg:h-12">
     <span class="leading-none">
-        <span class="block font-display text-lg font-bold tracking-tight text-white">Gogan<span class="text-signal">Bau</span></span>
-        <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-white/70 uppercase">&amp; Gebäudereinigung</span>
+        <span class="block font-sans text-xl font-extrabold tracking-tight text-white lg:text-2xl">Gogan<span class="text-signal">Bau</span></span>
+        <span class="mt-1 block text-[9px] font-semibold tracking-[0.12em] text-white/80 uppercase lg:text-[10px]">&amp; Gebäudereinigung</span>
     </span>
 </span>`;
 
@@ -58,7 +59,7 @@ function nav(ctx) {
     <div class="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:h-20 lg:px-8">
         <a href="${url()}" class="shrink-0" aria-label="${esc(gb.name)} – Startseite">${logo()}</a>
 
-        <nav class="hidden items-center gap-8 text-sm text-white/85 lg:flex" aria-label="Hauptnavigation">
+        <nav class="hidden items-center gap-6 text-sm whitespace-nowrap text-white/85 lg:flex xl:gap-8" aria-label="Hauptnavigation">
             <div class="group/dd relative">
                 <a href="${anchor('leistungen')}" class="flex items-center gap-1.5 py-2 transition hover:text-white">
                     Leistungen <span class="inline-flex transition group-focus-within/dd:rotate-180 group-hover/dd:rotate-180">${icon.chevronDown}</span>
@@ -75,8 +76,8 @@ function nav(ctx) {
             <a href="${anchor('kontakt')}" class="transition hover:text-white">Kontakt</a>
         </nav>
 
-        <div class="flex items-center gap-3">
-            <a href="${gb.contact.phoneHref}" class="hidden items-center gap-2.5 font-mono text-xs text-white/90 xl:flex">
+        <div class="flex items-center gap-3 whitespace-nowrap">
+            <a href="${gb.contact.phoneHref}" class="hidden items-center gap-2.5 font-mono text-xs whitespace-nowrap text-white/90 2xl:flex">
                 <span class="live-dot"></span>
                 <span><span class="text-signal">24/7</span> ${esc(gb.contact.phone)}</span>
             </a>

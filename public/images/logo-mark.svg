@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 64" role="img" aria-label="GoganBau">
+  <!-- GoganBau mark (vector redraw of the logo): excavator, city skyline and orange swoosh. Light parts for blue backgrounds. -->
+  <g fill="#e3eaf4">
+    <rect x="50" y="26" width="16" height="22"/>
+    <rect x="106" y="29" width="8" height="19"/>
+  </g>
+  <rect x="66" y="5" width="15" height="43" fill="#fff"/>
+  <rect x="83" y="12" width="11" height="36" fill="#eef3f9"/>
+  <rect x="96" y="19" width="9" height="29" fill="#fff"/>
+  <g fill="#023066">
+    <rect x="69" y="9" width="3" height="2.4"/><rect x="74" y="9" width="3" height="2.4"/>
+    <rect x="69" y="14" width="3" height="2.4"/><rect x="74" y="14" width="3" height="2.4"/>
+    <rect x="69" y="19" width="3" height="2.4"/><rect x="74" y="19" width="3" height="2.4"/>
+    <rect x="69" y="24" width="3" height="2.4"/><rect x="74" y="24" width="3" height="2.4"/>
+    <rect x="69" y="29" width="3" height="2.4"/><rect x="74" y="29" width="3" height="2.4"/>
+    <rect x="69" y="34" width="3" height="2.4"/><rect x="74" y="34" width="3" height="2.4"/>
+    <rect x="86" y="16" width="1.6" height="28"/><rect x="90" y="16" width="1.6" height="28"/>
+    <rect x="99" y="23" width="3" height="2.2"/><rect x="99" y="28" width="3" height="2.2"/><rect x="99" y="33" width="3" height="2.2"/>
+    <rect x="53" y="30" width="3" height="2.4"/><rect x="59" y="30" width="3" height="2.4"/>
+    <rect x="53" y="35" width="3" height="2.4"/><rect x="59" y="35" width="3" height="2.4"/>
+  </g>
+  <!-- excavator -->
+  <g fill="#fff">
+    <rect x="7" y="40" width="31" height="8" rx="4"/>
+    <path d="M11 40 13 30.5h15.5l4.5 3.5V40z"/>
+    <path d="M47.5 15.5 55 18l-2.2 7.2-6-2.4z"/>
+  </g>
+  <path d="M28.5 33 41 13.5l8.5 4" fill="none" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="15.5" y="32.2" width="7" height="5" fill="#023066"/>
+  <path d="M11 44h23" stroke="#023066" stroke-width="1.4" stroke-linecap="round"/>
+  <!-- swoosh -->
+  <path d="M3 57Q62 38 126 50Q62 44.5 3 62.5z" fill="#ff6b00"/>
+  <path d="M9 52Q62 35.5 121 45" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".85"/>
+</svg>
