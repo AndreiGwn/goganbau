@@ -103,10 +103,10 @@ export default {
         'München und Umkreis bis 50 km': ['München', 'Dachau', 'Freising', 'Erding', 'Fürstenfeldbruck', 'Starnberg', 'Ebersberg', 'Garching', 'Unterschleißheim', 'Oberschleißheim', 'Ismaning', 'Unterföhring', 'Germering', 'Unterhaching', 'Ottobrunn', 'Haar', 'Vaterstetten', 'Poing', 'Gräfelfing', 'Planegg', 'Puchheim', 'Olching', 'Karlsfeld', 'Grünwald', 'Pullach', 'Taufkirchen', 'Neubiberg', 'Aschheim', 'Kirchheim', 'Gilching', 'Gauting', 'Holzkirchen'],
     },
 
-    // The key of each service is its URL (/leistungen/<key>/) and the camera focus key in the 3D scene.
+    // The key of each service is its URL (/leistungen/<key>/).
     // title: name in menus and lists · short: one line on the home page · text: intro on the service
     // page · body: the paragraphs below it · seoTitle / description: for Google · area: Einsatzgebiet
-    // · scene: 3D zone for services without their own · h1: page heading (default "<title> in München")
+    // · h1: page heading (default "<title> in München")
     // · image: alt text of the service picture: public/images/leistungen/<key>.jpg (photo, shown as
     //   "Symbolbild") if present, else <key>.svg (drawn by site/illustrations.js)
     // · scope: "Leistungsumfang" list · faq: questions on the service page (only state facts).
@@ -148,7 +148,6 @@ export default {
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Entkernung',
-            scene: 'abbruch',
             short: 'Entkernung bis auf den Rohbau.',
             seoTitle: 'Entkernung München – Entkernungsfirma | GoganBau',
             description:
@@ -211,7 +210,6 @@ export default {
             group: 'abbruch',
             area: 'ganz Bayern',
             title: 'Kernbohrungen',
-            scene: 'abbruch',
             short: 'Kernbohrungen in Beton und Stahlbeton.',
             seoTitle: 'Kernbohrungen München & Bayern – Kernbohrfirma | GoganBau',
             description:
@@ -243,7 +241,6 @@ export default {
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Unterhaltsreinigung',
-            scene: 'gebaeudereinigung',
             short: 'Regelmäßige Reinigung nach festem Plan.',
             seoTitle: 'Unterhaltsreinigung München – für Unternehmen | GoganBau',
             description:
@@ -277,7 +274,6 @@ export default {
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Büroreinigung',
-            scene: 'gebaeudereinigung',
             short: 'Regelmäßige Reinigung von Büros.',
             seoTitle: 'Büroreinigung München – Büroreinigungsfirma | GoganBau',
             description:
@@ -311,7 +307,6 @@ export default {
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Grundreinigung',
-            scene: 'gebaeudereinigung',
             short: 'Intensivreinigung von Böden und Flächen.',
             seoTitle: 'Grundreinigung München – Intensivreinigung | GoganBau',
             description:
@@ -345,7 +340,6 @@ export default {
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Treppenhausreinigung',
-            scene: 'gebaeudereinigung',
             short: 'Saubere Treppenhäuser und Eingänge.',
             seoTitle: 'Treppenhausreinigung München – Hausverwaltungen | GoganBau',
             description:
@@ -477,7 +471,6 @@ export default {
             group: 'reinigung',
             area: 'München und Umkreis bis 50 km',
             title: 'Praxisreinigung',
-            scene: 'gebaeudereinigung',
             short: 'Gründliche Reinigung von Arztpraxen.',
             seoTitle: 'Praxisreinigung München – Arztpraxen | GoganBau',
             description:

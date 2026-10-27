@@ -16,6 +16,8 @@ const number = (key) => String(services.findIndex(([k]) => k === key) + 1).padSt
 // [[groupKey, label, [[key, service], …]], …] in the order of gb.serviceGroups
 const groups = Object.entries(gb.serviceGroups).map(([g, label]) => [g, label, services.filter(([, s]) => s.group === g)]);
 const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] tracking-[0.2em] uppercase">${esc(label)}</li>`;
+// Date of this build: the pages' machine-readable 'last modified' date.
+const buildDate = new Date().toISOString().slice(0, 10);
 const wa = (text) => `https://wa.me/${gb.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 /* ---------------------------------------------------------------- icons */
@@ -249,6 +251,7 @@ function structuredData() {
         logo: url('apple-touch-icon.png'),
         image: url('apple-touch-icon.png'),
         foundingDate: String(gb.founded),
+        founder: { '@type': 'Person', name: gb.legal.owner },
         address: {
             '@type': 'PostalAddress',
             streetAddress: gb.contact.street,
@@ -269,7 +272,17 @@ function structuredData() {
             })),
         },
     };
-    return jsonLd(data);
+    const website = {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: gb.name,
+        url: url(),
+        inLanguage: 'de-DE',
+        publisher: { '@id': url('#firma') },
+        author: { '@type': 'Person', name: gb.legal.owner },
+        dateModified: buildDate,
+    };
+    return jsonLd(data) + jsonLd(website);
 }
 
 const jsonLd = (data) => `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
@@ -287,21 +300,38 @@ const faqData = (faq) =>
 // title: the full browser-tab / Google title. description: the text under the Google result.
 // head: extra tags for <head>, e.g. structured data.
 function layout(ctx, { title, description = gb.homeDescription, head = '', body }) {
+    const pageUrl = `${gb.siteUrl}/${ctx.path}`;
+    // The site is German only: hreflang says so explicitly (de + x-default point to the same page).
     const canonical = ctx.path === null ? '' : `
-    <link rel="canonical" href="${gb.siteUrl}/${ctx.path}">
-    <meta property="og:url" content="${gb.siteUrl}/${ctx.path}">`;
+    <link rel="canonical" href="${pageUrl}">
+    <link rel="alternate" hreflang="de" href="${pageUrl}">
+    <link rel="alternate" hreflang="x-default" href="${pageUrl}">
+    <meta property="og:url" content="${pageUrl}">`;
     return `<!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <!-- GitHub Pages cannot send security headers; these meta tags cover what browsers accept in HTML.
+         The site only talks to itself and to Web3Forms (contact form). -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://api.web3forms.com ws: wss:; form-action 'self' https://api.web3forms.com; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>${esc(title)}</title>
     <meta name="description" content="${esc(description)}">
+    <meta name="author" content="${esc(gb.legal.owner)}, ${esc(gb.name)}">
     <meta name="theme-color" content="#023066">
     <meta property="og:title" content="${esc(title)}">
     <meta property="og:description" content="${esc(description)}">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="${gb.siteUrl}/apple-touch-icon.png">${canonical}
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:site_name" content="${esc(gb.name)}">
+    <meta property="og:image" content="${gb.siteUrl}/apple-touch-icon.png">
+    <meta property="article:modified_time" content="${buildDate}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="${esc(title)}">
+    <meta name="twitter:description" content="${esc(description)}">
+    <meta name="twitter:image" content="${gb.siteUrl}/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">${canonical}
     <!-- Ownership proof for Google Search Console — keep it, or Search Console loses access. -->
     <meta name="google-site-verification" content="hM1Rnfjfe5SjXZnyC5Ol7mLi7O48SRVqfC0Dk7GG6Nk">
     <!-- Bump ?v= whenever the logo changes, so browsers drop their cached tab icon. -->
@@ -352,32 +382,31 @@ function homePage(ctx, projects, photos) {
         title: gb.homeTitle,
         head: structuredData() + faqData(gb.faq),
         body: `
-    <!-- Fixed 3D canvas behind the hero; the sections below are opaque and cover it. -->
-    <div class="fixed inset-0 z-0" aria-hidden="true">
-        <canvas id="scene-canvas" class="block h-full w-full opacity-0"></canvas>
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-paper via-paper/70 to-transparent lg:via-paper/40"></div>
-        <div class="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-paper to-transparent"></div>
-    </div>
-
-    <section id="top" class="pointer-events-none relative z-10 flex min-h-[100svh] items-center pt-24 pb-16">
-        <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="pointer-events-auto max-w-xl">
+    <!-- Hero: text left, framed team photos right (no 3D, so it stays light on phones). -->
+    <section id="top" class="bg-gradient-to-b from-paper to-white pt-24 pb-16 lg:pt-36 lg:pb-24">
+        <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+            <div class="lg:col-span-6">
+                <p class="inline-flex rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">Zuverlässig · Gründlich · Seit ${gb.founded}</p>
                 <!-- The keyword line is the h1 for search engines; the big claim below is styled text. -->
-                <h1 data-hero-item class="eyebrow">${esc(gb.eyebrow)}</h1>
-                <p data-hero-item class="mt-6 font-display text-5xl leading-[0.95] font-bold tracking-tight text-ink uppercase sm:text-6xl lg:text-7xl">Wir sind da,<br>wenn es zählt.</p>
-                <p data-hero-item class="mt-8 text-lg text-slate-700">${esc(gb.tagline)}</p>
-                <div data-hero-item class="mt-10 flex flex-col gap-3 sm:flex-row">
+                <h1 class="eyebrow mt-6">${esc(gb.eyebrow)}</h1>
+                <p class="mt-4 font-display text-4xl leading-[1.05] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">Wir sind da,<br>wenn es zählt.</p>
+                <p class="mt-6 text-lg text-slate-700">${esc(gb.tagline)}</p>
+                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
                     <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                     <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
                 </div>
-                <p data-hero-item class="mt-12 font-mono text-[11px] tracking-[0.2em] text-ink uppercase">
+                <p class="mt-10 font-mono text-[11px] tracking-[0.2em] text-ink uppercase">
                     Seit ${gb.founded} <span class="text-signal-deep">·</span> ${esc(gb.region)} <span class="text-signal-deep">·</span> 24/7
                 </p>
+            </div>
+            <div class="relative lg:col-span-6">
+                <img src="${url('images/leistungen/unterhaltsreinigung.jpg')}" alt="Reinigungsteam von GoganBau bei der Unterhaltsreinigung in München" width="900" height="503" fetchpriority="high" class="aspect-[4/3] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/4]">
+                <img src="${url('images/leistungen/thumb/abbruch.jpg')}" alt="GoganBau bei Abbrucharbeiten" width="640" height="480" loading="lazy" class="absolute -bottom-8 -left-4 hidden w-44 rounded-xl border-4 border-white object-cover shadow-lg sm:block lg:-left-10 lg:w-56">
             </div>
         </div>
     </section>
 
-    <section id="leistungen" class="relative z-10 scroll-mt-16 bg-white py-20 lg:py-28">
+    <section id="leistungen" class="scroll-mt-16 border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Reinigung in München und Umgebung</p>
@@ -403,7 +432,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="probleme" class="relative z-10 border-t border-slate-200 bg-paper py-20 lg:py-28">
+    <section id="probleme" class="border-t border-slate-200 bg-paper py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Sie kennen das bestimmt</p>
@@ -419,7 +448,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="ablauf" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
+    <section id="ablauf" class="scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="max-w-2xl">
                 <p class="eyebrow">So funktioniert's</p>
@@ -439,7 +468,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="vorteile" class="relative z-10 border-t border-slate-200 bg-white py-20 lg:py-28">
+    <section id="vorteile" class="border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Ihre Vorteile</p>
@@ -464,7 +493,7 @@ function homePage(ctx, projects, photos) {
 
     ${
         projects.length
-            ? `<section id="projekte" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
+            ? `<section id="projekte" class="scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal>
                 <p class="eyebrow">Vorher / Nachher</p>
@@ -477,7 +506,7 @@ function homePage(ctx, projects, photos) {
             : ''
     }
 
-    <section id="ueber-uns" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-white py-24 lg:py-32">
+    <section id="ueber-uns" class="scroll-mt-16 border-t border-slate-200 bg-white py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-24 lg:px-8">
             <div data-reveal>
                 <p class="eyebrow">Über uns</p>
@@ -498,7 +527,7 @@ function homePage(ctx, projects, photos) {
     </section>
 
     <!-- Answers stay collapsed until tapped, so the page stays short while search engines read the full text. -->
-    <section id="fragen" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
+    <section id="fragen" class="scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-4">
                 <p class="eyebrow">Häufige Fragen</p>
@@ -515,7 +544,7 @@ function homePage(ctx, projects, photos) {
         </div>
     </section>
 
-    <section id="kontakt" class="relative z-10 scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
+    <section id="kontakt" class="scroll-mt-16 border-t border-slate-200 bg-paper py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div data-reveal class="lg:col-span-5">
                 <p class="eyebrow">Kontakt</p>

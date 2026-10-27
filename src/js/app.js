@@ -14,7 +14,3 @@ initReveal();
 initCompare();
 initInquiryForms();
 
-const canvas = document.getElementById('scene-canvas');
-if (canvas) {
-    import('./home.js').then(({ initHome }) => initHome(canvas, { reducedMotion }));
-}

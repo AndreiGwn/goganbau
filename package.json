@@ -15,8 +15,6 @@
     "dependencies": {
         "@fontsource-variable/inter": "^5.2.0",
         "@fontsource-variable/space-grotesk": "^5.2.0",
-        "@fontsource/jetbrains-mono": "^5.2.0",
-        "gsap": "^3.12.7",
-        "three": "^0.174.0"
+        "@fontsource/jetbrains-mono": "^5.2.0"
     }
 }
