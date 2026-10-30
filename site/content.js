@@ -640,6 +640,14 @@ export default {
         ['vn-matratze', 'Matratze'],
     ],
 
+    // Real Google reviews (5 stars), copied word for word; shortened ones end where Google cuts them.
+    reviews: [
+        ['Spy Clean', 'Wir haben mit dieser Reinigungsfirma zusammengearbeitet und waren sehr zufrieden. Die Zusammenarbeit war stets professionell, zuverlässig und unkompliziert.'],
+        ['S.', 'Ein Unternehmen, das großen Wert auf Qualität und Professionalität legt. Sehr zufrieden mit der Zusammenarbeit!'],
+        ['Adrian Penica', 'Die beste Firma! Sehr empfehlenswert! Super Leute!'],
+    ],
+    googleReviewsUrl: 'https://www.google.com/maps/search/?api=1&query=GoganBau+%26+Geb%C3%A4udereinigung+M%C3%BCnchen',
+
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
     steps: [
         ['Projekt beschreiben', 'Sie nennen uns Leistung, Standort und gewünschten Zeitraum – per Formular, WhatsApp oder Telefon. Fotos helfen bei der Einschätzung.'],

@@ -446,6 +446,23 @@ function homePage(ctx, projects, photos, personPhoto) {
         </div>
     </section>
 
+    <section id="bewertungen" class="border-t border-slate-200 bg-white py-16 lg:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="eyebrow">Google-Bewertungen</p>
+                <h2 class="section-title mt-4">Das sagen unsere Auftraggeber.</h2>
+            </div>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                ${each(gb.reviews, ([name, text]) => `<figure class="flex flex-col border border-slate-200 bg-paper p-6">
+                    <div class="flex gap-0.5 text-amber-400" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></div>
+                    <blockquote class="mt-4 text-slate-700">„${esc(text)}“</blockquote>
+                    <figcaption class="mt-auto pt-5 font-display font-semibold text-ink">${esc(name)} <span class="font-sans text-sm font-normal text-mist">· Google</span></figcaption>
+                </figure>`)}
+            </div>
+            <p class="mt-8 text-center"><a href="${gb.googleReviewsUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Bewertungen auf Google ansehen ${icon.arrow()}</a></p>
+        </div>
+    </section>
+
     <section id="leistungen" class="scroll-mt-16 border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
