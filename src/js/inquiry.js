@@ -52,6 +52,8 @@ function messageText(form, { bold = false } = {}) {
         value('phone') ? `Telefon: ${value('phone')}` : null,
         value('email') ? `E-Mail: ${value('email')}` : null,
         value('service') ? `Leistung: ${value('service')}` : null,
+        value('place') ? `Ort: ${value('place')}` : null,
+        value('area') ? `Fläche: ${value('area')}` : null,
         value('message') ? `\n${value('message')}` : null,
     ]
         .filter((line) => line !== null)

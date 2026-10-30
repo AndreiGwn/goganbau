@@ -22,9 +22,33 @@ export default {
     region: 'München & Bayern',
     claim: 'Wir sind da, wenn es zählt.',
     motto: 'Praktisch denken. Direkt handeln. Verlässlich liefern.',
-    // Small orange line above the big claim; it is the page's main heading (h1) for Google.
+    // Home hero: heroTitle is the big headline and the page's h1; the slogan (claim) sits above it.
     eyebrow: 'Abbruchfirma & Gebäudereinigung in München',
-    tagline: 'Abbruch, Entkernung, Rückbau und Reinigung – Ihr Subunternehmer für Bauunternehmen.',
+    heroTitle: 'Abbruch und Gebäudereinigung in München',
+    tagline: 'Innenabbruch, Entkernung und Rückbau in ganz Bayern. Regelmäßige Reinigung und Baureinigung in München und bis zu 50 km Umgebung. Ein fester Ansprechpartner für Ihr Projekt.',
+
+    // Short facts under the hero: [value, label]. Only real data.
+    facts: [
+        ['Seit 2019', 'in München tätig'],
+        ['Abbruch & Rückbau', 'in ganz Bayern'],
+        ['Reinigung', 'in München + 50 km'],
+        ['1 Ansprechpartner', 'für Ihr Projekt'],
+    ],
+
+    // "Für wen wir arbeiten" on the home page: [title, text, service keys].
+    audiences: [
+        ['Für Bauunternehmen', 'Abbruch, Entkernung und Rückbau, dazu Bau- und Bauendreinigung – als Subunternehmer für Ihre Baustelle.', ['abbruch', 'entkernung', 'rueckbau', 'baureinigung', 'bauendreinigung']],
+        ['Für Unternehmen & Praxen', 'Regelmäßige Reinigung von Büros, Geschäftsräumen und Praxen – nach festem Plan.', ['bueroreinigung', 'unterhaltsreinigung', 'praxisreinigung']],
+        ['Für Hausverwaltungen', 'Treppenhäuser, Eingänge und Gemeinschaftsflächen – regelmäßig und zuverlässig gepflegt.', ['treppenhausreinigung', 'gebaeudereinigung', 'grundreinigung']],
+    ],
+
+    // "Ihr Ansprechpartner" on the home page — shown only once public/images/cosmin-gogan.jpg exists.
+    contactPerson: {
+        name: 'Cosmin Gogan',
+        role: 'Inhaber',
+        text: 'Seit 2019 unterstütze ich mit GoganBau Bauunternehmen, Hausverwaltungen und Gewerbekunden. Leistungsumfang, Termine und Übergabe stimmen Sie direkt mit mir ab.',
+        photo: 'images/cosmin-gogan.jpg',
+    },
 
     // "Sie kennen das bestimmt": [the problem with other cleaning firms, our answer].
     painIntro:
@@ -117,7 +141,7 @@ export default {
             area: 'ganz Bayern',
             title: 'Abbrucharbeiten',
             short: 'Innenabbruch und Teilabbruch.',
-            seoTitle: 'Abbrucharbeiten München – Abbruchfirma | GoganBau',
+            seoTitle: 'Innenabbruch München & Bayern – Abbruchfirma | GoganBau',
             description:
                 'Abbrucharbeiten in München und ganz Bayern: Innenabbruch, Teilabbruch und manueller Abbruch von Innenwänden und Mauerwerk – für Bauunternehmen und Gewerbekunden.',
             text: 'Innenabbruch und Teilabbruch – präzise, manuell und mit handgeführten Geräten.',
@@ -278,7 +302,7 @@ export default {
             seoTitle: 'Büroreinigung München – Büroreinigungsfirma | GoganBau',
             description:
                 'Büroreinigung in München: regelmäßige Reinigung von Büroräumen, Besprechungsräumen, Empfang, Teeküchen und Sanitär – nach Absprache auch nach Feierabend.',
-            text: 'Regelmäßige Reinigung von Büros – nach Absprache auch nach Feierabend.',
+            text: 'Wir reinigen Büros, Kanzleien und Gewerbeflächen in München – regelmäßig und zu abgestimmten Zeiten. Den Leistungsumfang und Reinigungsrhythmus legen wir gemeinsam mit Ihnen fest.',
             body: [
                 'Als Büroreinigungsfirma in München reinigen wir Arbeitsplätze, Besprechungs- und Konferenzräume, Empfangsbereiche, Teeküchen und Sanitärbereiche – täglich, wöchentlich oder in dem Rhythmus, den Sie brauchen.',
                 'Damit Ihr Team ungestört arbeiten kann, stimmen wir die Reinigungszeiten mit Ihnen ab – auf Wunsch auch nach Feierabend. Für kleine Büros ebenso wie für größere Bürogebäude.',
@@ -582,9 +606,9 @@ export default {
 
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
     steps: [
-        ['Kostenloses Angebot anfordern', 'Per Formular, WhatsApp oder Telefon – rund um die Uhr. Kurz beschreiben, was, wo und wann; Fotos helfen uns bei der Einschätzung.'],
-        ['Angebot erhalten', 'Wir klären Umfang und Termin mit Ihnen und schicken Ihnen ein kostenloses Angebot.'],
-        ['Ausführung & Übergabe', 'Wir führen die Arbeiten aus – mit festem Ansprechpartner und abgestimmt mit Ihrer Bauleitung. Am Ende übergeben wir die Fläche sauber.'],
+        ['Projekt beschreiben', 'Sie nennen uns Leistung, Standort und gewünschten Zeitraum – per Formular, WhatsApp oder Telefon. Fotos helfen bei der Einschätzung.'],
+        ['Umfang gemeinsam klären', 'Wir prüfen Ihre Angaben und vereinbaren bei Bedarf einen Vor-Ort-Termin.'],
+        ['Kostenloses Angebot erhalten', 'Sie erhalten ein kostenloses Angebot mit klar beschriebenem Leistungsumfang.'],
     ],
 
     // "Häufige Fragen" on the home page. Answers are collapsed until tapped; only state facts.

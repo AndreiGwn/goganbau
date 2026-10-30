@@ -136,7 +136,7 @@ function mobileBar({ anchor }) {
         ${icon.whatsapp('size-5 text-[#25D366]')}
         WhatsApp<span class="sr-only"> Chat</span>
     </a>
-    <a href="${anchor('kontakt')}" class="flex flex-col items-center gap-1 bg-signal py-2.5 text-[11px] font-semibold text-white">
+    <a href="${anchor('anfrage')}" class="flex flex-col items-center gap-1 bg-signal py-2.5 text-[11px] font-semibold text-white">
         <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
         Anfrage
     </a>
@@ -184,9 +184,20 @@ function inquiryForm({ url }) {
             </select>
         </div>
 
+        <div class="grid gap-5 sm:grid-cols-2">
+            <div>
+                <label for="f-place" class="field-label">Ort <span class="normal-case tracking-normal">(optional)</span></label>
+                <input id="f-place" name="place" class="field" autocomplete="address-level2" maxlength="120" placeholder="z. B. München-Schwabing">
+            </div>
+            <div>
+                <label for="f-area" class="field-label">Fläche ca. <span class="normal-case tracking-normal">(optional)</span></label>
+                <input id="f-area" name="area" class="field" maxlength="60" placeholder="z. B. 250 m²">
+            </div>
+        </div>
+
         <div>
             <label for="f-message" class="field-label">Nachricht</label>
-            <textarea id="f-message" name="message" rows="4" class="field resize-y" maxlength="3000" placeholder="Was, wo und wann?"></textarea>
+            <textarea id="f-message" name="message" rows="4" class="field resize-y" maxlength="3000" placeholder="Was soll gemacht werden? Wo befindet sich das Objekt? Wann sollen die Arbeiten stattfinden?"></textarea>
             ${field('message')}
         </div>
 
@@ -194,7 +205,7 @@ function inquiryForm({ url }) {
 
         <div class="grid gap-3 sm:grid-cols-2">
             <button type="submit" class="btn-primary">Per E-Mail senden ${icon.arrow()}</button>
-            <button type="button" data-send-whatsapp class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp senden</button>
+            <button type="button" data-send-whatsapp class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} In WhatsApp öffnen</button>
         </div>
 
         <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-brand">Datenschutzerklärung</a></p>
@@ -361,14 +372,26 @@ function areaLine(area) {
     const districts = gb.areaDistricts[area] ?? [];
     return `<div class="mt-6 flex gap-3 text-sm text-mist">
                 <svg viewBox="0 0 24 24" class="size-5 shrink-0 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-                <p>Einsatzgebiet: <span class="text-ink">${esc(area)}</span>${places.length ? `<br>z. B. ${esc(places.join(', '))}` : ''}${districts.length ? `<br>Münchner Stadtteile: ${esc(districts.join(', '))}` : ''}</p>
+                <div>
+                    <p>Einsatzgebiet: <span class="text-ink">${esc(area)}</span>${places.length ? ` – z. B. ${esc(places.slice(0, 5).join(', '))}` : ''}</p>
+                    ${
+                        places.length > 5 || districts.length
+                            ? `<details class="mt-1">
+                        <summary class="cursor-pointer text-signal-deep">Alle Orte anzeigen</summary>
+                        <p class="mt-2">${esc(places.join(', '))}</p>
+                        ${districts.length ? `<p class="mt-2">Münchner Stadtteile: ${esc(districts.join(', '))}</p>` : ''}
+                    </details>`
+                            : ''
+                    }
+                </div>
             </div>`;
 }
 
 /* ---------------------------------------------------------------- pages */
 
 // photos: keys of services with a photo in public/images/leistungen/ (the rest use their drawing).
-function homePage(ctx, projects, photos) {
+// personPhoto: true once the contact person photo (gb.contactPerson.photo) is in public/.
+function homePage(ctx, projects, photos, personPhoto) {
     const { url } = ctx;
     const channels = [
         ['Telefon · 24/7', esc(gb.contact.phone), gb.contact.phoneHref, false],
@@ -386,22 +409,39 @@ function homePage(ctx, projects, photos) {
     <section id="top" class="bg-gradient-to-b from-paper to-white pt-24 pb-16 lg:pt-36 lg:pb-24">
         <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div class="lg:col-span-6">
-                <p class="inline-flex rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">Zuverlässig · Gründlich · Seit ${gb.founded}</p>
-                <!-- The keyword line is the h1 for search engines; the big claim below is styled text. -->
-                <h1 class="eyebrow mt-6">${esc(gb.eyebrow)}</h1>
-                <p class="mt-4 font-display text-4xl leading-[1.05] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">Wir sind da,<br>wenn es zählt.</p>
+                <p class="inline-flex rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">${esc(gb.claim)}</p>
+                <!-- The offer is the big headline and the h1; the slogan above stays secondary. -->
+                <h1 class="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${esc(gb.heroTitle)}</h1>
                 <p class="mt-6 text-lg text-slate-700">${esc(gb.tagline)}</p>
                 <div class="mt-9 flex flex-col gap-3 sm:flex-row">
                     <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
-                    <a href="#leistungen" class="btn-ghost">Unsere Leistungen</a>
+                    <a href="${url('leistungen/abbruch/')}" class="btn-ghost">Abbruch & Rückbau ansehen</a>
                 </div>
-                <p class="mt-10 font-mono text-[11px] tracking-[0.2em] text-ink uppercase">
-                    Seit ${gb.founded} <span class="text-signal-deep">·</span> ${esc(gb.region)} <span class="text-signal-deep">·</span> 24/7
-                </p>
             </div>
             <div class="relative lg:col-span-6">
                 <img src="${url('images/leistungen/unterhaltsreinigung.jpg')}" alt="Reinigungsteam von GoganBau bei der Unterhaltsreinigung in München" width="900" height="503" fetchpriority="high" class="aspect-[4/3] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/4]">
                 <img src="${url('images/leistungen/thumb/abbruch.jpg')}" alt="GoganBau bei Abbrucharbeiten" width="640" height="480" loading="lazy" class="absolute -bottom-8 -left-4 hidden w-44 rounded-xl border-4 border-white object-cover shadow-lg sm:block lg:-left-10 lg:w-56">
+            </div>
+        </div>
+        <dl class="mx-auto mt-16 grid max-w-7xl grid-cols-2 gap-px overflow-hidden border-y border-slate-200 bg-slate-200 sm:mx-6 lg:mx-auto lg:grid-cols-4">
+            ${each(gb.facts, ([value, label]) => `<div class="bg-white px-4 py-5 sm:px-6">
+                <dt class="font-display text-lg font-bold text-brand sm:text-xl">${esc(value)}</dt>
+                <dd class="mt-1 text-sm text-slate-600">${esc(label)}</dd>
+            </div>`)}
+        </dl>
+    </section>
+
+    <section id="kunden" class="border-t border-slate-200 bg-paper py-16 lg:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title text-center">Für wen wir arbeiten.</h2>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                ${each(gb.audiences, ([title, text, keys]) => `<div class="flex flex-col border-t-4 border-brand bg-white p-6 shadow-sm">
+                    <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
+                    <p class="mt-2 text-slate-600">${esc(text)}</p>
+                    <ul class="mt-4 flex flex-wrap gap-2 text-sm">
+                        ${each(keys, (k) => `<li><a href="${url(`leistungen/${k}/`)}" class="inline-flex border border-slate-300 px-2.5 py-1 text-ink hover:border-brand hover:text-brand">${esc(gb.services[k].title)}</a></li>`)}
+                    </ul>
+                </div>`)}
             </div>
         </div>
     </section>
@@ -506,6 +546,26 @@ function homePage(ctx, projects, photos) {
             : ''
     }
 
+    ${
+        personPhoto
+            ? `<section id="ansprechpartner" class="border-t border-slate-200 bg-paper py-20 lg:py-24">
+        <div class="mx-auto grid max-w-5xl items-center gap-10 px-4 sm:px-6 md:grid-cols-5 lg:px-8">
+            <img src="${url(gb.contactPerson.photo)}" alt="${esc(gb.contactPerson.name)}, ${esc(gb.contactPerson.role)} von ${esc(gb.shortName)}" loading="lazy" class="aspect-[4/5] w-full rounded-2xl object-cover shadow-xl md:col-span-2">
+            <div class="md:col-span-3">
+                <p class="eyebrow">Ihr Ansprechpartner</p>
+                <h2 class="section-title mt-4">${esc(gb.contactPerson.name)}</h2>
+                <p class="mt-1 text-mist">${esc(gb.contactPerson.role)}, ${esc(gb.name)}</p>
+                <p class="mt-6 text-lg text-slate-700">„${esc(gb.contactPerson.text)}“</p>
+                <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                    <a href="${gb.contact.phoneHref}" class="btn-primary">${esc(gb.contact.phone)}</a>
+                    <a href="${wa()}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} WhatsApp<span class="sr-only"> an ${esc(gb.contactPerson.name)}</span></a>
+                </div>
+            </div>
+        </div>
+    </section>`
+            : ''
+    }
+
     <section id="ueber-uns" class="scroll-mt-16 border-t border-slate-200 bg-white py-24 lg:py-32">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-24 lg:px-8">
             <div data-reveal>
@@ -562,7 +622,7 @@ function homePage(ctx, projects, photos) {
                     </li>`)}
                 </ul>
             </div>
-            <div data-reveal style="--reveal-delay: 120ms" class="glass p-5 sm:p-8 lg:col-span-7">
+            <div id="anfrage" data-reveal style="--reveal-delay: 120ms" class="glass scroll-mt-20 p-5 sm:p-8 lg:col-span-7">
                 <p class="mb-6 font-display text-xl font-bold text-ink">Kostenloses Angebot anfordern</p>
                 ${inquiryForm(ctx)}
             </div>
@@ -616,6 +676,20 @@ function leistungenPage(ctx, photos) {
     });
 }
 
+// Services that fit together on a job (shown under "Weitere Leistungen"); the rest: same group.
+const related = {
+    abbruch: ['entkernung', 'rueckbau', 'kernbohrungen', 'baureinigung'],
+    entkernung: ['abbruch', 'rueckbau', 'baureinigung', 'bauendreinigung'],
+    rueckbau: ['abbruch', 'entkernung', 'baureinigung', 'logistik'],
+    kernbohrungen: ['abbruch', 'entkernung', 'rueckbau', 'baureinigung'],
+    baureinigung: ['bauendreinigung', 'entkernung', 'abbruch', 'grundreinigung'],
+    bauendreinigung: ['baureinigung', 'grundreinigung', 'gebaeudereinigung', 'entkernung'],
+};
+const relatedServices = (key) =>
+    (related[key] ?? services.filter(([k, o]) => k !== key && o.group === gb.services[key].group).map(([k]) => k))
+        .slice(0, 4)
+        .map((k) => [k, gb.services[k]]);
+
 function servicePage(ctx, key, projects, photo) {
     const { url } = ctx;
     const s = gb.services[key];
@@ -633,12 +707,16 @@ function servicePage(ctx, key, projects, photo) {
             <p class="eyebrow mt-8">Leistung ${number(key)}</p>
             <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
             <p class="mt-6 text-lg text-slate-700">${esc(s.text)}</p>
+            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                <p class="text-sm text-mist">Standort, Zeitraum und eine kurze Beschreibung genügen.</p>
+            </div>
             ${
                 !s.image
                     ? ''
                     : photo
                       ? `<figure class="mt-8">
-                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" class="w-full border border-slate-200">
+                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" width="900" height="503" class="aspect-[16/9] max-h-80 w-full border border-slate-200 object-cover">
                 <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>
             </figure>`
                       : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-slate-200">`
@@ -658,7 +736,7 @@ function servicePage(ctx, key, projects, photo) {
             ${s.area ? areaLine(s.area) : ''}
             ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-700">${esc(s.note)}</p>` : ''}
             <div class="mt-12 grid gap-3 sm:grid-cols-2">
-                <a href="${url(`?leistung=${key}#kontakt`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
                 <a href="${wa(`Hallo, ich interessiere mich für ${s.title}.`)}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp fragen</a>
             </div>
             <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-ink underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
@@ -700,7 +778,7 @@ function servicePage(ctx, key, projects, photo) {
             <p class="eyebrow">Weitere Leistungen</p>
             <ul class="mt-6 divide-y divide-slate-200 border-y border-slate-200">
                 ${each(
-                    services.filter(([k]) => k !== key),
+                    relatedServices(key),
                     ([k, o]) => `<li>
                     <a href="${url(`leistungen/${k}/`)}" class="group flex items-center gap-4 py-4">
                         <span class="font-mono text-xs text-signal-deep">${number(k)}</span>
@@ -710,6 +788,7 @@ function servicePage(ctx, key, projects, photo) {
                 </li>`,
                 )}
             </ul>
+            <a href="${url('leistungen/')}" class="mt-6 inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a>
         </div>
     </section>`,
     });
@@ -732,7 +811,8 @@ function b2bPage(ctx) {
     const columns = [
         // [heading, service keys, Einsatzgebiet, green accent?]
         ['Abbruch & Rückbau', keysOf('abbruch'), 'ganz Bayern', false],
-        ['Baureinigung & Gebäudereinigung', keysOf('reinigung'), 'München und Umkreis bis 50 km', true],
+        // Builders look for construction cleaning first.
+        ['Baureinigung & Gebäudereinigung', ['baureinigung', 'bauendreinigung', ...keysOf('reinigung').filter((k) => !k.startsWith('bau'))], 'München und Umkreis bis 50 km', true],
         ['Montage & Logistik', keysOf('montage'), null, false],
     ];
 
@@ -888,7 +968,7 @@ export function renderPages({ base, publicDir }) {
     };
 
     return [
-        { file: 'index.html', html: homePage(context('home', ''), projects, photos) },
+        { file: 'index.html', html: homePage(context('home', ''), projects, photos, fs.existsSync(path.join(publicDir, gb.contactPerson.photo))) },
         ...services.map(([key]) => ({
             file: `leistungen/${key}/index.html`,
             html: servicePage(
