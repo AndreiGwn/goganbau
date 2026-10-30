@@ -472,6 +472,24 @@ function homePage(ctx, projects, photos, personPhoto) {
         </div>
     </section>
 
+    <section id="arbeiten" class="border-t border-slate-200 bg-white py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="mx-auto max-w-3xl text-center">
+                <p class="eyebrow">Aus unserer Arbeit</p>
+                <h2 class="section-title mt-4">Echte Einsätze in München und Umgebung.</h2>
+                <p class="mt-4 text-lg text-slate-600">Keine Symbolbilder: So sieht es aus, wenn unser Team fertig ist.</p>
+            </div>
+            <ul class="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+                ${each(gb.gallery, ([file, caption]) => `<li>
+                    <figure>
+                        <img src="${url(`images/arbeiten/${file}.jpg`)}" alt="${esc(caption)} – GoganBau" width="900" height="1200" loading="lazy" class="aspect-[3/4] w-full rounded-xl object-cover">
+                        <figcaption class="mt-2 text-sm text-slate-600">${esc(caption)}</figcaption>
+                    </figure>
+                </li>`)}
+            </ul>
+        </div>
+    </section>
+
     <section id="probleme" class="border-t border-slate-200 bg-paper py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">

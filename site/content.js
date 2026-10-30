@@ -589,6 +589,13 @@ export default {
     // images, so they are labelled as such (not your own project photos).
     projects: [
         {
+            service: 'gebaeudereinigung',
+            title: 'Eingangsbereich eines Wohnhauses',
+            before: 'images/projekte/eingang-vorher.jpg',
+            after: 'images/projekte/eingang-nachher.jpg',
+            symbolbild: false,
+        },
+        {
             service: 'entkernung',
             title: 'Entkernung Bürogeschoss',
             before: 'images/projekte/abbruch-vorher.jpg',
@@ -602,6 +609,18 @@ export default {
             after: 'images/projekte/reinigung-nachher.jpg',
             symbolbild: false,
         },
+    ],
+
+    // "Aus unserer Arbeit" on the home page: own photos from public/images/arbeiten/ as [file, caption].
+    gallery: [
+        ['neubau-wohnung', 'Endreinigung einer Neubauwohnung'],
+        ['neubau-bad', 'Bad nach der Bauendreinigung'],
+        ['treppenhaus', 'Treppenhausreinigung in einer Wohnanlage'],
+        ['scheuersaugmaschine', 'Grundreinigung mit Scheuersaugmaschine'],
+        ['bad-altbau', 'Badreinigung in einer Altbauwohnung'],
+        ['hauseingang-altbau', 'Reinigung eines Altbau-Hauseingangs'],
+        ['altbau-balkon', 'Reinigung in einer Altbauwohnung'],
+        ['treppenhaus-einfamilienhaus', 'Grundreinigung im Einfamilienhaus'],
     ],
 
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
