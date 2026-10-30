@@ -50,21 +50,28 @@ export default {
         photo: 'images/cosmin-gogan.jpg',
     },
 
-    // "Sie kennen das bestimmt": [the problem with other cleaning firms, our answer].
+    // Checklist next to the hero photo: [title, text].
+    heroFeatures: [
+        ['Abbruch und Reinigung aus einer Hand', 'Innenabbruch, Entkernung und Rückbau in ganz Bayern – und danach die Bau- und Bauendreinigung vom selben Team.'],
+        ['Fester Ansprechpartner', 'Sie stimmen Umfang, Termine und Übergabe direkt mit uns ab – rund um die Uhr erreichbar.'],
+        ['Kostenloses Angebot', 'Beschreiben Sie Ihr Projekt kurz – Sie erhalten ein Angebot mit klar beschriebenem Leistungsumfang.'],
+    ],
+
+    // "Sie kennen das bestimmt": [title, the problem with other cleaning firms, our answer].
     painIntro:
         'Sie möchten saubere Räume, ohne sich selbst darum kümmern zu müssen. Mit der falschen Reinigungsfirma wird Sauberkeit aber schnell zur zusätzlichen Aufgabe.',
     painPoints: [
-        ['Ständig neue Gesichter – und niemand weiß, was vereinbart war.', 'Fester Ansprechpartner'],
-        ['Absprachen werden nicht eingehalten, Sie müssen alles nachkontrollieren.', 'Klarer Reinigungsplan'],
-        ['Wenn es schnell gehen muss, erreichen Sie niemanden.', 'Rund um die Uhr erreichbar'],
+        ['Ständig neue Gesichter', 'Jedes Mal jemand anderes – und niemand weiß, was vereinbart war.', 'Bei uns: ein fester Ansprechpartner.'],
+        ['Absprachen ohne Verlass', 'Termine und Aufgaben werden nicht eingehalten, Sie müssen alles nachkontrollieren.', 'Bei uns: ein klarer Reinigungsplan.'],
+        ['Niemand erreichbar', 'Wenn es schnell gehen muss, geht niemand ans Telefon.', 'Bei uns: rund um die Uhr erreichbar.'],
     ],
 
-    // "Ihre Vorteile auf einen Blick": [title, text]. Only promise what we always do.
+    // "Ihre Vorteile auf einen Blick": [icon, title, text]. Only promise what we always do.
     advantages: [
-        ['Zeit sparen', 'Sie beauftragen uns einmal – um Reinigungsplan, Personal und Ablauf kümmern wir uns.'],
-        ['Ein Ansprechpartner', 'Fragen und Änderungen klären Sie direkt mit uns, rund um die Uhr.'],
-        ['Planbare Sauberkeit', 'Fester Reinigungsplan: täglich, wöchentlich oder monatlich – so, wie es zu Ihnen passt.'],
-        ['Auch für Baustellen', 'Bau- und Bauendreinigung vor der Abnahme – von einem Team, das selbst auf Baustellen zu Hause ist.'],
+        ['clock', 'Zeit sparen', 'Sie beauftragen uns einmal – um Reinigungsplan, Personal und Ablauf kümmern wir uns.'],
+        ['user', 'Ein Ansprechpartner', 'Fragen und Änderungen klären Sie direkt mit uns, rund um die Uhr.'],
+        ['calendar', 'Planbare Sauberkeit', 'Fester Reinigungsplan: täglich, wöchentlich oder monatlich – so, wie es zu Ihnen passt.'],
+        ['helmet', 'Auch für Baustellen', 'Bau- und Bauendreinigung vor der Abnahme – von einem Team, das selbst auf Baustellen zu Hause ist.'],
     ],
 
     // "Über uns" text on the home page: intro paragraphs, then the topic blocks below them. Only state facts.

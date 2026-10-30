@@ -20,6 +20,9 @@ const groupLabel = (cls) => (label) => `<li class="${cls} font-mono text-[10px] 
 const buildDate = new Date().toISOString().slice(0, 10);
 const wa = (text) => `https://wa.me/${gb.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
+// Heading text with one word set in the orange highlight box (see .hl in app.css).
+const hl = (text, word) => esc(text).replace(esc(word), `<span class="hl">${esc(word)}</span>`);
+
 /* ---------------------------------------------------------------- icons */
 
 const icon = {
@@ -39,6 +42,16 @@ const logo = () => `<span class="flex items-center gap-2.5">
         <span class="mt-1 block font-mono text-[9px] tracking-[0.2em] text-white/70 uppercase">&amp; Gebäudereinigung</span>
     </span>
 </span>`;
+
+// Line icons for "Ihre Vorteile".
+const lineIcon = Object.fromEntries(
+    Object.entries({
+        clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+        user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+        calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+        helmet: '<path d="M4 17a8 8 0 0 1 16 0M2 17h20v3H2zM10 9V5h4v4"/>',
+    }).map(([k, d]) => [k, `<svg viewBox="0 0 24 24" class="size-9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`]),
+);
 
 /* ------------------------------------------------------------- partials */
 
@@ -405,25 +418,35 @@ function homePage(ctx, projects, photos, personPhoto) {
         title: gb.homeTitle,
         head: structuredData() + faqData(gb.faq),
         body: `
-    <!-- Hero: text left, framed team photos right (no 3D, so it stays light on phones). -->
-    <section id="top" class="bg-gradient-to-b from-paper to-white pt-24 pb-16 lg:pt-36 lg:pb-24">
-        <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
-            <div class="lg:col-span-6">
-                <p class="inline-flex rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">${esc(gb.claim)}</p>
-                <!-- The offer is the big headline and the h1; the slogan above stays secondary. -->
-                <h1 class="mt-5 font-display text-4xl leading-[1.05] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${esc(gb.heroTitle)}</h1>
-                <p class="mt-6 text-lg text-slate-700">${esc(gb.tagline)}</p>
-                <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-                    <a href="#kontakt" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
-                    <a href="${url('leistungen/abbruch/')}" class="btn-ghost">Abbruch & Rückbau ansehen</a>
+    <!-- Hero: centered headline with one highlighted word, then photo + checklist (no 3D, light on phones). -->
+    <section id="top" class="bg-white pt-28 pb-16 lg:pt-40 lg:pb-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-4xl text-center">
+                <p class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">${esc(gb.claim)}</p>
+                <!-- The offer is the h1; the slogan above stays secondary. -->
+                <h1 class="mt-5 font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(gb.heroTitle, 'Gebäudereinigung')}</h1>
+                <p class="mx-auto mt-6 max-w-3xl text-lg text-slate-600">${esc(gb.tagline)}</p>
+            </div>
+            <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+                <div class="relative lg:col-span-7">
+                    <img src="${url('images/leistungen/unterhaltsreinigung.jpg')}" alt="Reinigungsteam von GoganBau bei der Unterhaltsreinigung in München" width="900" height="503" fetchpriority="high" class="aspect-[16/10] w-full rounded-2xl object-cover shadow-xl">
+                </div>
+                <div class="lg:col-span-5">
+                    <ul class="space-y-7">
+                        ${each(gb.heroFeatures, ([title, text]) => `<li class="flex gap-4">
+                            <span class="mt-1 grid size-7 shrink-0 place-items-center rounded-full bg-signal text-white"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg></span>
+                            <span>
+                                <span class="block font-display text-xl font-bold text-ink">${esc(title)}</span>
+                                <span class="mt-1 block text-slate-600">${esc(text)}</span>
+                            </span>
+                        </li>`)}
+                    </ul>
+                    <a href="#kontakt" class="btn-primary mt-9 w-full">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                    <a href="${url('leistungen/abbruch/')}" class="btn-ghost mt-3 w-full">Abbruch & Rückbau ansehen</a>
                 </div>
             </div>
-            <div class="relative lg:col-span-6">
-                <img src="${url('images/leistungen/unterhaltsreinigung.jpg')}" alt="Reinigungsteam von GoganBau bei der Unterhaltsreinigung in München" width="900" height="503" fetchpriority="high" class="aspect-[4/3] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/4]">
-                <img src="${url('images/leistungen/thumb/abbruch.jpg')}" alt="GoganBau bei Abbrucharbeiten" width="640" height="480" loading="lazy" class="absolute -bottom-8 -left-4 hidden w-44 rounded-xl border-4 border-white object-cover shadow-lg sm:block lg:-left-10 lg:w-56">
-            </div>
         </div>
-        <dl class="mx-auto mt-16 grid max-w-7xl grid-cols-2 gap-px overflow-hidden border-y border-slate-200 bg-slate-200 sm:mx-6 lg:mx-auto lg:grid-cols-4">
+        <dl class="mx-auto mt-16 grid max-w-7xl grid-cols-2 gap-px overflow-hidden rounded-xl border border-slate-200 bg-slate-200 sm:mx-6 lg:mx-auto lg:grid-cols-4">
             ${each(gb.facts, ([value, label]) => `<div class="bg-white px-4 py-5 sm:px-6">
                 <dt class="font-display text-lg font-bold text-brand sm:text-xl">${esc(value)}</dt>
                 <dd class="mt-1 text-sm text-slate-600">${esc(label)}</dd>
@@ -433,7 +456,7 @@ function homePage(ctx, projects, photos, personPhoto) {
 
     <section id="kunden" class="border-t border-slate-200 bg-paper py-16 lg:py-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 class="section-title text-center">Für wen wir arbeiten.</h2>
+            <h2 class="section-title text-center">Für ${hl('wen', 'wen')} wir arbeiten</h2>
             <div class="mt-10 grid gap-5 md:grid-cols-3">
                 ${each(gb.audiences, ([title, text, keys]) => `<div class="flex flex-col border-t-4 border-brand bg-white p-6 shadow-sm">
                     <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
@@ -450,7 +473,7 @@ function homePage(ctx, projects, photos, personPhoto) {
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <p class="eyebrow">Google-Bewertungen</p>
-                <h2 class="section-title mt-4">Das sagen unsere Auftraggeber.</h2>
+                <h2 class="section-title mt-4">Das sagen unsere ${hl('Auftraggeber', 'Auftraggeber')}</h2>
             </div>
             <div class="mt-10 grid gap-5 md:grid-cols-3">
                 ${each(gb.reviews, ([name, text]) => `<figure class="flex flex-col border border-slate-200 bg-paper p-6">
@@ -467,7 +490,7 @@ function homePage(ctx, projects, photos, personPhoto) {
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Reinigung in München und Umgebung</p>
-                <h2 class="section-title mt-4">Unsere Reinigungsleistungen im Überblick.</h2>
+                <h2 class="section-title mt-4">Unsere ${hl('Reinigungsleistungen', 'Reinigungsleistungen')} im Überblick</h2>
                 <p class="mt-4 text-lg text-slate-600">Von der regelmäßigen Unterhaltsreinigung bis zur Bauendreinigung vor der Abnahme – in München und im Umkreis von bis zu 50 km.</p>
             </div>
             <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -493,7 +516,7 @@ function homePage(ctx, projects, photos, personPhoto) {
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Aus unserer Arbeit</p>
-                <h2 class="section-title mt-4">Echte Einsätze in München und Umgebung.</h2>
+                <h2 class="section-title mt-4">${hl('Echte', 'Echte')} Einsätze in München und Umgebung</h2>
                 <p class="mt-4 text-lg text-slate-600">Keine Symbolbilder – alle Fotos stammen aus unseren eigenen Einsätzen.</p>
             </div>
             <ul class="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
@@ -516,36 +539,48 @@ function homePage(ctx, projects, photos, personPhoto) {
         </div>
     </section>
 
-    <section id="probleme" class="border-t border-slate-200 bg-paper py-20 lg:py-28">
+    <section id="probleme" class="border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
-                <p class="eyebrow">Sie kennen das bestimmt</p>
-                <h2 class="section-title mt-4">Sauberkeit sollte keine Extra-Aufgabe sein.</h2>
-                <p class="mt-4 text-lg text-slate-600">${esc(gb.painIntro)}</p>
+                <h2 class="section-title">Die 3 größten ${hl('Probleme', 'Probleme')} mit Ihrer aktuellen Reinigungsfirma</h2>
+                <p class="mt-5 text-lg text-slate-600">${esc(gb.painIntro)}</p>
             </div>
-            <div class="mt-12 grid gap-5 md:grid-cols-3">
-                ${each(gb.painPoints, ([problem, answer], i) => `<div data-reveal style="--reveal-delay: ${i * 100}ms" class="flex flex-col bg-white p-6 shadow-sm sm:p-8">
-                    <p class="text-slate-600">„${esc(problem)}“</p>
-                    <p class="mt-auto flex items-center gap-2 pt-6 font-display text-lg font-bold text-brand">${icon.check()} ${esc(answer)}</p>
-                </div>`)}
+            <div class="mt-14 grid items-center gap-12 lg:grid-cols-2">
+                <ol class="space-y-2">
+                    ${each(gb.painPoints, ([title, problem, answer], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="flex gap-6">
+                        <div class="flex w-14 shrink-0 flex-col items-center">
+                            <span class="font-display text-4xl font-bold text-signal-deep">${String(i + 1).padStart(2, '0')}</span>
+                            ${i < gb.painPoints.length - 1 ? '<span class="mt-3 w-px flex-1 bg-signal/40"></span>' : ''}
+                        </div>
+                        <div class="pb-8">
+                            <h3 class="font-display text-2xl font-bold text-ink">${esc(title)}</h3>
+                            <p class="mt-2 text-slate-600">${esc(problem)}</p>
+                            <p class="mt-3 flex items-center gap-2 font-semibold text-brand">${icon.check('size-5')} ${esc(answer)}</p>
+                        </div>
+                    </li>`)}
+                </ol>
+                <img data-reveal src="${url('images/arbeiten/treppenhaus.jpg')}" alt="GoganBau bei der Treppenhausreinigung in einer Wohnanlage" width="900" height="1186" loading="lazy" class="aspect-[4/5] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/6]">
             </div>
         </div>
     </section>
 
     <section id="ablauf" class="scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div data-reveal class="max-w-2xl">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">So funktioniert's</p>
-                <h2 class="section-title mt-4">In drei Schritten zum Auftrag.</h2>
+                <h2 class="section-title mt-4">In drei Schritten zum ${hl('Auftrag', 'Auftrag')}</h2>
             </div>
-            <ol class="mt-12 grid gap-6 md:grid-cols-3 md:gap-8">
-                ${each(gb.steps, ([title, text], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="border border-slate-200 bg-white p-6 sm:p-8">
-                    <span class="grid size-12 place-items-center bg-brand font-display text-xl font-bold text-white">${i + 1}</span>
-                    <h3 class="mt-5 font-display text-xl font-bold text-ink">${esc(title)}</h3>
-                    <p class="mt-2 text-slate-600">${esc(text)}</p>
+            <!-- Timeline: one line in the middle (left on phones), cards alternate sides. -->
+            <ol class="relative mt-14 space-y-10 before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-signal/40 md:before:left-1/2 md:before:-translate-x-1/2">
+                ${each(gb.steps, ([title, text], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="relative pl-14 md:grid md:grid-cols-2 md:gap-16 md:pl-0">
+                    <span class="absolute top-4 left-0 grid size-9 place-items-center rounded-lg bg-signal font-display font-bold text-white shadow md:left-1/2 md:-translate-x-1/2">${i + 1}</span>
+                    <div class="rounded-xl bg-white p-6 shadow-sm ${i % 2 ? 'md:col-start-1 md:text-right' : 'md:col-start-2'}">
+                        <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
+                        <p class="mt-2 text-slate-600">${esc(text)}</p>
+                    </div>
                 </li>`)}
             </ol>
-            <div data-reveal class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div data-reveal class="mt-12 flex flex-col justify-center gap-3 sm:flex-row">
                 <a href="#kontakt" class="btn-primary">Jetzt anfragen ${icon.arrow()}</a>
                 <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> anrufen</span></a>
             </div>
@@ -555,17 +590,19 @@ function homePage(ctx, projects, photos, personPhoto) {
     <section id="vorteile" class="border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div data-reveal class="mx-auto max-w-3xl text-center">
-                <p class="eyebrow">Ihre Vorteile</p>
-                <h2 class="section-title mt-4">Ihre Vorteile auf einen Blick.</h2>
+                <h2 class="section-title">Ihre ${hl('Vorteile', 'Vorteile')} auf einen Blick</h2>
             </div>
             <div class="mt-12 grid gap-5 lg:grid-cols-3">
                 <div class="grid gap-5 sm:grid-cols-2 lg:col-span-2">
-                    ${each(gb.advantages, ([title, text], i) => `<div data-reveal style="--reveal-delay: ${(i % 2) * 100}ms" class="border border-slate-200 p-6">
-                        <h3 class="font-display text-lg font-bold text-ink uppercase">${esc(title)}</h3>
-                        <p class="mt-2 text-slate-600">${esc(text)}</p>
+                    ${each(gb.advantages, ([ic, title, text], i) => `<div data-reveal style="--reveal-delay: ${(i % 2) * 100}ms" class="flex gap-5 rounded-xl bg-paper p-6 shadow-sm">
+                        <span class="text-signal-deep">${lineIcon[ic]}</span>
+                        <div>
+                            <h3 class="font-display text-lg font-bold text-ink">${esc(title)}</h3>
+                            <p class="mt-2 text-slate-600">${esc(text)}</p>
+                        </div>
                     </div>`)}
                 </div>
-                <div data-reveal style="--reveal-delay: 150ms" class="flex flex-col justify-center bg-brand p-8 text-white">
+                <div data-reveal style="--reveal-delay: 150ms" class="flex flex-col justify-center rounded-xl bg-brand p-8 text-white">
                     <p class="font-display text-2xl font-bold">Jetzt ist Ihre Zeit.</p>
                     <p class="mt-3 text-white/80">Sagen Sie uns, was gereinigt werden soll – Sie erhalten ein kostenloses Angebot.</p>
                     <a href="#kontakt" class="btn-primary mt-6">Kostenloses Angebot anfordern ${icon.arrow()}</a>

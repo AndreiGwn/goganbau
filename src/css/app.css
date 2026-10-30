@@ -61,7 +61,7 @@
 }
 
 @utility btn {
-    @apply inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 px-5 py-3 font-display text-sm font-semibold tracking-wide uppercase transition duration-200 select-none disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex rounded-lg min-h-12 cursor-pointer items-center justify-center gap-2 px-5 py-3 font-display text-sm font-semibold tracking-wide uppercase transition duration-200 select-none disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 @layer components {
@@ -112,6 +112,13 @@
         @apply font-mono text-[11px] font-medium tracking-[0.22em] text-signal-deep uppercase;
     }
 
+    /* One highlighted word in a heading: white on orange, like a marker box. */
+    .hl {
+        @apply rounded-lg bg-signal px-2.5 text-white;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+
     .section-title {
         @apply font-display text-3xl leading-[1.05] font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl;
     }
@@ -153,7 +160,7 @@
     }
 
     .field {
-        @apply w-full border border-slate-300 bg-white px-3.5 py-3 text-base text-ink sm:py-2.5 sm:text-sm placeholder:text-slate-400 transition outline-none focus:border-signal focus:ring-1 focus:ring-signal/60;
+        @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-3 text-base text-ink sm:py-2.5 sm:text-sm placeholder:text-slate-400 transition outline-none focus:border-signal focus:ring-1 focus:ring-signal/60;
     }
 
     .field-error {
@@ -161,7 +168,7 @@
     }
 
     .card {
-        @apply border border-slate-200 bg-white p-6 transition duration-300 hover:border-slate-300 hover:shadow-sm;
+        @apply rounded-xl border border-slate-200 bg-white p-6 transition duration-300 hover:border-slate-300 hover:shadow-sm;
     }
 
     .blueprint-grid {
