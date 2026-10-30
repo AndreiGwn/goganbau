@@ -798,7 +798,7 @@ function servicePage(ctx, key, projects, photo) {
     const { url } = ctx;
     const s = gb.services[key];
     const cleaning = s.group === 'reinigung';
-    // Second photo for the problems section: a real job photo, or another service of the same group.
+    // Second photo for the problems section: the staircase job photo only on its own page, otherwise another service of the same group.
     const other = services.find(([k, o]) => k !== key && o.group === s.group)[0];
     const problems = {
         heading: cleaning
@@ -806,7 +806,7 @@ function servicePage(ctx, key, projects, photo) {
             : `Die 3 größten ${hl('Probleme', 'Probleme')} auf der Baustelle`,
         intro: cleaning ? gb.painIntro : gb.painIntroBau,
         points: cleaning ? gb.painPoints : gb.painPointsBau,
-        photo: cleaning
+        photo: key === 'treppenhausreinigung'
             ? [url('images/arbeiten/treppenhaus.jpg'), 'GoganBau bei der Treppenhausreinigung in einer Wohnanlage']
             : [url(`images/leistungen/${other}.jpg`), `GoganBau – ${gb.services[other].title}`],
     };
