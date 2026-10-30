@@ -400,6 +400,83 @@ function areaLine(area) {
             </div>`;
 }
 
+/* --------------------------------------------------------- shared sections */
+// Used on the home page and on every service page.
+
+function reviewsSection() {
+    const star = '<svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg>';
+    return `<section id="bewertungen" class="border-t border-slate-200 bg-white py-16 lg:py-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="eyebrow">Google-Bewertungen</p>
+                <h2 class="section-title mt-4">Das sagen unsere ${hl('Auftraggeber', 'Auftraggeber')}</h2>
+            </div>
+            <div class="mt-10 grid gap-5 md:grid-cols-3">
+                ${each(gb.reviews, ([name, text]) => `<figure class="flex flex-col rounded-xl border border-slate-200 bg-paper p-6">
+                    <div class="flex gap-0.5 text-amber-400" role="img" aria-label="5 von 5 Sternen">${star.repeat(5)}</div>
+                    <blockquote class="mt-4 text-slate-700">„${esc(text)}“</blockquote>
+                    <figcaption class="mt-auto pt-5 font-display font-semibold text-ink">${esc(name)} <span class="font-sans text-sm font-normal text-mist">· Google</span></figcaption>
+                </figure>`)}
+            </div>
+            <p class="mt-8 text-center"><a href="${gb.googleReviewsUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Bewertungen auf Google ansehen ${icon.arrow()}</a></p>
+        </div>
+    </section>`;
+}
+
+// heading: HTML (may contain hl()); points: [[title, problem, answer], …]; photo: [src, alt].
+function problemsSection({ heading, intro, points, photo }) {
+    return `<section id="probleme" class="border-t border-slate-200 bg-white py-20 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="mx-auto max-w-3xl text-center">
+                <h2 class="section-title">${heading}</h2>
+                <p class="mt-5 text-lg text-slate-600">${esc(intro)}</p>
+            </div>
+            <div class="mt-14 grid items-center gap-12 lg:grid-cols-2">
+                <ol class="space-y-2">
+                    ${each(points, ([title, problem, answer], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="flex gap-6">
+                        <div class="flex w-14 shrink-0 flex-col items-center">
+                            <span class="font-display text-4xl font-bold text-signal-deep">${String(i + 1).padStart(2, '0')}</span>
+                            ${i < points.length - 1 ? '<span class="mt-3 w-px flex-1 bg-signal/40"></span>' : ''}
+                        </div>
+                        <div class="pb-8">
+                            <h3 class="font-display text-2xl font-bold text-ink">${esc(title)}</h3>
+                            <p class="mt-2 text-slate-600">${esc(problem)}</p>
+                            <p class="mt-3 flex items-center gap-2 font-semibold text-brand">${icon.check('size-5')} ${esc(answer)}</p>
+                        </div>
+                    </li>`)}
+                </ol>
+                <img data-reveal src="${photo[0]}" alt="${esc(photo[1])}" loading="lazy" class="aspect-[4/5] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/6]">
+            </div>
+        </div>
+    </section>`;
+}
+
+// ctaHref: where "Jetzt anfragen" goes (the form, preselected on service pages).
+function stepsSection(ctaHref) {
+    return `<section id="ablauf" class="scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <div data-reveal class="mx-auto max-w-3xl text-center">
+                <p class="eyebrow">So funktioniert's</p>
+                <h2 class="section-title mt-4">In drei Schritten zum ${hl('Auftrag', 'Auftrag')}</h2>
+            </div>
+            <!-- Timeline: one line in the middle (left on phones), cards alternate sides. -->
+            <ol class="relative mt-14 space-y-10 before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-signal/40 md:before:left-1/2 md:before:-translate-x-1/2">
+                ${each(gb.steps, ([title, text], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="relative pl-14 md:grid md:grid-cols-2 md:gap-16 md:pl-0">
+                    <span class="absolute top-4 left-0 grid size-9 place-items-center rounded-lg bg-signal font-display font-bold text-white shadow md:left-1/2 md:-translate-x-1/2">${i + 1}</span>
+                    <div class="rounded-xl bg-white p-6 shadow-sm ${i % 2 ? 'md:col-start-1 md:text-right' : 'md:col-start-2'}">
+                        <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
+                        <p class="mt-2 text-slate-600">${esc(text)}</p>
+                    </div>
+                </li>`)}
+            </ol>
+            <div data-reveal class="mt-12 flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="${ctaHref}" class="btn-primary">Jetzt anfragen ${icon.arrow()}</a>
+                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> anrufen</span></a>
+            </div>
+        </div>
+    </section>`;
+}
+
 /* ---------------------------------------------------------------- pages */
 
 // photos: keys of services with a photo in public/images/leistungen/ (the rest use their drawing).
@@ -469,22 +546,7 @@ function homePage(ctx, projects, photos, personPhoto) {
         </div>
     </section>
 
-    <section id="bewertungen" class="border-t border-slate-200 bg-white py-16 lg:py-20">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="eyebrow">Google-Bewertungen</p>
-                <h2 class="section-title mt-4">Das sagen unsere ${hl('Auftraggeber', 'Auftraggeber')}</h2>
-            </div>
-            <div class="mt-10 grid gap-5 md:grid-cols-3">
-                ${each(gb.reviews, ([name, text]) => `<figure class="flex flex-col border border-slate-200 bg-paper p-6">
-                    <div class="flex gap-0.5 text-amber-400" role="img" aria-label="5 von 5 Sternen"><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg><svg viewBox="0 0 20 20" class="size-4" fill="currentColor" aria-hidden="true"><path d="m10 1.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9z"/></svg></div>
-                    <blockquote class="mt-4 text-slate-700">„${esc(text)}“</blockquote>
-                    <figcaption class="mt-auto pt-5 font-display font-semibold text-ink">${esc(name)} <span class="font-sans text-sm font-normal text-mist">· Google</span></figcaption>
-                </figure>`)}
-            </div>
-            <p class="mt-8 text-center"><a href="${gb.googleReviewsUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Bewertungen auf Google ansehen ${icon.arrow()}</a></p>
-        </div>
-    </section>
+    ${reviewsSection()}
 
     <section id="leistungen" class="scroll-mt-16 border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -539,53 +601,14 @@ function homePage(ctx, projects, photos, personPhoto) {
         </div>
     </section>
 
-    <section id="probleme" class="border-t border-slate-200 bg-white py-20 lg:py-28">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div data-reveal class="mx-auto max-w-3xl text-center">
-                <h2 class="section-title">Die 3 größten ${hl('Probleme', 'Probleme')} mit Ihrer aktuellen Reinigungsfirma</h2>
-                <p class="mt-5 text-lg text-slate-600">${esc(gb.painIntro)}</p>
-            </div>
-            <div class="mt-14 grid items-center gap-12 lg:grid-cols-2">
-                <ol class="space-y-2">
-                    ${each(gb.painPoints, ([title, problem, answer], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="flex gap-6">
-                        <div class="flex w-14 shrink-0 flex-col items-center">
-                            <span class="font-display text-4xl font-bold text-signal-deep">${String(i + 1).padStart(2, '0')}</span>
-                            ${i < gb.painPoints.length - 1 ? '<span class="mt-3 w-px flex-1 bg-signal/40"></span>' : ''}
-                        </div>
-                        <div class="pb-8">
-                            <h3 class="font-display text-2xl font-bold text-ink">${esc(title)}</h3>
-                            <p class="mt-2 text-slate-600">${esc(problem)}</p>
-                            <p class="mt-3 flex items-center gap-2 font-semibold text-brand">${icon.check('size-5')} ${esc(answer)}</p>
-                        </div>
-                    </li>`)}
-                </ol>
-                <img data-reveal src="${url('images/arbeiten/treppenhaus.jpg')}" alt="GoganBau bei der Treppenhausreinigung in einer Wohnanlage" width="900" height="1186" loading="lazy" class="aspect-[4/5] w-full rounded-2xl object-cover shadow-xl lg:aspect-[5/6]">
-            </div>
-        </div>
-    </section>
+    ${problemsSection({
+        heading: `Die 3 größten ${hl('Probleme', 'Probleme')} mit Ihrer aktuellen Reinigungsfirma`,
+        intro: gb.painIntro,
+        points: gb.painPoints,
+        photo: [url('images/arbeiten/treppenhaus.jpg'), 'GoganBau bei der Treppenhausreinigung in einer Wohnanlage'],
+    })}
 
-    <section id="ablauf" class="scroll-mt-16 border-t border-slate-200 bg-paper py-20 lg:py-28">
-        <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div data-reveal class="mx-auto max-w-3xl text-center">
-                <p class="eyebrow">So funktioniert's</p>
-                <h2 class="section-title mt-4">In drei Schritten zum ${hl('Auftrag', 'Auftrag')}</h2>
-            </div>
-            <!-- Timeline: one line in the middle (left on phones), cards alternate sides. -->
-            <ol class="relative mt-14 space-y-10 before:absolute before:inset-y-0 before:left-4 before:w-0.5 before:bg-signal/40 md:before:left-1/2 md:before:-translate-x-1/2">
-                ${each(gb.steps, ([title, text], i) => `<li data-reveal style="--reveal-delay: ${i * 100}ms" class="relative pl-14 md:grid md:grid-cols-2 md:gap-16 md:pl-0">
-                    <span class="absolute top-4 left-0 grid size-9 place-items-center rounded-lg bg-signal font-display font-bold text-white shadow md:left-1/2 md:-translate-x-1/2">${i + 1}</span>
-                    <div class="rounded-xl bg-white p-6 shadow-sm ${i % 2 ? 'md:col-start-1 md:text-right' : 'md:col-start-2'}">
-                        <h3 class="font-display text-xl font-bold text-ink">${esc(title)}</h3>
-                        <p class="mt-2 text-slate-600">${esc(text)}</p>
-                    </div>
-                </li>`)}
-            </ol>
-            <div data-reveal class="mt-12 flex flex-col justify-center gap-3 sm:flex-row">
-                <a href="#kontakt" class="btn-primary">Jetzt anfragen ${icon.arrow()}</a>
-                <a href="${gb.contact.phoneHref}" class="btn-ghost"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> anrufen</span></a>
-            </div>
-        </div>
-    </section>
+    ${stepsSection('#kontakt')}
 
     <section id="vorteile" class="border-t border-slate-200 bg-white py-20 lg:py-28">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -774,55 +797,87 @@ const relatedServices = (key) =>
 function servicePage(ctx, key, projects, photo) {
     const { url } = ctx;
     const s = gb.services[key];
+    const cleaning = s.group === 'reinigung';
+    // Second photo for the problems section: a real job photo, or another service of the same group.
+    const other = services.find(([k, o]) => k !== key && o.group === s.group)[0];
+    const problems = {
+        heading: cleaning
+            ? `Die 3 größten ${hl('Probleme', 'Probleme')} mit Ihrer aktuellen Reinigungsfirma`
+            : `Die 3 größten ${hl('Probleme', 'Probleme')} auf der Baustelle`,
+        intro: cleaning ? gb.painIntro : gb.painIntroBau,
+        points: cleaning ? gb.painPoints : gb.painPointsBau,
+        photo: cleaning
+            ? [url('images/arbeiten/treppenhaus.jpg'), 'GoganBau bei der Treppenhausreinigung in einer Wohnanlage']
+            : [url(`images/leistungen/${other}.jpg`), `GoganBau – ${gb.services[other].title}`],
+    };
     return layout(ctx, {
         title: s.seoTitle,
         description: s.description,
         head: s.faq ? faqData(s.faq) : '',
         body: `
-    <section class="pt-24 pb-16 lg:pt-36 lg:pb-24">
-        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+    <section class="bg-white pt-24 pb-16 lg:pt-32 lg:pb-20">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <a href="${url('leistungen/')}" class="inline-flex items-center gap-2 py-2 text-sm text-mist hover:text-brand">
                 <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5m6-6-6 6 6 6"/></svg>
                 Alle Leistungen
             </a>
-            <p class="eyebrow mt-8">Leistung ${number(key)}</p>
-            <h1 class="section-title mt-4">${esc(s.h1 ?? `${s.title} in München`)}</h1>
-            <p class="mt-6 text-lg text-slate-700">${esc(s.text)}</p>
-            <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
-                <p class="text-sm text-mist">Standort, Zeitraum und eine kurze Beschreibung genügen.</p>
+            <div class="mx-auto mt-6 max-w-4xl text-center">
+                <p class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">Leistung ${number(key)}${s.area ? ` · ${esc(s.area)}` : ''}</p>
+                <h1 class="mt-5 font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(s.h1 ?? `${s.title} in München`, s.title)}</h1>
+                <p class="mx-auto mt-6 max-w-3xl text-lg text-slate-600">${esc(s.text)}</p>
             </div>
-            ${
-                !s.image
-                    ? ''
-                    : photo
-                      ? `<figure class="mt-8">
-                <img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image)}" width="900" height="503" class="aspect-[16/9] max-h-80 w-full border border-slate-200 object-cover">
-                <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>
-            </figure>`
-                      : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image)}" width="800" height="500" class="mt-8 w-full border border-slate-200">`
-            }
-            ${each(s.body, (p) => `<p class="mt-4 text-slate-600">${esc(p)}</p>`)}
-            <ul class="mt-10 border-t border-slate-200">
-                ${each(s.points, (p) => `<li class="flex items-center gap-4 border-b border-slate-200 py-4 text-ink">${icon.check()} ${esc(p)}</li>`)}
-            </ul>
-            ${
-                s.scope
-                    ? `<h2 class="mt-12 font-display text-xl font-bold text-ink">Leistungsumfang: ${esc(s.title)}</h2>
-            <ul class="mt-4 grid gap-x-6 gap-y-2 text-slate-700 sm:grid-cols-2">
-                ${each(s.scope, (item) => `<li class="flex gap-3"><span class="mt-2.5 size-1.5 shrink-0 bg-signal"></span>${esc(item)}</li>`)}
-            </ul>`
-                    : ''
-            }
-            ${s.area ? areaLine(s.area) : ''}
-            ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-700">${esc(s.note)}</p>` : ''}
-            <div class="mt-12 grid gap-3 sm:grid-cols-2">
-                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
-                <a href="${wa(`Hallo, ich interessiere mich für ${s.title}.`)}" target="_blank" rel="noopener" class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp fragen</a>
+            <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+                <figure class="lg:col-span-7">
+                    ${
+                        photo
+                            ? `<img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image ?? s.title)}" width="900" height="503" fetchpriority="high" class="aspect-[16/10] w-full rounded-2xl object-cover shadow-xl">
+                    <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>`
+                            : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image ?? s.title)}" width="800" height="500" class="w-full rounded-2xl border border-slate-200">`
+                    }
+                </figure>
+                <div class="lg:col-span-5">
+                    <ul class="space-y-6">
+                        ${each([...s.points, 'Kostenloses Angebot'], (p) => `<li class="flex items-center gap-4">
+                            <span class="grid size-7 shrink-0 place-items-center rounded-full bg-signal text-white"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 7"/></svg></span>
+                            <span class="font-display text-xl font-bold text-ink">${esc(p)}</span>
+                        </li>`)}
+                    </ul>
+                    <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary mt-9 w-full">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                    <a href="${wa(`Hallo, ich interessiere mich für ${s.title}.`)}" target="_blank" rel="noopener" class="btn-ghost mt-3 w-full">${icon.whatsapp('size-4 text-[#25D366]')} Per WhatsApp fragen</a>
+                    <p class="mt-4 text-center text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-ink underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
+                </div>
             </div>
-            <p class="mt-4 text-sm text-mist">Oder direkt anrufen, rund um die Uhr: <a href="${gb.contact.phoneHref}" class="text-ink underline underline-offset-2">${esc(gb.contact.phone)}</a></p>
         </div>
     </section>
+
+    ${reviewsSection()}
+
+    <section class="border-t border-slate-200 bg-paper py-20 lg:py-28">
+        <div class="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:px-8">
+            <div class="lg:col-span-7">
+                <p class="eyebrow">Leistungsumfang</p>
+                <h2 class="section-title mt-4">Das übernehmen wir bei der ${hl(s.title, s.title)}</h2>
+                ${each(s.body, (p) => `<p class="mt-5 text-lg text-slate-600">${esc(p)}</p>`)}
+                ${s.area ? areaLine(s.area) : ''}
+                ${s.note ? `<p class="mt-6 border-l-2 border-tech/60 bg-tech/5 px-4 py-3 text-sm text-slate-700">${esc(s.note)}</p>` : ''}
+            </div>
+            ${
+                s.scope
+                    ? `<div class="rounded-2xl bg-white p-6 shadow-sm sm:p-8 lg:col-span-5">
+                <h3 class="font-display text-xl font-bold text-ink">Im Leistungsumfang</h3>
+                <ul class="mt-5 space-y-3 text-slate-700">
+                    ${each(s.scope, (item) => `<li class="flex gap-3">${icon.check('size-5 mt-0.5')} ${esc(item)}</li>`)}
+                </ul>
+                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary mt-8 w-full">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+            </div>`
+                    : ''
+            }
+        </div>
+    </section>
+
+    ${problemsSection(problems)}
+
+    ${stepsSection(url(`?leistung=${key}#anfrage`))}
 
     ${
         s.faq
@@ -853,6 +908,17 @@ function servicePage(ctx, key, projects, photo) {
     </section>`
             : ''
     }
+
+    <section class="bg-brand py-16 text-white lg:py-20">
+        <div class="mx-auto max-w-4xl px-4 text-center sm:px-6">
+            <h2 class="font-display text-3xl font-bold sm:text-4xl">${esc(s.title)}: Jetzt kostenloses Angebot anfordern</h2>
+            <p class="mx-auto mt-4 max-w-2xl text-lg text-white/80">Standort, Zeitraum und eine kurze Beschreibung genügen – wir melden uns mit einem klaren Angebot.</p>
+            <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <a href="${url(`?leistung=${key}#anfrage`)}" class="btn-primary">Jetzt kostenloses Angebot ${icon.arrow()}</a>
+                <a href="${gb.contact.phoneHref}" class="btn border border-white/40 text-white hover:bg-white/10"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> anrufen</span></a>
+            </div>
+        </div>
+    </section>
 
     <section class="border-t border-slate-200 bg-paper py-16 lg:py-24">
         <div class="mx-auto max-w-3xl px-4 sm:px-6">

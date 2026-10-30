@@ -66,6 +66,14 @@ export default {
         ['Niemand erreichbar', 'Wenn es schnell gehen muss, geht niemand ans Telefon.', 'Bei uns: rund um die Uhr erreichbar.'],
     ],
 
+    // Same section on demolition and montage pages: [title, problem, our answer].
+    painIntroBau: 'Auf der Baustelle zählt jeder Tag. Wenn Kapazität fehlt oder Abstimmungen hängen, gerät der ganze Bauablauf ins Stocken.',
+    painPointsBau: [
+        ['Kapazität fehlt', 'Ihr Team ist ausgelastet, der Zeitplan drückt – und der nächste Bauabschnitt wartet.', 'Bei uns: zusätzliche Kapazität als Subunternehmer.'],
+        ['Zu viele Firmen', 'Abbruch, Entkernung und Reinigung von verschiedenen Firmen bedeuten Abstimmung und Wartezeiten.', 'Bei uns: Abbruch und Reinigung aus einer Hand.'],
+        ['Niemand erreichbar', 'Wenn auf der Baustelle schnell etwas geklärt werden muss, geht niemand ans Telefon.', 'Bei uns: rund um die Uhr erreichbar.'],
+    ],
+
     // "Ihre Vorteile auf einen Blick": [icon, title, text]. Only promise what we always do.
     advantages: [
         ['clock', 'Zeit sparen', 'Sie beauftragen uns einmal – um Reinigungsplan, Personal und Ablauf kümmern wir uns.'],
