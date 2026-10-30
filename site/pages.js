@@ -605,7 +605,7 @@ function homePage(ctx, projects, photos, personPhoto) {
         heading: `Die 3 größten ${hl('Probleme', 'Probleme')} mit Ihrer aktuellen Reinigungsfirma`,
         intro: gb.painIntro,
         points: gb.painPoints,
-        photo: [url('images/arbeiten/treppenhaus.jpg'), 'GoganBau bei der Treppenhausreinigung in einer Wohnanlage'],
+        photo: [url('images/arbeiten/scheuersaugmaschine.jpg'), 'GoganBau bei der Bodenreinigung mit der Scheuersaugmaschine'],
     })}
 
     ${stepsSection('#kontakt')}
