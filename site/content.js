@@ -622,7 +622,6 @@ export default {
         ['altbau-balkon', 'Reinigung in einer Altbauwohnung'],
         ['treppenhaus-einfamilienhaus', 'Grundreinigung im Einfamilienhaus'],
         ['bad-marmor', 'Bad nach der Reinigung'],
-        ['polsterreinigung', 'Polsterreinigung mit Sprühextraktion'],
         ['matratzenreinigung', 'Matratzenreinigung'],
     ],
     // Our own before/after shots, already combined in one picture: [file, caption].
