@@ -477,12 +477,21 @@ function homePage(ctx, projects, photos, personPhoto) {
             <div data-reveal class="mx-auto max-w-3xl text-center">
                 <p class="eyebrow">Aus unserer Arbeit</p>
                 <h2 class="section-title mt-4">Echte Einsätze in München und Umgebung.</h2>
-                <p class="mt-4 text-lg text-slate-600">Keine Symbolbilder: So sieht es aus, wenn unser Team fertig ist.</p>
+                <p class="mt-4 text-lg text-slate-600">Keine Symbolbilder – alle Fotos stammen aus unseren eigenen Einsätzen.</p>
             </div>
             <ul class="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
                 ${each(gb.gallery, ([file, caption]) => `<li>
                     <figure>
                         <img src="${url(`images/arbeiten/${file}.jpg`)}" alt="${esc(caption)} – GoganBau" width="900" height="1200" loading="lazy" class="aspect-[3/4] w-full rounded-xl object-cover">
+                        <figcaption class="mt-2 text-sm text-slate-600">${esc(caption)}</figcaption>
+                    </figure>
+                </li>`)}
+            </ul>
+            <h3 class="mt-16 text-center font-display text-2xl font-bold text-ink">Vorher / Nachher aus unseren Einsätzen</h3>
+            <ul class="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
+                ${each(gb.galleryBeforeAfter, ([file, caption]) => `<li>
+                    <figure>
+                        <img src="${url(`images/arbeiten/${file}.jpg`)}" alt="Vorher und nachher: ${esc(caption)} – GoganBau" width="900" height="900" loading="lazy" class="aspect-square w-full rounded-xl bg-paper object-contain">
                         <figcaption class="mt-2 text-sm text-slate-600">${esc(caption)}</figcaption>
                     </figure>
                 </li>`)}

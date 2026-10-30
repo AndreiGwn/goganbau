@@ -621,6 +621,23 @@ export default {
         ['hauseingang-altbau', 'Reinigung eines Altbau-Hauseingangs'],
         ['altbau-balkon', 'Reinigung in einer Altbauwohnung'],
         ['treppenhaus-einfamilienhaus', 'Grundreinigung im Einfamilienhaus'],
+        ['bad-marmor', 'Bad nach der Reinigung'],
+        ['polsterreinigung', 'Polsterreinigung mit Sprühextraktion'],
+        ['matratzenreinigung', 'Matratzenreinigung'],
+    ],
+    // Our own before/after shots, already combined in one picture: [file, caption].
+    galleryBeforeAfter: [
+        ['vn-treppe', 'Treppe nach Bauarbeiten'],
+        ['vn-duschwanne', 'Duschwanne: Kalk und Rost entfernt'],
+        ['vn-duschglas', 'Duschwand: Kalk entfernt'],
+        ['vn-duschtuer', 'Duschtür: Kalk entfernt'],
+        ['vn-duschprofil', 'Duschprofil: Ablagerungen entfernt'],
+        ['vn-armatur', 'Armatur und Wannenrand'],
+        ['vn-brausekopf', 'Brausekopf entkalkt'],
+        ['vn-kochfeld', 'Kochfeld'],
+        ['vn-teppich', 'Teppichboden'],
+        ['vn-teppich-2', 'Teppichboden'],
+        ['vn-matratze', 'Matratze'],
     ],
 
     // "So funktioniert's" on the home page: [title, text] per step. Only promise what we always do.
