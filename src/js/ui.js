@@ -45,3 +45,24 @@ export function initCompare() {
     });
 }
 
+
+// Hero video: plays muted on loop; the button turns the sound on and starts it from the beginning.
+export function initHeroVideo() {
+    document.querySelectorAll('[data-hero-video]').forEach((wrap) => {
+        const video = wrap.querySelector('video');
+        const button = wrap.querySelector('[data-video-sound]');
+        const label = button.querySelector('span');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
+        button.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                video.currentTime = 0;
+                video.play();
+            } else {
+                video.muted = true;
+            }
+            label.textContent = video.muted ? 'Ton an' : 'Ton aus';
+            button.setAttribute('aria-pressed', String(!video.muted));
+        });
+    });
+}
