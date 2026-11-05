@@ -46,23 +46,36 @@ export function initCompare() {
 }
 
 
-// Hero video: plays muted on loop; the button turns the sound on and starts it from the beginning.
+// Hero video: plays muted on loop; buttons for play/pause, restart from the beginning, and sound.
 export function initHeroVideo() {
     document.querySelectorAll('[data-hero-video]').forEach((wrap) => {
         const video = wrap.querySelector('video');
-        const button = wrap.querySelector('[data-video-sound]');
-        const label = button.querySelector('span');
+        const play = wrap.querySelector('[data-video-play]');
+        const sound = wrap.querySelector('[data-video-sound]');
+        // Show one of the two icons inside a button.
+        const show = (button, on, off, flag) => {
+            button.querySelector(`[data-icon="${on}"]`).classList.toggle('hidden', !flag);
+            button.querySelector(`[data-icon="${off}"]`).classList.toggle('hidden', flag);
+        };
+        const sync = () => {
+            show(play, 'pause', 'play', !video.paused);
+            play.setAttribute('aria-label', video.paused ? 'Video abspielen' : 'Video pausieren');
+            show(sound, 'sound', 'muted', !video.muted);
+            sound.setAttribute('aria-label', video.muted ? 'Ton an' : 'Ton aus');
+            sound.setAttribute('aria-pressed', String(!video.muted));
+        };
+        ['play', 'pause', 'volumechange'].forEach((e) => video.addEventListener(e, sync));
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
-        button.addEventListener('click', () => {
-            if (video.muted) {
-                video.muted = false;
-                video.currentTime = 0;
-                video.play();
-            } else {
-                video.muted = true;
-            }
-            label.textContent = video.muted ? 'Ton an' : 'Ton aus';
-            button.setAttribute('aria-pressed', String(!video.muted));
+
+        play.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+        wrap.querySelector('[data-video-restart]').addEventListener('click', () => {
+            video.currentTime = 0;
+            video.play();
         });
+        sound.addEventListener('click', () => {
+            video.muted = !video.muted;
+            if (video.paused) video.play();
+        });
+        sync();
     });
 }
