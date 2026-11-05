@@ -505,7 +505,7 @@ function homePage(ctx, projects, photos, personPhoto) {
             <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
                 <!-- Intro video: muted loop like a photo; "Ton an" plays it with sound from the start. -->
                 <div data-hero-video class="relative lg:col-span-7">
-                    <video src="${url('video/goganbau.mp4')}" poster="${url('video/goganbau-poster.jpg')}" width="1280" height="720" autoplay muted loop playsinline preload="metadata" aria-label="Video: GoganBau stellt sich vor – Abbruch und Gebäudereinigung in München" class="aspect-video w-full rounded-2xl bg-slate-900 object-cover shadow-xl"></video>
+                    <video src="${url('video/goganbau-v2.mp4')}" poster="${url('video/goganbau-v2-poster.jpg')}" width="1280" height="720" autoplay muted loop playsinline preload="metadata" aria-label="Video: GoganBau stellt sich vor – Abbruch und Gebäudereinigung in München" class="aspect-video w-full rounded-2xl bg-slate-900 object-cover shadow-xl"></video>
                     <button type="button" data-video-sound aria-pressed="false" class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-lg bg-black/60 px-3.5 py-2 text-sm font-semibold text-white backdrop-blur-sm transition hover:bg-black/75">
                         <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
                         <span>Ton an</span>
