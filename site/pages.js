@@ -503,20 +503,20 @@ function homePage(ctx, projects, photos, personPhoto) {
                 <p class="mx-auto mt-6 max-w-3xl text-lg text-slate-600">${esc(gb.tagline)}</p>
             </div>
             <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
-                <!-- Intro video: muted loop like a photo; play/pause, restart and sound buttons in the corner. -->
+                <!-- Intro video: starts only when the visitor presses play, with sound; play/pause, restart and mute buttons in the corner. -->
                 <div data-hero-video class="relative lg:col-span-7">
-                    <video src="${url('video/goganbau-v2.mp4')}" poster="${url('video/goganbau-v2-poster.jpg')}" width="1280" height="720" autoplay muted loop playsinline preload="metadata" aria-label="Video: GoganBau stellt sich vor – Abbruch und Gebäudereinigung in München" class="aspect-video w-full rounded-2xl bg-slate-900 object-cover shadow-xl"></video>
+                    <video src="${url('video/goganbau-v2.mp4')}" poster="${url('video/goganbau-v2-poster.jpg')}" width="1280" height="720" playsinline preload="metadata" aria-label="Video: GoganBau stellt sich vor – Abbruch und Gebäudereinigung in München" class="aspect-video cursor-pointer w-full rounded-2xl bg-slate-900 object-cover shadow-xl"></video>
                     <div class="absolute bottom-4 left-4 flex gap-1 rounded-xl bg-black/60 p-1 text-white backdrop-blur-sm">
-                        <button type="button" data-video-play aria-label="Video pausieren" class="grid size-10 place-items-center rounded-lg transition hover:bg-white/15">
-                            <svg data-icon="pause" viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
-                            <svg data-icon="play" viewBox="0 0 24 24" class="hidden size-5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>
+                        <button type="button" data-video-play aria-label="Video abspielen" class="grid size-10 place-items-center rounded-lg transition hover:bg-white/15">
+                            <svg data-icon="pause" viewBox="0 0 24 24" class="hidden size-5" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+                            <svg data-icon="play" viewBox="0 0 24 24" class="size-5" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10.4-6.5a1 1 0 0 0 0-1.8L9.5 4.6A1 1 0 0 0 8 5.5z"/></svg>
                         </button>
                         <button type="button" data-video-restart aria-label="Video von vorne abspielen" class="grid size-10 place-items-center rounded-lg transition hover:bg-white/15">
                             <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/></svg>
                         </button>
-                        <button type="button" data-video-sound aria-label="Ton an" aria-pressed="false" class="grid size-10 place-items-center rounded-lg transition hover:bg-white/15">
-                            <svg data-icon="muted" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>
-                            <svg data-icon="sound" viewBox="0 0 24 24" class="hidden size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                        <button type="button" data-video-sound aria-label="Ton aus" aria-pressed="true" class="grid size-10 place-items-center rounded-lg transition hover:bg-white/15">
+                            <svg data-icon="muted" viewBox="0 0 24 24" class="hidden size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6M21 9l-5 6"/></svg>
+                            <svg data-icon="sound" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
                         </button>
                     </div>
                 </div>

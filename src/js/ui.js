@@ -45,8 +45,7 @@ export function initCompare() {
     });
 }
 
-
-// Hero video: plays muted on loop; buttons for play/pause, restart from the beginning, and sound.
+// Hero video: starts only on play, with sound; buttons for play/pause, restart from the beginning, and mute.
 export function initHeroVideo() {
     document.querySelectorAll('[data-hero-video]').forEach((wrap) => {
         const video = wrap.querySelector('video');
@@ -65,17 +64,15 @@ export function initHeroVideo() {
             sound.setAttribute('aria-pressed', String(!video.muted));
         };
         ['play', 'pause', 'volumechange'].forEach((e) => video.addEventListener(e, sync));
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) video.pause();
 
-        play.addEventListener('click', () => (video.paused ? video.play() : video.pause()));
+        const toggle = () => (video.paused ? video.play() : video.pause());
+        play.addEventListener('click', toggle);
+        video.addEventListener('click', toggle);
         wrap.querySelector('[data-video-restart]').addEventListener('click', () => {
             video.currentTime = 0;
             video.play();
         });
-        sound.addEventListener('click', () => {
-            video.muted = !video.muted;
-            if (video.paused) video.play();
-        });
+        sound.addEventListener('click', () => (video.muted = !video.muted));
         sync();
     });
 }
