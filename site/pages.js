@@ -21,7 +21,8 @@ const buildDate = new Date().toISOString().slice(0, 10);
 const wa = (text) => `https://wa.me/${gb.contact.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ''}`;
 
 // Heading text with one word set in the orange highlight box (see .hl in app.css).
-const hl = (text, word) => esc(text).replace(esc(word), `<span class="hl">${esc(word)}</span>`);
+// A soft hyphen before "reinigung" lets long compounds break as "Treppenhaus-/reinigung" on small phones.
+const hl = (text, word) => esc(text).replace(esc(word), `<span class="hl">${esc(word)}</span>`).replace(/(\p{L})(reinigung)/gu, '$1&shy;$2');
 
 /* ---------------------------------------------------------------- icons */
 
@@ -120,18 +121,18 @@ function footer({ url }) {
             ${logo()}
             <p class="mt-4 text-sm text-white/70">${esc(gb.motto)}</p>
         </div>
-        <ul class="flex flex-col gap-3 text-sm sm:flex-row sm:gap-8">
-            <li><a href="${gb.contact.phoneHref}" class="font-mono text-white transition hover:text-signal">${esc(gb.contact.phone)}</a></li>
-            <li><a href="mailto:${gb.contact.email}" class="font-mono text-white transition hover:text-signal">${esc(gb.contact.email)}</a></li>
-            <li><a href="${wa()}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-mono text-white transition hover:text-signal">${icon.whatsapp('size-4')} WhatsApp<span class="sr-only"> schreiben</span></a></li>
+        <ul class="flex flex-col gap-1 text-sm sm:flex-row sm:gap-8">
+            <li><a href="${gb.contact.phoneHref}" class="inline-block py-1.5 font-mono text-white transition hover:text-signal">${esc(gb.contact.phone)}</a></li>
+            <li><a href="mailto:${gb.contact.email}" class="inline-block py-1.5 font-mono text-white transition hover:text-signal">${esc(gb.contact.email)}</a></li>
+            <li><a href="${wa()}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-1.5 font-mono text-white transition hover:text-signal">${icon.whatsapp('size-4')} WhatsApp<span class="sr-only"> schreiben</span></a></li>
         </ul>
     </div>
     <div class="border-t border-white/15">
-        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-[11px] tracking-wider text-white/60 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
+        <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-6 font-mono text-xs tracking-wider text-white/60 uppercase sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <span>© ${gb.founded}–${new Date().getFullYear()} ${esc(gb.name)}</span>
             <span class="flex gap-6">
-                <a href="${url('impressum/')}" class="hover:text-white">Impressum</a>
-                <a href="${url('datenschutz/')}" class="hover:text-white">Datenschutz</a>
+                <a href="${url('impressum/')}" class="inline-block py-2 hover:text-white">Impressum</a>
+                <a href="${url('datenschutz/')}" class="inline-block py-2 hover:text-white">Datenschutz</a>
             </span>
         </div>
     </div>
@@ -141,15 +142,15 @@ function footer({ url }) {
 // Phones: the three ways to reach us, always one tap away.
 function mobileBar({ anchor }) {
     return `<nav class="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl lg:hidden" aria-label="Schnellkontakt">
-    <a href="${gb.contact.phoneHref}" class="flex flex-col items-center gap-1 py-2.5 text-[11px] font-medium text-slate-700">
+    <a href="${gb.contact.phoneHref}" class="flex flex-col items-center gap-1 py-2.5 text-xs font-medium text-slate-700">
         <svg viewBox="0 0 24 24" class="size-5 text-signal-deep" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>
         Anrufen
     </a>
-    <a href="${wa()}" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 border-x border-slate-200 py-2.5 text-[11px] font-medium text-slate-700">
+    <a href="${wa()}" target="_blank" rel="noopener" class="flex flex-col items-center gap-1 border-x border-slate-200 py-2.5 text-xs font-medium text-slate-700">
         ${icon.whatsapp('size-5 text-[#25D366]')}
         WhatsApp<span class="sr-only"> Chat</span>
     </a>
-    <a href="${anchor('anfrage')}" class="flex flex-col items-center gap-1 bg-signal py-2.5 text-[11px] font-semibold text-white">
+    <a href="${anchor('anfrage')}" class="flex flex-col items-center gap-1 bg-signal py-2.5 text-xs font-semibold text-white">
         <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg>
         Anfrage
     </a>
@@ -221,7 +222,7 @@ function inquiryForm({ url }) {
             <button type="button" data-send-whatsapp class="btn-ghost">${icon.whatsapp('size-4 text-[#25D366]')} In WhatsApp öffnen</button>
         </div>
 
-        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="underline underline-offset-2 hover:text-brand">Datenschutzerklärung</a></p>
+        <p class="text-xs text-mist">Ihre Angaben nutzen wir nur für die Antwort auf Ihre Anfrage. <a href="${url('datenschutz/')}" class="inline-block py-1 underline underline-offset-2 hover:text-brand">Datenschutzerklärung</a></p>
     </form>
 
     <div data-inquiry-success hidden tabindex="-1" class="py-10 text-center outline-none">
@@ -240,8 +241,8 @@ function beforeAfter(project) {
     <div class="relative aspect-[4/3] overflow-hidden bg-slate-100 select-none">
         <img src="/${project.after}" alt="Nachher: ${esc(project.title)}" loading="lazy" class="absolute inset-0 size-full object-cover">
         <img src="/${project.before}" alt="Vorher: ${esc(project.title)}" loading="lazy" class="absolute inset-0 size-full object-cover" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0)">
-        <span class="pointer-events-none absolute top-3 left-3 bg-white/90 px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-ink uppercase">Vorher</span>
-        <span class="pointer-events-none absolute top-3 right-3 bg-signal px-2 py-1 font-mono text-[10px] tracking-[0.2em] text-white uppercase">Nachher</span>
+        <span class="pointer-events-none absolute top-3 left-3 bg-white/90 px-2 py-1 font-mono text-xs tracking-[0.2em] text-ink uppercase">Vorher</span>
+        <span class="pointer-events-none absolute top-3 right-3 bg-signal px-2 py-1 font-mono text-xs tracking-[0.2em] text-white uppercase">Nachher</span>
         <div class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white" style="left: var(--pos)">
             <span class="absolute top-1/2 left-1/2 grid size-10 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-ink shadow-lg">
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 7-5 5 5 5M15 7l5 5-5 5"/></svg>
@@ -251,7 +252,7 @@ function beforeAfter(project) {
     </div>
     <figcaption class="mt-3 flex items-baseline justify-between gap-4 text-sm">
         <span class="font-display font-semibold text-ink">${esc(project.title)}</span>
-        ${project.symbolbild ? '<span class="font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</span>' : ''}
+        ${project.symbolbild ? '<span class="font-mono text-xs tracking-[0.15em] text-mist uppercase">Symbolbild</span>' : ''}
     </figcaption>
 </figure>`;
 }
@@ -390,7 +391,7 @@ function areaLine(area) {
                     ${
                         places.length > 5 || districts.length
                             ? `<details class="mt-1">
-                        <summary class="cursor-pointer text-signal-deep">Alle Orte anzeigen</summary>
+                        <summary class="cursor-pointer py-1.5 text-signal-deep">Alle Orte anzeigen</summary>
                         <p class="mt-2">${esc(places.join(', '))}</p>
                         ${districts.length ? `<p class="mt-2">Münchner Stadtteile: ${esc(districts.join(', '))}</p>` : ''}
                     </details>`
@@ -417,7 +418,7 @@ function reviewsSection() {
                     <figcaption class="mt-auto pt-5 font-display font-semibold text-ink">${esc(name)} <span class="font-sans text-sm font-normal text-mist">· Google</span></figcaption>
                 </figure>`)}
             </div>
-            <p class="mt-8 text-center"><a href="${gb.googleReviewsUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Bewertungen auf Google ansehen ${icon.arrow()}</a></p>
+            <p class="mt-8 text-center"><a href="${gb.googleReviewsUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 py-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Bewertungen auf Google ansehen ${icon.arrow()}</a></p>
         </div>
     </section>`;
 }
@@ -497,9 +498,9 @@ function homePage(ctx, projects, photos, personPhoto) {
     <section id="top" class="bg-white pt-28 pb-16 lg:pt-40 lg:pb-20">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="mx-auto max-w-4xl text-center">
-                <p class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-[11px] font-medium tracking-[0.12em] text-slate-700 uppercase">${esc(gb.claim)}</p>
+                <p class="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium tracking-[0.12em] text-slate-700 uppercase">${esc(gb.claim)}</p>
                 <!-- The offer is the h1; the slogan above stays secondary. -->
-                <h1 class="mt-5 font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(gb.heroTitle, 'Gebäudereinigung')}</h1>
+                <h1 class="mt-5 font-display text-[2rem] leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(gb.heroTitle, 'Gebäudereinigung')}</h1>
                 <p class="mx-auto mt-6 max-w-3xl text-lg text-slate-600">${esc(gb.tagline)}</p>
             </div>
             <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
@@ -582,7 +583,7 @@ function homePage(ctx, projects, photos, personPhoto) {
                     </div>
                 </li>`)}
             </ul>
-            <p class="mt-10 text-center"><a href="${url('leistungen/')}" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a></p>
+            <p class="mt-10 text-center"><a href="${url('leistungen/')}" class="inline-flex items-center gap-2 py-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a></p>
         </div>
     </section>
 
@@ -641,7 +642,7 @@ function homePage(ctx, projects, photos, personPhoto) {
                     <p class="font-display text-2xl font-bold">Jetzt ist Ihre Zeit.</p>
                     <p class="mt-3 text-white/80">Sagen Sie uns, was gereinigt werden soll – Sie erhalten ein kostenloses Angebot.</p>
                     <a href="#kontakt" class="btn-primary mt-6">Kostenloses Angebot anfordern ${icon.arrow()}</a>
-                    <a href="${gb.contact.phoneHref}" class="mt-4 inline-flex items-center justify-center gap-2 font-mono text-sm text-white/90 hover:text-white"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> direkt anrufen</span></a>
+                    <a href="${gb.contact.phoneHref}" class="mt-2 inline-flex items-center justify-center gap-2 py-2 font-mono text-sm text-white/90 hover:text-white"><span class="live-dot"></span> 24/7 ${esc(gb.contact.phone)}<span class="sr-only"> direkt anrufen</span></a>
                 </div>
             </div>
         </div>
@@ -730,7 +731,7 @@ function homePage(ctx, projects, photos, personPhoto) {
                     ${each(channels, ([label, value, href, isWhatsapp]) => `<li>
                         <a href="${href}"${isWhatsapp ? ' target="_blank" rel="noopener"' : ''} class="group flex items-center justify-between gap-4 py-4">
                             <span>
-                                <span class="block font-mono text-[11px] tracking-[0.2em] text-mist uppercase">${label}</span>
+                                <span class="block font-mono text-xs tracking-[0.2em] text-mist uppercase">${label}</span>
                                 <span class="mt-1 flex items-center gap-2 font-display text-lg font-bold text-ink transition group-hover:text-signal-deep">${isWhatsapp ? icon.whatsapp('size-5 text-[#25D366]') : ''} ${value}</span>
                             </span>
                             ${icon.arrow('size-4 shrink-0 text-mist transition group-hover:text-signal-deep')}
@@ -834,7 +835,7 @@ function servicePage(ctx, key, projects, photo) {
                 Alle Leistungen
             </a>
             <div class="mx-auto mt-6 max-w-4xl text-center">
-                <h1 class="font-display text-4xl leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(s.h1 ?? `${s.title} in München`, s.title)}</h1>
+                <h1 class="font-display text-[2rem] leading-[1.15] font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">${hl(s.h1 ?? `${s.title} in München`, s.title)}</h1>
                 <p class="mx-auto mt-6 max-w-3xl text-lg text-slate-600">${esc(s.text)}</p>
             </div>
             <div class="mt-12 grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
@@ -842,7 +843,7 @@ function servicePage(ctx, key, projects, photo) {
                     ${
                         photo
                             ? `<img src="${url(`images/leistungen/${key}.jpg`)}" alt="${esc(s.image ?? s.title)}" width="900" height="503" fetchpriority="high" class="aspect-[16/10] w-full rounded-2xl object-cover shadow-xl">
-                    <figcaption class="mt-2 font-mono text-[10px] tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>`
+                    <figcaption class="mt-2 font-mono text-xs tracking-[0.15em] text-mist uppercase">Symbolbild</figcaption>`
                             : `<img src="${url(`images/leistungen/${key}.svg`)}" alt="${esc(s.image ?? s.title)}" width="800" height="500" class="w-full rounded-2xl border border-slate-200">`
                     }
                 </figure>
@@ -954,7 +955,7 @@ function servicePage(ctx, key, projects, photo) {
                 </li>`,
                 )}
             </ul>
-            <p class="mt-10 text-center"><a href="${url('leistungen/')}" class="inline-flex items-center gap-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a></p>
+            <p class="mt-10 text-center"><a href="${url('leistungen/')}" class="inline-flex items-center gap-2 py-2 font-display text-sm font-semibold tracking-wide text-signal-deep uppercase hover:text-brand">Alle Leistungen ansehen ${icon.arrow()}</a></p>
         </div>
     </section>`,
     });

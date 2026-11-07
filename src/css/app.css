@@ -45,6 +45,14 @@
         background-color: #fff;
     }
 
+    /* Long German compounds (Unterhaltsreinigung …) must not push past a phone screen: hyphenate when they don't fit. */
+    h1,
+    h2,
+    h3 {
+        hyphens: auto;
+        overflow-wrap: break-word;
+    }
+
     ::selection {
         background: var(--color-signal);
         color: #fff;
